@@ -1,5 +1,5 @@
 //
-//  MasterViewController.swift
+//  MainView.swift
 //  Counters
 //
 //  Created by Samuel García on 24-07-20.
@@ -8,9 +8,9 @@
 
 import UIKit
 
-class MasterViewController: UITableViewController {
+class MainView: UITableViewController {
 
-    var detailViewController: DetailViewController? = nil
+    var counterView: CounterView? = nil
     var objects = [Any]()
 
 
@@ -23,8 +23,13 @@ class MasterViewController: UITableViewController {
         navigationItem.rightBarButtonItem = addButton
         if let split = splitViewController {
             let controllers = split.viewControllers
-            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
+            counterView = (controllers[controllers.count-1] as! UINavigationController).topViewController as? CounterView
         }
+        
+        NetworkOperation.shared.get(endpoint: "/api/v1/counters") { (data, string) in
+            
+        }
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -45,20 +50,16 @@ class MasterViewController: UITableViewController {
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let object = objects[indexPath.row] as! NSDate
-                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
+                let controller = (segue.destination as! UINavigationController).topViewController as! CounterView
                 controller.detailItem = object
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
-                detailViewController = controller
+                counterView = controller
             }
         }
     }
 
     // MARK: - Table View
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return objects.count

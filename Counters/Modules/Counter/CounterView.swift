@@ -1,5 +1,5 @@
 //
-//  DetailViewController.swift
+//  CounterView.swift
 //  Counters
 //
 //  Created by Samuel García on 24-07-20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class CounterView: UIViewController {
 
     @IBOutlet weak var detailDescriptionLabel: UILabel!
 

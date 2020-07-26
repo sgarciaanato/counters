@@ -10,32 +10,39 @@ import UIKit
 
 class CreateItemView: UIViewController {
 
-    @IBOutlet weak var detailDescriptionLabel: UILabel!
-
+    @IBOutlet weak var examplesLabel: UILabel!
+    
+    let saveBtn = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveAction(_:)))
+    
 
     func configureView() {
-        // Update the user interface for the detail item.
-        if let detail = detailItem {
-            if let label = detailDescriptionLabel {
-                label.text = detail.description
-            }
-        }
+        let backBtn = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(backAction(_:)))
+        navigationItem.leftBarButtonItem = backBtn
+        
+        navigationItem.rightBarButtonItem = saveBtn
+        
+        let examplesLabelTap = UITapGestureRecognizer(target: self, action: #selector(self.exampleLabelTapped(_:)))
+        self.examplesLabel.isUserInteractionEnabled = true
+        self.examplesLabel.addGestureRecognizer(examplesLabelTap)
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
         configureView()
     }
-
-    var detailItem: NSDate? {
-        didSet {
-            // Update the view.
-            configureView()
-        }
+    
+    @objc func backAction(_ sender: Any){
+        navigationController?.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func saveAction(_ sender: Any){
+        navigationController?.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func exampleLabelTapped(_ sender: Any){
+        performSegue(withIdentifier: "showExamples", sender: nil)
     }
 
-
 }
-

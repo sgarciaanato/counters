@@ -34,7 +34,7 @@ class MainView: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.addShadow()
         
         search.searchBar.delegate = self
         search.searchBar.sizeToFit()
@@ -64,36 +64,19 @@ class MainView: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        navigationItem.hidesSearchBarWhenScrolling = false
         super.viewWillAppear(animated)
+        navigationItem.hidesSearchBarWhenScrolling = false
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        search.searchBar.becomeFirstResponder()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationItem.hidesSearchBarWhenScrolling = true
-    }
-    @IBAction func addNewAction(_ sender: Any) {
-        self.performSegue(withIdentifier: "showDetail", sender: nil)
-    }
-
-    // MARK: - Segues
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetail" {
-            if let indexPath = tableView.indexPathForSelectedRow {
-                let object = objects[indexPath.row] as! NSDate
-                let controller = (segue.destination as! UINavigationController).topViewController as! CreateItemView
-                controller.detailItem = object
-                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-                controller.navigationItem.leftItemsSupplementBackButton = true
-                createItemView = controller
-            }
-        }
+        navigationController?.navigationBar.prefersLargeTitles = false
     }
 
 }
@@ -111,8 +94,8 @@ extension MainView : UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = self.tableView.dequeueReusableCell(withIdentifier: "CounterTableViewCell", for: indexPath) as? CounterTableViewCell {
-            cell.titleLabel.text = "object.description"
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "CounterTableViewCell", for: indexPath) as? CounterTableViewCell {
+            cell.titleLabel.text = "Cups of coffee"
             return cell
         }
 //        let object = objects[indexPath.row] as! NSDate

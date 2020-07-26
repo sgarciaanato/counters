@@ -101,4 +101,12 @@ extension UIView {
         layer.shadowOffset = CGSize(width: 0, height: 2) // your offset
     }
     
+    func loadNib(className : String) {
+        let bundle = Bundle.init(for: type(of: self))
+        let nib = UINib(nibName: className, bundle: bundle)
+        let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
+        view.frame = bounds
+        view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        addSubview(view)
+    }
 }

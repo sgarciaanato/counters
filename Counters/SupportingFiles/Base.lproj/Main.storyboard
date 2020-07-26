@@ -99,8 +99,6 @@
         <!--Examples-->
         <scene sceneID="zsy-ju-mpZ">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ikR-AX-48X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="RvQ-Dm-z7B" userLabel="Exit" sceneMemberID="exit"/>
                 <viewController title="Examples" id="vc0-1B-Bgh" customClass="ExamplesView" customModule="Counters" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UJU-L4-lwF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
@@ -146,6 +144,8 @@
                         <segue destination="RvQ-Dm-z7B" kind="unwind" identifier="unwindToCreateItem" unwindAction="unwindToCreateItem:" id="SzA-cV-8IJ"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ikR-AX-48X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="RvQ-Dm-z7B" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1486.9565217391305" y="128.57142857142856"/>
         </scene>
@@ -171,6 +171,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JDB-Jq-Pwx" customClass="CustomErrorView" customModule="Counters" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="88" width="414" height="729"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
                             <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cDU-pb-SFj">
                                 <rect key="frame" x="12" y="88" width="390" height="729"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -194,7 +198,7 @@
                                             <color key="titleColor" name="tintColor"/>
                                         </state>
                                         <connections>
-                                            <segue destination="vC3-pB-5Vb" kind="showDetail" id="9wh-TP-fCK"/>
+                                            <segue destination="vC3-pB-5Vb" kind="showDetail" identifier="createItemSegue" id="9wh-TP-fCK"/>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p2N-RH-pN4">
@@ -227,14 +231,19 @@
                             <constraint firstItem="cDU-pb-SFj" firstAttribute="top" secondItem="BIS-TU-Y2b" secondAttribute="top" id="Ujj-i3-Mcr"/>
                             <constraint firstItem="mjE-hO-aB9" firstAttribute="leading" secondItem="gEr-DM-rDJ" secondAttribute="leading" id="X5T-iO-Jgx"/>
                             <constraint firstAttribute="trailing" secondItem="mjE-hO-aB9" secondAttribute="trailing" id="bfd-pZ-rWE"/>
+                            <constraint firstItem="mjE-hO-aB9" firstAttribute="top" secondItem="JDB-Jq-Pwx" secondAttribute="bottom" id="dJ5-Dl-ETO"/>
                             <constraint firstItem="mjE-hO-aB9" firstAttribute="trailing" secondItem="BIS-TU-Y2b" secondAttribute="trailing" id="fLC-sd-rkd"/>
+                            <constraint firstItem="JDB-Jq-Pwx" firstAttribute="top" secondItem="BIS-TU-Y2b" secondAttribute="top" id="m5x-rQ-3BK"/>
+                            <constraint firstItem="JDB-Jq-Pwx" firstAttribute="leading" secondItem="BIS-TU-Y2b" secondAttribute="leading" id="p7N-r2-mjd"/>
                             <constraint firstItem="mjE-hO-aB9" firstAttribute="top" secondItem="cDU-pb-SFj" secondAttribute="bottom" id="q9X-VI-Gec"/>
+                            <constraint firstItem="BIS-TU-Y2b" firstAttribute="trailing" secondItem="JDB-Jq-Pwx" secondAttribute="trailing" id="qHB-me-lQF"/>
                             <constraint firstItem="BIS-TU-Y2b" firstAttribute="bottom" secondItem="mjE-hO-aB9" secondAttribute="bottom" constant="-34" id="wNm-Io-MaA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="BIS-TU-Y2b"/>
                     </view>
                     <navigationItem key="navigationItem" title="Counters" id="mxu-3r-RIU"/>
                     <connections>
+                        <outlet property="customErrorView" destination="JDB-Jq-Pwx" id="9DJ-XO-vUz"/>
                         <outlet property="itemsCounterDescription" destination="YFk-8a-nu9" id="FJZ-gf-2RI"/>
                         <outlet property="tableView" destination="cDU-pb-SFj" id="J9L-5q-PYW"/>
                     </connections>

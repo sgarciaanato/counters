@@ -15,19 +15,41 @@ class CounterTableViewCell: UITableViewCell {
     @IBOutlet weak var decButton: UIButton!
     @IBOutlet weak var incButton: UIButton!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    @IBAction func decAction(_ sender: Any) {
-    }
-    @IBAction func incButton(_ sender: Any) {
+    var delegate : CounterDelegate?
+    
+    var counter : Counter? {
+        didSet {
+            titleLabel.text = counter?.title
+            let decButtonEnabled = self.counter?.count ?? 0 > 0
+            decButton.isEnabled = decButtonEnabled
+            decButton.alpha = decButtonEnabled ? 1 : 0.5
+            counterLabel.text = "\(self.counter?.count ?? 0)"
+        }
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        counterLabel.text = "----"
+        // Initialization code
+    }
+    
+    func configure(_ counter: Counter?){
+        self.counter = counter
+    }
+    
+    @IBAction func incButton(_ sender: Any) {
+        guard let counter = counter else { return }
+        delegate?.increment(counter)
+    }
+    
+    @IBAction func decAction(_ sender: Any) {
+        guard let counter = counter else { return }
+        delegate?.decrement(counter)
+    }
+    
+}
+
+protocol CounterDelegate {
+    func increment(_ counter: Counter)
+    func decrement(_ counter: Counter)
 }

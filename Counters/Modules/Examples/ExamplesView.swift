@@ -16,7 +16,7 @@ class ExamplesView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.controller = ExamplesController()
+        controller = ExamplesController()
     }
     
     override func viewDidLoad() {

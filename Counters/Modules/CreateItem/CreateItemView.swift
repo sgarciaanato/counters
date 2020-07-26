@@ -42,6 +42,8 @@ class CreateItemView: UIViewController {
     
     @objc func saveAction(_ sender: Any){
         self.performSegue(withIdentifier: "unwindToMain", sender: nil)
+        self.titleTextfield.text = ""
+        self.titleTextfield.endEditing(false)
     }
     
     @objc func exampleLabelTapped(_ sender: Any){

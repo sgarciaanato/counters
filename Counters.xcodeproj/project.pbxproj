@@ -20,6 +20,12 @@
 		8E41640624CD38A40093B20E /* ExamplesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E41640524CD38A40093B20E /* ExamplesInteractor.swift */; };
 		8E41640924CD38E40093B20E /* ExamplesCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E41640824CD38E40093B20E /* ExamplesCategory.swift */; };
 		8E41640B24CD38F70093B20E /* Example.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E41640A24CD38F70093B20E /* Example.swift */; };
+		8EA12E1924CDEA25000D7979 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E1824CDEA25000D7979 /* MainController.swift */; };
+		8EA12E1B24CDEA6E000D7979 /* MainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E1A24CDEA6E000D7979 /* MainInteractor.swift */; };
+		8EA12E1E24CDF1C6000D7979 /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E1D24CDF1C6000D7979 /* Counter.swift */; };
+		8EA12E2124CE0C49000D7979 /* CustomErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E2024CE0C49000D7979 /* CustomErrorView.swift */; };
+		8EA12E2324CE0C7C000D7979 /* CustomErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EA12E2224CE0C7C000D7979 /* CustomErrorView.xib */; };
+		8EA12E2824CE0E40000D7979 /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E2724CE0E40000D7979 /* ErrorModel.swift */; };
 		8EA8FE9324CBA4B20009A23B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA8FE9224CBA4B20009A23B /* AppDelegate.swift */; };
 		8EA8FE9524CBA4B20009A23B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA8FE9424CBA4B20009A23B /* SceneDelegate.swift */; };
 		8EA8FE9724CBA4B20009A23B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA8FE9624CBA4B20009A23B /* MainView.swift */; };
@@ -55,6 +61,12 @@
 		8E41640524CD38A40093B20E /* ExamplesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamplesInteractor.swift; sourceTree = "<group>"; };
 		8E41640824CD38E40093B20E /* ExamplesCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamplesCategory.swift; sourceTree = "<group>"; };
 		8E41640A24CD38F70093B20E /* Example.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example.swift; sourceTree = "<group>"; };
+		8EA12E1824CDEA25000D7979 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
+		8EA12E1A24CDEA6E000D7979 /* MainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractor.swift; sourceTree = "<group>"; };
+		8EA12E1D24CDF1C6000D7979 /* Counter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
+		8EA12E2024CE0C49000D7979 /* CustomErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomErrorView.swift; sourceTree = "<group>"; };
+		8EA12E2224CE0C7C000D7979 /* CustomErrorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomErrorView.xib; sourceTree = "<group>"; };
+		8EA12E2724CE0E40000D7979 /* ErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModel.swift; sourceTree = "<group>"; };
 		8EA8FE8F24CBA4B20009A23B /* Counters.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Counters.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EA8FE9224CBA4B20009A23B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8EA8FE9424CBA4B20009A23B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -159,6 +171,32 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		8EA12E1C24CDF1BA000D7979 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8EA12E1D24CDF1C6000D7979 /* Counter.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8EA12E1F24CE0C2C000D7979 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				8EA12E2424CE0E1B000D7979 /* Models */,
+				8EA12E2024CE0C49000D7979 /* CustomErrorView.swift */,
+				8EA12E2224CE0C7C000D7979 /* CustomErrorView.xib */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		8EA12E2424CE0E1B000D7979 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8EA12E2724CE0E40000D7979 /* ErrorModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		8EA8FE8624CBA4B20009A23B = {
 			isa = PBXGroup;
 			children = (
@@ -199,6 +237,7 @@
 		8EA8FEB624CBC2DD0009A23B /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				8EA12E1F24CE0C2C000D7979 /* Error */,
 				8E4163F724CD332E0093B20E /* Examples */,
 				8E4163E924CBCDA20093B20E /* CreateItem */,
 				8EA8FEBA24CBCB3B0009A23B /* Main */,
@@ -218,8 +257,11 @@
 		8EA8FEBA24CBCB3B0009A23B /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				8EA12E1C24CDF1BA000D7979 /* Models */,
 				8E4163EB24CCC4D10093B20E /* Cells */,
 				8EA8FE9624CBA4B20009A23B /* MainView.swift */,
+				8EA12E1824CDEA25000D7979 /* MainController.swift */,
+				8EA12E1A24CDEA6E000D7979 /* MainInteractor.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -309,6 +351,7 @@
 				8E4163FE24CD36E60093B20E /* CategoryTableViewCell.xib in Resources */,
 				8EA8FEA124CBA4B90009A23B /* LaunchScreen.storyboard in Resources */,
 				8EA8FE9E24CBA4B90009A23B /* Assets.xcassets in Resources */,
+				8EA12E2324CE0C7C000D7979 /* CustomErrorView.xib in Resources */,
 				8EA8FE9C24CBA4B20009A23B /* Main.storyboard in Resources */,
 				8E41640224CD377B0093B20E /* ExampleCollectionViewCell.xib in Resources */,
 			);
@@ -330,18 +373,23 @@
 			files = (
 				8E41640624CD38A40093B20E /* ExamplesInteractor.swift in Sources */,
 				8E4163F624CD25730093B20E /* UIViewController+Utils.swift in Sources */,
+				8EA12E2124CE0C49000D7979 /* CustomErrorView.swift in Sources */,
 				8EA8FE9324CBA4B20009A23B /* AppDelegate.swift in Sources */,
 				8E41640424CD38790093B20E /* ExamplesController.swift in Sources */,
 				8E41640924CD38E40093B20E /* ExamplesCategory.swift in Sources */,
 				8EA8FEB924CBC3050009A23B /* NetworkingOperation.swift in Sources */,
 				8E4163F224CD035F0093B20E /* UIView+Utils.swift in Sources */,
 				8E41640124CD377B0093B20E /* ExampleCollectionViewCell.swift in Sources */,
+				8EA12E1924CDEA25000D7979 /* MainController.swift in Sources */,
+				8EA12E2824CE0E40000D7979 /* ErrorModel.swift in Sources */,
 				8E4163F924CD335E0093B20E /* ExamplesView.swift in Sources */,
 				8E4163FD24CD36E60093B20E /* CategoryTableViewCell.swift in Sources */,
 				8E4163EE24CCC4E60093B20E /* CounterTableViewCell.swift in Sources */,
 				8EA8FE9524CBA4B20009A23B /* SceneDelegate.swift in Sources */,
 				8EA8FE9724CBA4B20009A23B /* MainView.swift in Sources */,
+				8EA12E1E24CDF1C6000D7979 /* Counter.swift in Sources */,
 				8EA8FE9924CBA4B20009A23B /* CreateItemView.swift in Sources */,
+				8EA12E1B24CDEA6E000D7979 /* MainInteractor.swift in Sources */,
 				8E41640B24CD38F70093B20E /* Example.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

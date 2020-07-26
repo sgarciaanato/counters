@@ -14,27 +14,32 @@ class MainView: UIViewController {
     var objects = [Any]()
     
     @IBOutlet weak var tableView: UITableView!
-    
     @IBOutlet weak var itemsCounterDescription: UILabel!
-    //    init() {
-//        super.init(nibName: nil, bundle: nil)
-//        
-//        controller = DetailPresenter()
-//        controller?.view = self
-//        controller?.router?.view = self
-//    }
-//    
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
+    @IBOutlet weak var customErrorView: CustomErrorView!
+    
+    var controller : MainController?
     
     private var search = UISearchController(searchResultsController: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+
+        navigationItem.leftBarButtonItem = editButtonItem
         
-        self.navigationController?.navigationBar.addShadow()
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        tableView.register(UINib(nibName: "CounterTableViewCell", bundle: nil), forCellReuseIdentifier: "CounterTableViewCell")
+
+        if let split = splitViewController {
+            let controllers = split.viewControllers
+            createItemView = (controllers[controllers.count-1] as! UINavigationController).topViewController as? CreateItemView
+        }
+        
+    }
+    
+    func configureSearchBar() {
         
         search.searchBar.delegate = self
         search.searchBar.sizeToFit()
@@ -43,23 +48,8 @@ class MainView: UIViewController {
         self.definesPresentationContext = true
         search.searchBar.placeholder = "Search"
         self.navigationItem.searchController = search
-
         
-        navigationItem.leftBarButtonItem = editButtonItem
-        
-        tableView.dataSource = self
-        tableView.delegate = self
-
-        if let split = splitViewController {
-            let controllers = split.viewControllers
-            createItemView = (controllers[controllers.count-1] as! UINavigationController).topViewController as? CreateItemView
-        }
-        
-        tableView.register(UINib(nibName: "CounterTableViewCell", bundle: nil), forCellReuseIdentifier: "CounterTableViewCell")
-        
-        NetworkOperation.shared.get(endpoint: "/api/v1/counters") { (data, string) in
-            
-        }
+        self.navigationController?.navigationBar.addShadow()
         
     }
 
@@ -67,6 +57,13 @@ class MainView: UIViewController {
         super.viewWillAppear(animated)
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationController?.navigationBar.prefersLargeTitles = true
+        
+        controller = MainController()
+        controller?.view = self
+        
+        controller?.updateCounterDescriptionText()
+        
+        configureSearchBar()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -89,20 +86,52 @@ extension MainView : UISearchBarDelegate {
     
 }
 
+extension MainView : CounterDelegate {
+    func increment(_ counter: Counter) {
+        controller?.increment(counter)
+    }
+    func decrement(_ counter: Counter) {
+        controller?.decrement(counter)
+    }
+}
+
+extension MainView : MainControllerToViewDelegate {
+    func reloadData() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            self.tableView.isHidden = false
+            self.customErrorView.isHidden = true
+        }
+    }
+    func setDescriptionCounterText(_ text: String) {
+        itemsCounterDescription.text = text
+    }
+    func showError(error : ErrorModel) {
+        customErrorView.configure(error: error)
+        DispatchQueue.main.async {
+            self.tableView.isHidden = true
+            self.customErrorView.isHidden = false
+        }
+    }
+    func goToCreateItem() {
+        performSegue(withIdentifier: "createItemSegue", sender: nil)
+    }
+}
+
 // MARK: - Table View
 
 extension MainView : UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 100
+        return controller?.getCountersCount() ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "CounterTableViewCell", for: indexPath) as? CounterTableViewCell {
-            cell.titleLabel.text = "Cups of coffee"
+            cell.configure(controller?.getCounterFor(indexPath.row))
+            cell.delegate = self
             return cell
         }
-//        let object = objects[indexPath.row] as! NSDate
         return UITableViewCell()
     }
 

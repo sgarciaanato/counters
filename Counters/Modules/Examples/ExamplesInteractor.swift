@@ -11,6 +11,7 @@ import Foundation
 class ExamplesInteractor {
 
     let examplesCategories : [ExamplesCategory]
+    var selectedTitle = ""
     
     init() {
         examplesCategories = [
@@ -37,6 +38,14 @@ class ExamplesInteractor {
     
     func getCategoryCount() -> Int {
         return examplesCategories.count
+    }
+    
+    func getSelectedTitle() -> String {
+        return selectedTitle
+    }
+    
+    func setSelectedTitle (_ title : String) {
+        selectedTitle = title
     }
     
 }

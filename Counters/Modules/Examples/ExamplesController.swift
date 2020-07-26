@@ -24,4 +24,12 @@ class ExamplesController {
         return interactor.getCategoryCount()
     }
     
+    func getSelectedTitle() -> String {
+        return interactor.getSelectedTitle()
+    }
+    
+    func setSelectedTitle (_ title : String) {
+        interactor.setSelectedTitle(title)
+    }
+    
 }

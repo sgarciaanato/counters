@@ -13,6 +13,8 @@ class CategoryTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var examplesCollectionView: UICollectionView!
     
+    var delegate : ExampleSelectionDelegate?
+    
     var examplesCategory : ExamplesCategory?
     
     override func awakeFromNib() {
@@ -46,9 +48,13 @@ extension CategoryTableViewCell : UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let label = UILabel(frame: CGRect.zero)
-        label.text = examplesCategory?.examples[indexPath.item].text ?? ""
+        label.text = examplesCategory?.examples[indexPath.item].text
         label.sizeToFit()
         return CGSize(width: label.frame.width + 40, height: 55)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.setSelectedTitle(examplesCategory?.examples[indexPath.row].text ?? "")
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -59,4 +65,8 @@ extension CategoryTableViewCell : UICollectionViewDelegate, UICollectionViewData
         return UICollectionViewCell()
     }
     
+}
+
+protocol ExampleSelectionDelegate {
+    func setSelectedTitle(_ title : String)
 }

@@ -11,13 +11,16 @@ import UIKit
 class CreateItemView: UIViewController {
 
     @IBOutlet weak var examplesLabel: UILabel!
+    @IBOutlet weak var titleTextfield: UITextField!
     
-    let saveBtn = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveAction(_:)))
+    var saveBtn : UIBarButtonItem?
     
 
     func configureView() {
         let backBtn = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(backAction(_:)))
         navigationItem.leftBarButtonItem = backBtn
+        
+        saveBtn = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveAction(_:)))
         
         navigationItem.rightBarButtonItem = saveBtn
         
@@ -38,11 +41,17 @@ class CreateItemView: UIViewController {
     }
     
     @objc func saveAction(_ sender: Any){
-        navigationController?.navigationController?.popViewController(animated: true)
+        self.performSegue(withIdentifier: "unwindToMain", sender: nil)
     }
     
     @objc func exampleLabelTapped(_ sender: Any){
-        performSegue(withIdentifier: "showExamples", sender: nil)
+        self.navigationController?.performSegue(withIdentifier: "showExamples", sender: nil)
+    }
+    
+    @IBAction func unwindToCreateItem(_ sender: UIStoryboardSegue) { }
+    
+    func setSelectedTitle(_ text : String) {
+        self.titleTextfield.text = text
     }
 
 }

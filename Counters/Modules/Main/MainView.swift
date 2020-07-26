@@ -78,6 +78,10 @@ class MainView: UIViewController {
         navigationItem.hidesSearchBarWhenScrolling = true
         navigationController?.navigationBar.prefersLargeTitles = false
     }
+    
+    @IBAction func unwindToMain(_ sender: UIStoryboardSegue) {
+        self.tableView.reloadData()
+    }
 
 }
 

@@ -42,8 +42,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PgQ-KZ-mZ6">
-                                <rect key="frame" x="24" y="181" width="366" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PgQ-KZ-mZ6">
+                                <rect key="frame" x="24" y="181" width="366" height="20.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Give it a name. Creative block? See ">
                                         <attributes>
@@ -76,9 +76,9 @@
                         <constraints>
                             <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="PgQ-KZ-mZ6" secondAttribute="trailing" constant="24" id="75I-cj-jhX"/>
                             <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="Ldc-wY-hf2" secondAttribute="trailing" constant="12" id="RbG-2c-E6r"/>
-                            <constraint firstItem="PgQ-KZ-mZ6" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" constant="24" id="fNR-4m-bU5"/>
+                            <constraint firstItem="PgQ-KZ-mZ6" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" constant="24" id="fNR-4m-bU5"/>
                             <constraint firstItem="PgQ-KZ-mZ6" firstAttribute="top" secondItem="Ldc-wY-hf2" secondAttribute="bottom" constant="13" id="kc2-OG-bKK"/>
-                            <constraint firstItem="Ldc-wY-hf2" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" constant="12" id="nGc-Gx-BgH"/>
+                            <constraint firstItem="Ldc-wY-hf2" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" constant="12" id="nGc-Gx-BgH"/>
                             <constraint firstItem="Ldc-wY-hf2" firstAttribute="top" secondItem="VUw-jc-0yf" secondAttribute="top" constant="25" id="viB-08-Op9"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VUw-jc-0yf"/>
@@ -87,36 +87,40 @@
                     <navigationItem key="navigationItem" title="Create a counter" id="mOI-FS-AaM"/>
                     <connections>
                         <outlet property="examplesLabel" destination="PgQ-KZ-mZ6" id="BIM-gs-KEe"/>
-                        <segue destination="vc0-1B-Bgh" kind="showDetail" identifier="showExamples" id="Jlo-dg-c9B"/>
+                        <outlet property="titleTextfield" destination="Ldc-wY-hf2" id="WbL-Bj-ZbW"/>
+                        <segue destination="YXN-DY-c7B" kind="unwind" identifier="unwindToMain" unwindAction="unwindToMain:" id="cQ0-Yk-hbq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>
+                <exit id="YXN-DY-c7B" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="709" y="129"/>
+            <point key="canvasLocation" x="708.69565217391312" y="128.57142857142856"/>
         </scene>
         <!--Examples-->
         <scene sceneID="zsy-ju-mpZ">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ikR-AX-48X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="RvQ-Dm-z7B" userLabel="Exit" sceneMemberID="exit"/>
                 <viewController title="Examples" id="vc0-1B-Bgh" customClass="ExamplesView" customModule="Counters" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UJU-L4-lwF">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select an example to add it to your counters." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z4m-R3-Ix9">
-                                <rect key="frame" x="43" y="104" width="328" height="18"/>
+                                <rect key="frame" x="43" y="16" width="328" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.53333333333333333" green="0.54509803921568623" blue="0.56470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sPU-J2-N0q">
-                                <rect key="frame" x="0.0" y="138" width="414" height="1"/>
+                                <rect key="frame" x="0.0" y="50" width="414" height="1"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="1Md-rm-4hA"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Vfw-Td-gKh">
-                                <rect key="frame" x="0.0" y="146" width="414" height="708"/>
+                                <rect key="frame" x="0.0" y="58" width="414" height="742"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
@@ -136,11 +140,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="shx-de-FGZ"/>
                     </view>
+                    <navigationItem key="navigationItem" id="JHp-E8-B3j"/>
                     <connections>
                         <outlet property="categoriesTableView" destination="Vfw-Td-gKh" id="gWs-R6-lLE"/>
+                        <segue destination="RvQ-Dm-z7B" kind="unwind" identifier="unwindToCreateItem" unwindAction="unwindToCreateItem:" id="SzA-cV-8IJ"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ikR-AX-48X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1486.9565217391305" y="128.57142857142856"/>
         </scene>
@@ -249,6 +254,7 @@
                     </navigationBar>
                     <connections>
                         <segue destination="JEX-9P-axG" kind="relationship" relationship="rootViewController" id="GKi-kA-LjT"/>
+                        <segue destination="vc0-1B-Bgh" kind="show" identifier="showExamples" id="Qt4-GF-fah"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SLD-UC-DBI" userLabel="First Responder" sceneMemberID="firstResponder"/>

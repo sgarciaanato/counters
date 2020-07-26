@@ -1,5 +1,5 @@
 //
-//  CounterView.swift
+//  CreateItemView.swift
 //  Counters
 //
 //  Created by Samuel García on 24-07-20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CounterView: UIViewController {
+class CreateItemView: UIViewController {
 
     @IBOutlet weak var detailDescriptionLabel: UILabel!
 
@@ -25,6 +25,7 @@ class CounterView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
         configureView()
     }
 

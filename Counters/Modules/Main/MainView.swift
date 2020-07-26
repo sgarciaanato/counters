@@ -8,23 +8,54 @@
 
 import UIKit
 
-class MainView: UITableViewController {
+class MainView: UIViewController {
 
-    var counterView: CounterView? = nil
+    var createItemView: CreateItemView? = nil
     var objects = [Any]()
-
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var itemsCounterDescription: UILabel!
+    //    init() {
+//        super.init(nibName: nil, bundle: nil)
+//        
+//        controller = DetailPresenter()
+//        controller?.view = self
+//        controller?.router?.view = self
+//    }
+//    
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+    
+    private var search = UISearchController(searchResultsController: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        navigationItem.leftBarButtonItem = editButtonItem
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        search.searchBar.delegate = self
+        search.searchBar.sizeToFit()
+        search.obscuresBackgroundDuringPresentation = false
+        search.hidesNavigationBarDuringPresentation = true
+        self.definesPresentationContext = true
+        search.searchBar.placeholder = "Search"
+        self.navigationItem.searchController = search
 
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
-        navigationItem.rightBarButtonItem = addButton
+        
+        navigationItem.leftBarButtonItem = editButtonItem
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+
         if let split = splitViewController {
             let controllers = split.viewControllers
-            counterView = (controllers[controllers.count-1] as! UINavigationController).topViewController as? CounterView
+            createItemView = (controllers[controllers.count-1] as! UINavigationController).topViewController as? CreateItemView
         }
+        
+        tableView.register(UINib(nibName: "CounterTableViewCell", bundle: nil), forCellReuseIdentifier: "CounterTableViewCell")
         
         NetworkOperation.shared.get(endpoint: "/api/v1/counters") { (data, string) in
             
@@ -33,15 +64,21 @@ class MainView: UITableViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
+        navigationItem.hidesSearchBarWhenScrolling = false
         super.viewWillAppear(animated)
     }
-
-    @objc
-    func insertNewObject(_ sender: Any) {
-        objects.insert(NSDate(), at: 0)
-        let indexPath = IndexPath(row: 0, section: 0)
-        tableView.insertRows(at: [indexPath], with: .automatic)
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        search.searchBar.becomeFirstResponder()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationItem.hidesSearchBarWhenScrolling = true
+    }
+    @IBAction func addNewAction(_ sender: Any) {
+        self.performSegue(withIdentifier: "showDetail", sender: nil)
     }
 
     // MARK: - Segues
@@ -50,34 +87,44 @@ class MainView: UITableViewController {
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let object = objects[indexPath.row] as! NSDate
-                let controller = (segue.destination as! UINavigationController).topViewController as! CounterView
+                let controller = (segue.destination as! UINavigationController).topViewController as! CreateItemView
                 controller.detailItem = object
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
-                counterView = controller
+                createItemView = controller
             }
         }
     }
 
-    // MARK: - Table View
+}
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return objects.count
+extension MainView : UISearchBarDelegate {
+    
+}
+
+// MARK: - Table View
+
+extension MainView : UITableViewDelegate, UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 100
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let object = objects[indexPath.row] as! NSDate
-        cell.textLabel!.text = object.description
-        return cell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = self.tableView.dequeueReusableCell(withIdentifier: "CounterTableViewCell", for: indexPath) as? CounterTableViewCell {
+            cell.titleLabel.text = "object.description"
+            return cell
+        }
+//        let object = objects[indexPath.row] as! NSDate
+        return UITableViewCell()
     }
 
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
 
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             objects.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
@@ -85,7 +132,4 @@ class MainView: UITableViewController {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
         }
     }
-
-
 }
-

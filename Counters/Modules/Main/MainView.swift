@@ -81,7 +81,7 @@ class MainView: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        reloadData()
+        tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -130,12 +130,14 @@ class MainView: UIViewController {
     
     @IBAction func deleteSelected(_ sender: Any) {
         
+        guard let selectedCounter = controller?.selectedCounterCount(), selectedCounter > 0 else { return }
+        
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
         let handler : ((UIAlertAction) -> Void) = {_ in
             self.controller?.deleteSelected()
         }
-        alert.addAction(UIAlertAction(title: "Delete \(controller?.selectedCounterCount() ?? 0) counter", style: .destructive, handler: handler))
+        alert.addAction(UIAlertAction(title: "Delete \(selectedCounter) counter", style: .destructive, handler: handler))
 
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 
@@ -197,7 +199,7 @@ extension MainView : MainControllerToViewDelegate {
     func hideNoResults(){
         DispatchQueue.main.async {
             self.noResultsLabel.isHidden = true
-            self.tableView.isHidden = false
+//            self.tableView.isHidden = false
         }
     }
     func goToCreateItem() {
@@ -237,6 +239,15 @@ extension MainView : MainControllerToViewDelegate {
     
     func updateEditingLayout() {
         configureEditingLayout()
+    }
+    
+    func openShareViewController(objectsToShare : [Any]) {
+        
+        let activityViewController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        
+        self.present(activityViewController, animated: true, completion: nil)
+        self.hideLoading()
     }
     
 }

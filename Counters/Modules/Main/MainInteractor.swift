@@ -32,7 +32,17 @@ class MainInteractor {
         }
     }
     
-    var countersWithoutTreating : [Counter] = []
+    var countersWithoutTreating : [Counter] = [] {
+        didSet {
+            for counter in countersWithoutTreating {
+                for (index,selectedCounter) in selectedCounters.enumerated() {
+                    if counter.id == selectedCounter.id {
+                        selectedCounters[index] = counter
+                    }
+                }
+            }
+        }
+    }
     
     var selectedCounters : [Counter] = []
     
@@ -168,6 +178,17 @@ class MainInteractor {
     
     func shareSelected(){
         
+        var objectsToShare : [Any] = []
+        
+        for counter in selectedCounters {
+            objectsToShare.append("\(counter.count) x \(counter.title ?? "")")
+        }
+        
+        objectsToShare.append("You can see the full list on sam-counters://share")
+        
+        
+        controller.showLoading()
+        controller.openShareViewController(objectsToShare: objectsToShare)
     }
     
     func deleteSelected() {
@@ -200,4 +221,5 @@ protocol MainInteractorToControllerDelegate {
     func showLoading()
     func hideLoading()
     func updateEditingLayout()
+    func openShareViewController(objectsToShare : [Any])
 }

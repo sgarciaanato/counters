@@ -124,6 +124,9 @@ extension MainController : MainInteractorToControllerDelegate {
     func updateEditingLayout() {
         view.updateEditingLayout()
     }
+    func openShareViewController(objectsToShare : [Any]){
+        view.openShareViewController(objectsToShare: objectsToShare)
+    }
 }
 
 protocol MainControllerToViewDelegate {
@@ -137,4 +140,5 @@ protocol MainControllerToViewDelegate {
     func showLoading()
     func hideLoading()
     func updateEditingLayout()
+    func openShareViewController(objectsToShare : [Any])
 }

@@ -217,7 +217,7 @@
                                                 <color key="tintColor" name="tintColor"/>
                                                 <state key="normal" image="plus" catalog="system"/>
                                                 <connections>
-                                                    <segue destination="vC3-pB-5Vb" kind="showDetail" id="BW1-cT-bgv"/>
+                                                    <segue destination="vC3-pB-5Vb" kind="showDetail" identifier="createItemSegue" id="BW1-cT-bgv"/>
                                                 </connections>
                                             </button>
                                         </subviews>

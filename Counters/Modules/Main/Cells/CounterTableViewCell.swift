@@ -14,6 +14,10 @@ class CounterTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var decButton: UIButton!
     @IBOutlet weak var incButton: UIButton!
+    @IBOutlet weak var selectionImageView: UIImageView!
+    @IBOutlet weak var selectButton: UIButton!
+    
+    @IBOutlet weak var hiddenEditRadioButtonConstraint: NSLayoutConstraint!
     
     var delegate : CounterDelegate?
     
@@ -29,12 +33,13 @@ class CounterTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        counterLabel.text = "----"
-        // Initialization code
     }
     
-    func configure(_ counter: Counter?){
+    func configure(_ counter: Counter?, editing : Bool = false, selected : Bool?){
         self.counter = counter
+        hiddenEditRadioButtonConstraint.isActive = !editing
+        selectButton.isEnabled = editing
+        selectionImageView.image = selected ?? false ? UIImage(named: "selected-radio-button") : UIImage(named: "unselected-radio-button")
     }
     
     @IBAction func incButton(_ sender: Any) {
@@ -47,9 +52,23 @@ class CounterTableViewCell: UITableViewCell {
         delegate?.decrement(counter)
     }
     
+    @IBAction func selectAction(_ sender: Any) {
+        isSelected = !isSelected
+        guard let counter = counter else { return }
+        if isSelected {
+            selectionImageView.image = UIImage(named: "selected-radio-button")
+            delegate?.select(counter)
+        }else{
+            selectionImageView.image = UIImage(named: "unselected-radio-button")
+            delegate?.deselect(counter)
+        }
+    }
+    
 }
 
 protocol CounterDelegate {
     func increment(_ counter: Counter)
     func decrement(_ counter: Counter)
+    func select(_ counter: Counter)
+    func deselect(_ counter: Counter)
 }

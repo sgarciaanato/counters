@@ -13,6 +13,15 @@ class MainController {
     let view : MainControllerToViewDelegate
     var interactor : MainInteractor?
     
+    var editing : Bool {
+        set {
+            interactor?.editing = newValue
+        }
+        get {
+            return interactor?.editing ?? false
+        }
+    }
+    
     init(view : MainControllerToViewDelegate) {
         self.view = view
         interactor = MainInteractor(controller : self)
@@ -20,6 +29,10 @@ class MainController {
     
     func fetchCounters(searchText: String?) {
         interactor?.fetchCounters(searchText: searchText)
+    }
+    
+    func fetchCounters() {
+        interactor?.fetchCounters()
     }
     
     func getCountersCount() -> Int {
@@ -38,6 +51,14 @@ class MainController {
         interactor?.decrement(counter)
     }
     
+    func select(_ counter : Counter) {
+        interactor?.select(counter)
+    }
+    
+    func deselect(_ counter : Counter) {
+        interactor?.deselect(counter)
+    }
+    
     func updateCounterDescriptionText() {
         interactor?.updateCounterDescriptionText()
     }
@@ -46,8 +67,24 @@ class MainController {
         interactor?.setCounters(counters)
     }
     
-    func deleteCounter(at row: Int) {
-        interactor?.deleteCounter(at: row)
+    func deleteCounter(_ counter : Counter) {
+        interactor?.deleteCounter(counter)
+    }
+    
+    func shareSelected(){
+        interactor?.shareSelected()
+    }
+    
+    func deleteSelected() {
+        interactor?.deleteSelected()
+    }
+    
+    func selectedCounterCount() -> Int {
+        return interactor?.selectedCounterCount() ?? 0
+    }
+    
+    func isSelected(_ counter : Counter?) -> Bool {
+        return interactor?.isSelected(counter) ?? false
     }
     
 }
@@ -67,6 +104,12 @@ extension MainController : MainInteractorToControllerDelegate {
     func showError(error : ErrorModel) {
         view.showError(error: error)
     }
+    func showNoResults() {
+        view.showNoResults()
+    }
+    func hideNoResults() {
+        view.hideNoResults()
+    }
     func goToCreateItem() {
         view.goToCreateItem()
     }
@@ -78,14 +121,20 @@ extension MainController : MainInteractorToControllerDelegate {
     func hideLoading() {
         view.hideLoading()
     }
+    func updateEditingLayout() {
+        view.updateEditingLayout()
+    }
 }
 
 protocol MainControllerToViewDelegate {
     func reloadData()
     func setDescriptionCounterText(_ text: String)
     func showError(error : ErrorModel)
+    func showNoResults()
+    func hideNoResults()
     func goToCreateItem()
     func showDialogError(title: String, message: String, actions : [String:(()->())])
     func showLoading()
     func hideLoading()
+    func updateEditingLayout()
 }

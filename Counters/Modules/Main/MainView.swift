@@ -12,9 +12,17 @@ class MainView: UIViewController {
 
     var createItemView: CreateItemView? = nil
     
+    @IBOutlet weak var noResultsLabel: UILabel!
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var itemsCounterDescription: UILabel!
     @IBOutlet weak var customErrorView: CustomErrorView!
+    
+    @IBOutlet weak var createItemButton: UIButton!
+    @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
+    
+    var customEditButton : UIBarButtonItem?
     
     var refreshControl = UIRefreshControl()
     
@@ -25,8 +33,9 @@ class MainView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-
-        navigationItem.leftBarButtonItem = editButtonItem
+        
+        customEditButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(self.edit(_:)))
+        navigationItem.leftBarButtonItem = customEditButton
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -34,7 +43,7 @@ class MainView: UIViewController {
         controller = MainController(view : self)
         controller?.updateCounterDescriptionText()
         
-        controller?.fetchCounters(searchText: nil)
+        controller?.fetchCounters()
         showLoading()
         
         tableView.register(UINib(nibName: "CounterTableViewCell", bundle: nil), forCellReuseIdentifier: "CounterTableViewCell")
@@ -70,8 +79,9 @@ class MainView: UIViewController {
         configureSearchBar()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -90,9 +100,51 @@ class MainView: UIViewController {
     }
     
     @objc func refresh(_ sender: Any){
-        controller?.fetchCounters(searchText: nil)
+        controller?.fetchCounters()
     }
+    
+    @objc func edit(_ sender: Any){
+        configureEditingLayout()
+        tableView.reloadData()
+    }
+    
+    func configureEditingLayout() {
+        guard let editing = controller?.editing else { return }
+        if editing {
+            controller?.editing = false
+            navigationItem.leftBarButtonItem?.title = "Edit"
+            navigationItem.leftBarButtonItem?.style = .plain
+        }else{
+            controller?.editing = true
+            navigationItem.leftBarButtonItem?.title = "Done"
+            navigationItem.leftBarButtonItem?.style = .done
+        }
+        deleteButton.isHidden = editing
+        shareButton.isHidden = editing
+        createItemButton.isHidden = !editing
+    }
+    
+    @IBAction func shareSelected(_ sender: Any) {
+        controller?.shareSelected()
+    }
+    
+    @IBAction func deleteSelected(_ sender: Any) {
+        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
+        let handler : ((UIAlertAction) -> Void) = {_ in
+            self.controller?.deleteSelected()
+        }
+        alert.addAction(UIAlertAction(title: "Delete \(controller?.selectedCounterCount() ?? 0) counter", style: .destructive, handler: handler))
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+
+        DispatchQueue.main.async {
+            alert.view.tintColor = UIColor(named: "tintColor")
+            self.present(alert, animated: true)
+        }
+    }
+    
 }
 
 extension MainView : UISearchBarDelegate {
@@ -107,6 +159,12 @@ extension MainView : CounterDelegate {
     }
     func decrement(_ counter: Counter) {
         controller?.decrement(counter)
+    }
+    func select(_ counter: Counter) {
+        controller?.select(counter)
+    }
+    func deselect(_ counter: Counter) {
+        controller?.deselect(counter)
     }
 }
 
@@ -128,6 +186,18 @@ extension MainView : MainControllerToViewDelegate {
         DispatchQueue.main.async {
             self.tableView.isHidden = true
             self.customErrorView.isHidden = false
+        }
+    }
+    func showNoResults(){
+        DispatchQueue.main.async {
+            self.noResultsLabel.isHidden = false
+            self.tableView.isHidden = true
+        }
+    }
+    func hideNoResults(){
+        DispatchQueue.main.async {
+            self.noResultsLabel.isHidden = true
+            self.tableView.isHidden = false
         }
     }
     func goToCreateItem() {
@@ -164,6 +234,11 @@ extension MainView : MainControllerToViewDelegate {
             self.refreshControl.endRefreshing()
         }
     }
+    
+    func updateEditingLayout() {
+        configureEditingLayout()
+    }
+    
 }
 
 // MARK: - Table View
@@ -176,7 +251,8 @@ extension MainView : UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "CounterTableViewCell", for: indexPath) as? CounterTableViewCell {
-            cell.configure(controller?.getCounterFor(indexPath.row))
+            let counter = controller?.getCounterFor(indexPath.row)
+            cell.configure(counter, editing: controller?.editing ?? false, selected: controller?.isSelected(counter))
             cell.delegate = self
             return cell
         }
@@ -189,10 +265,8 @@ extension MainView : UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            controller?.deleteCounter(at: indexPath.row)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+        if editingStyle == .delete, let counter = controller?.getCounterFor(indexPath.row)  {
+            controller?.deleteCounter(counter)
         }
     }
 }

@@ -14,33 +14,46 @@ class MainInteractor {
     
     var searchText : String? = nil
     
+    var editing : Bool = false
+    
     var counters : [Counter] {
         get {
             guard let searchText = self.searchText, searchText != "" else {
-                return self.countersWithoutTreating
+                controller.hideNoResults()
+                return self.countersWithoutTreating.reversed()
             }
-            return self.countersWithoutTreating.filter{ ($0.title?.contains(searchText) ?? false) }
-        }
-        set {
-            updateCounterDescriptionText()
+            let treatedCounters = self.countersWithoutTreating.filter{ ($0.title?.contains(searchText) ?? false) }
+            if treatedCounters.count == 0 {
+                controller.showNoResults()
+            }else{
+                controller.hideNoResults()
+            }
+            return treatedCounters.reversed()
         }
     }
     
     var countersWithoutTreating : [Counter] = []
     
+    var selectedCounters : [Counter] = []
+    
     init(controller : MainInteractorToControllerDelegate) {
         self.controller = controller
+    }
+    
+    func fetchCounters() {
+        searchText = nil
+        NetworkOperation.shared.request(paths: [.api, .v1, .counters], httpBody: nil) { (result : Result<[Counter]?,Error>) in
+            self.parseResult(result: result)
+        }
     }
     
     func fetchCounters(searchText: String? = "") {
         self.searchText = searchText
         if searchText != nil, let counters : [Counter] = Cache.shared.getData() {
-            self.countersWithoutTreating = counters
-            self.controller.reloadData()
+            countersWithoutTreating = counters
+            controller.reloadData()
+            updateCounterDescriptionText()
             return
-        }
-        NetworkOperation.shared.request(paths: [.api, .v1, .counters], httpBody: nil) { (result : Result<[Counter]?,Error>) in
-            self.parseResult(result: result)
         }
     }
     
@@ -72,6 +85,14 @@ class MainInteractor {
         }
     }
     
+    func select(_ counter : Counter) {
+        self.selectedCounters.append(counter)
+    }
+    
+    func deselect(_ counter : Counter) {
+        self.selectedCounters.removeAll { $0.id == counter.id }
+    }
+    
     func getCountersCount() -> Int {
         return counters.count
     }
@@ -82,8 +103,8 @@ class MainInteractor {
     }
     
     func updateCounterDescriptionText() {
-        let count = countersWithoutTreating.count
-        let totalCount = countersWithoutTreating.map({$0.count}).reduce(0, +)
+        let count = counters.count
+        let totalCount = counters.map({$0.count}).reduce(0, +)
         controller.setDescriptionCounterText("\(count) items · Counted \(totalCount) times")
         if count == 0 {
             controller.setDescriptionCounterText("")
@@ -95,9 +116,12 @@ class MainInteractor {
         self.controller.reloadData()
     }
     
-    func deleteCounter(at row: Int) {
-        guard let id = counters[row].id, let title = counters[row].title else { return }
+    func deleteCounter(_ counter : Counter) {
+        guard let id = counter.id, let title = counter.title else { return }
+        deselect(counter)
+        controller.showLoading()
         NetworkOperation.shared.request(paths: [.api, .v1, .counter], httpMethod: "DELETE",httpBody: [ "id" : id]) { (result : Result<[Counter]?,Error>) in
+            self.controller.hideLoading()
             self.parseResult(result: result) {
                 self.controller.showDialogError(title: "Couldn't delete the counter \(title)", message: "The internet connection appears to be ofline", actions: [
                     "Dismiss" : { }
@@ -118,20 +142,20 @@ class MainInteractor {
                     self.controller.showError(error: errorModel)
                     return
                 }
-                self.countersWithoutTreating = counters
-                self.controller.reloadData()
+                countersWithoutTreating = counters
+                controller.reloadData()
         case .failure(let error):
             if let counters : [Counter] = Cache.shared.getData() {
                 if counters.count > 0 {
-                    self.countersWithoutTreating = counters
-                    self.controller.reloadData()
+                    countersWithoutTreating = counters
+                    controller.reloadData()
                     customFailureBlock?()
                     return
                 }
                 let errorModel = ErrorModel(title: "No counters yet", description: "\"When I started counting my blessings, my whole life turned aroud.\"\n-Willie Nelson", buttonTitle: "Create a counter") {
                     self.controller.goToCreateItem()
                 }
-                self.controller.showError(error: errorModel)
+                controller.showError(error: errorModel)
                 return
             }
             let errorModel = ErrorModel(title: "Couldn't load the counters", description: error.localizedDescription, buttonTitle: "Retry") {
@@ -139,6 +163,28 @@ class MainInteractor {
             }
             self.controller.showError(error: errorModel)
         }
+        updateCounterDescriptionText()
+    }
+    
+    func shareSelected(){
+        
+    }
+    
+    func deleteSelected() {
+        for counter in selectedCounters {
+            deleteCounter(counter)
+        }
+        controller.updateEditingLayout()
+        controller.reloadData()
+    }
+    
+    func selectedCounterCount() -> Int {
+        return selectedCounters.count
+    }
+    
+    func isSelected(_ counter : Counter?) -> Bool {
+        guard let counterId = counter?.id else { return false }
+        return selectedCounters.contains { $0.id == counterId }
     }
     
 }
@@ -147,8 +193,11 @@ protocol MainInteractorToControllerDelegate {
     func reloadData()
     func setDescriptionCounterText(_ text: String)
     func showError(error : ErrorModel)
+    func showNoResults()
+    func hideNoResults()
     func goToCreateItem()
     func showDialogError(title: String, message: String, actions : [String:(()->())])
     func showLoading()
     func hideLoading()
+    func updateEditingLayout()
 }

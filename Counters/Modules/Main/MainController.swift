@@ -38,9 +38,22 @@ class MainController {
         interactor.updateCounterDescriptionText()
     }
     
+    func setCounters(_ counters : [Counter]) {
+        interactor.setCounters(counters)
+    }
+    
+    func deleteCounter(at row: Int) {
+        interactor.deleteCounter(at: row)
+    }
+    
 }
 
 extension MainController : MainInteractorToControllerDelegate {
+    
+    func showDialogError(title: String, message: String, actions: [String:(()->())]) {
+        view?.showDialogError(title: title, message: message, actions: actions)
+    }
+    
     func reloadData() {
         view?.reloadData()
     }
@@ -60,4 +73,5 @@ protocol MainControllerToViewDelegate {
     func setDescriptionCounterText(_ text: String)
     func showError(error : ErrorModel)
     func goToCreateItem()
+    func showDialogError(title: String, message: String, actions : [String:(()->())])
 }

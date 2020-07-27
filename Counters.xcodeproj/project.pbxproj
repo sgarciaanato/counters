@@ -26,6 +26,10 @@
 		8EA12E2124CE0C49000D7979 /* CustomErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E2024CE0C49000D7979 /* CustomErrorView.swift */; };
 		8EA12E2324CE0C7C000D7979 /* CustomErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EA12E2224CE0C7C000D7979 /* CustomErrorView.xib */; };
 		8EA12E2824CE0E40000D7979 /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E2724CE0E40000D7979 /* ErrorModel.swift */; };
+		8EA12E2A24CE32D9000D7979 /* CreateItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E2924CE32D9000D7979 /* CreateItemController.swift */; };
+		8EA12E2C24CE32E7000D7979 /* CreateItemInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E2B24CE32E7000D7979 /* CreateItemInteractor.swift */; };
+		8EA12E2E24CE3E10000D7979 /* CreateItemRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E2D24CE3E10000D7979 /* CreateItemRequestModel.swift */; };
+		8EA12E3024CE5729000D7979 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E2F24CE5729000D7979 /* Cache.swift */; };
 		8EA8FE9324CBA4B20009A23B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA8FE9224CBA4B20009A23B /* AppDelegate.swift */; };
 		8EA8FE9524CBA4B20009A23B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA8FE9424CBA4B20009A23B /* SceneDelegate.swift */; };
 		8EA8FE9724CBA4B20009A23B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA8FE9624CBA4B20009A23B /* MainView.swift */; };
@@ -67,6 +71,10 @@
 		8EA12E2024CE0C49000D7979 /* CustomErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomErrorView.swift; sourceTree = "<group>"; };
 		8EA12E2224CE0C7C000D7979 /* CustomErrorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomErrorView.xib; sourceTree = "<group>"; };
 		8EA12E2724CE0E40000D7979 /* ErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModel.swift; sourceTree = "<group>"; };
+		8EA12E2924CE32D9000D7979 /* CreateItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateItemController.swift; sourceTree = "<group>"; };
+		8EA12E2B24CE32E7000D7979 /* CreateItemInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateItemInteractor.swift; sourceTree = "<group>"; };
+		8EA12E2D24CE3E10000D7979 /* CreateItemRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateItemRequestModel.swift; sourceTree = "<group>"; };
+		8EA12E2F24CE5729000D7979 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		8EA8FE8F24CBA4B20009A23B /* Counters.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Counters.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EA8FE9224CBA4B20009A23B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8EA8FE9424CBA4B20009A23B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -104,6 +112,9 @@
 			isa = PBXGroup;
 			children = (
 				8EA8FE9824CBA4B20009A23B /* CreateItemView.swift */,
+				8EA12E2924CE32D9000D7979 /* CreateItemController.swift */,
+				8EA12E2B24CE32E7000D7979 /* CreateItemInteractor.swift */,
+				8EA12E2D24CE3E10000D7979 /* CreateItemRequestModel.swift */,
 			);
 			path = CreateItem;
 			sourceTree = "<group>";
@@ -250,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				8EA8FEB824CBC3050009A23B /* NetworkingOperation.swift */,
+				8EA12E2F24CE5729000D7979 /* Cache.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -374,17 +386,21 @@
 				8E41640624CD38A40093B20E /* ExamplesInteractor.swift in Sources */,
 				8E4163F624CD25730093B20E /* UIViewController+Utils.swift in Sources */,
 				8EA12E2124CE0C49000D7979 /* CustomErrorView.swift in Sources */,
+				8EA12E2A24CE32D9000D7979 /* CreateItemController.swift in Sources */,
 				8EA8FE9324CBA4B20009A23B /* AppDelegate.swift in Sources */,
 				8E41640424CD38790093B20E /* ExamplesController.swift in Sources */,
 				8E41640924CD38E40093B20E /* ExamplesCategory.swift in Sources */,
 				8EA8FEB924CBC3050009A23B /* NetworkingOperation.swift in Sources */,
 				8E4163F224CD035F0093B20E /* UIView+Utils.swift in Sources */,
+				8EA12E2E24CE3E10000D7979 /* CreateItemRequestModel.swift in Sources */,
+				8EA12E3024CE5729000D7979 /* Cache.swift in Sources */,
 				8E41640124CD377B0093B20E /* ExampleCollectionViewCell.swift in Sources */,
 				8EA12E1924CDEA25000D7979 /* MainController.swift in Sources */,
 				8EA12E2824CE0E40000D7979 /* ErrorModel.swift in Sources */,
 				8E4163F924CD335E0093B20E /* ExamplesView.swift in Sources */,
 				8E4163FD24CD36E60093B20E /* CategoryTableViewCell.swift in Sources */,
 				8E4163EE24CCC4E60093B20E /* CounterTableViewCell.swift in Sources */,
+				8EA12E2C24CE32E7000D7979 /* CreateItemInteractor.swift in Sources */,
 				8EA8FE9524CBA4B20009A23B /* SceneDelegate.swift in Sources */,
 				8EA8FE9724CBA4B20009A23B /* MainView.swift in Sources */,
 				8EA12E1E24CDF1C6000D7979 /* Counter.swift in Sources */,

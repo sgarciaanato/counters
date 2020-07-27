@@ -1,5 +1,5 @@
 //
-//  Counter.swift
+//  CreateItemRequestModel.swift
 //  Counters
 //
 //  Created by Samuel García on 26-07-20.
@@ -8,8 +8,6 @@
 
 import Foundation
 
-struct Counter : Codable {
-    let id : String?
-    let title : String?
-    var count : Int
+struct CreateItemRequestModel : Codable {
+    let title : String
 }

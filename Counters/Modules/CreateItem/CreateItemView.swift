@@ -13,6 +13,8 @@ class CreateItemView: UIViewController {
     @IBOutlet weak var examplesLabel: UILabel!
     @IBOutlet weak var titleTextfield: UITextField!
     
+    var controller : CreateItemController?
+    
     var saveBtn : UIBarButtonItem?
     
 
@@ -36,14 +38,18 @@ class CreateItemView: UIViewController {
         configureView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        controller = CreateItemController()
+        controller?.view = self
+    }
+    
     @objc func backAction(_ sender: Any){
         navigationController?.navigationController?.popViewController(animated: true)
     }
     
     @objc func saveAction(_ sender: Any){
-        self.performSegue(withIdentifier: "unwindToMain", sender: nil)
-        self.titleTextfield.text = ""
-        self.titleTextfield.endEditing(false)
+        controller?.createItem(self.titleTextfield.text)
     }
     
     @objc func exampleLabelTapped(_ sender: Any){
@@ -55,5 +61,23 @@ class CreateItemView: UIViewController {
     func setSelectedTitle(_ text : String) {
         self.titleTextfield.text = text
     }
+    
+    // MARK: Segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let mainView = segue.destination as? MainView {
+            guard let counters = controller?.getCounterList() else { return }
+            mainView.updateList(counters)
+        }
+    }
 
+}
+
+extension CreateItemView : CreateItemControllerToViewDelegate {
+    func updateCountersList() {
+        DispatchQueue.main.async {
+            self.titleTextfield.text = ""
+            self.titleTextfield.endEditing(false)
+            self.performSegue(withIdentifier: "unwindToMain", sender: nil)
+        }
+    }
 }

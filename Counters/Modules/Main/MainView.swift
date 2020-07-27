@@ -11,7 +11,6 @@ import UIKit
 class MainView: UIViewController {
 
     var createItemView: CreateItemView? = nil
-    var objects = [Any]()
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var itemsCounterDescription: UILabel!
@@ -79,6 +78,10 @@ class MainView: UIViewController {
     @IBAction func unwindToMain(_ sender: UIStoryboardSegue) {
         self.tableView.reloadData()
     }
+    
+    func updateList(_ counters : [Counter]) {
+        controller?.setCounters(counters)
+    }
 
 }
 
@@ -104,7 +107,9 @@ extension MainView : MainControllerToViewDelegate {
         }
     }
     func setDescriptionCounterText(_ text: String) {
-        itemsCounterDescription.text = text
+        DispatchQueue.main.async {
+            self.itemsCounterDescription.text = text
+        }
     }
     func showError(error : ErrorModel) {
         customErrorView.configure(error: error)
@@ -115,6 +120,26 @@ extension MainView : MainControllerToViewDelegate {
     }
     func goToCreateItem() {
         performSegue(withIdentifier: "createItemSegue", sender: nil)
+    }
+    
+    func showDialogError(title: String, message: String, actions : [String:(()->())]){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+
+        let sortedActions = actions.sorted() {$0.key > $1.key}
+        
+        for action in sortedActions {
+            let handler : ((UIAlertAction) -> Void) = {_ in
+                action.value()
+            }
+            alert.addAction(UIAlertAction(title: action.key, style: .default, handler: handler))
+        }
+        
+        
+        DispatchQueue.main.async {
+            alert.view.tintColor = UIColor(named: "tintColor")
+            self.present(alert, animated: true)
+        }
+
     }
 }
 
@@ -142,8 +167,7 @@ extension MainView : UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            objects.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            controller?.deleteCounter(at: indexPath.row)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
         }

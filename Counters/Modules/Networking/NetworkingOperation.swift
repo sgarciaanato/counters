@@ -11,7 +11,10 @@ import Foundation
 enum Path : String {
     case api
     case v1
+    case counter
     case counters
+    case inc
+    case dec
 }
 
 class NetworkOperation {
@@ -21,7 +24,7 @@ class NetworkOperation {
     private var dataTask : URLSessionTask?
     private let defaultSession = URLSession(configuration: .default)
     
-    func request<T:Codable>(paths: [Path], completion : @escaping (Result<T?, Error>)->()) {
+    func request<T:Codable>(paths: [Path], httpMethod : String = "GET", httpBody : [String:Any]?, completion : @escaping (Result<T?, Error>)->()) {
         
         urlComponents?.path = ""
         
@@ -31,7 +34,19 @@ class NetworkOperation {
             return
         }
         
-        dataTask = defaultSession.dataTask(with: url) { [weak self] data, response, error in
+        var urlRequest = URLRequest(url: url)
+        
+        urlRequest.httpMethod = httpMethod
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        if let httpBody = httpBody {
+            do {
+                let jsonData = try? JSONSerialization.data(withJSONObject: httpBody, options: .prettyPrinted)
+                urlRequest.httpBody = jsonData
+            }
+        }
+        
+        dataTask = defaultSession.dataTask(with: urlRequest) { [weak self] data, response, error in
             defer {
                 self?.dataTask = nil
             }
@@ -41,6 +56,7 @@ class NetworkOperation {
             } else if let data = data, let response = response as? HTTPURLResponse{
                 if response.statusCode == 200 {
                     do {
+                        Cache.shared.save(data: data)
                         let t = try JSONDecoder().decode(T.self, from: data)
                         completion(.success(t))
                     } catch {

@@ -10,32 +10,48 @@ import Foundation
 
 class CreateItemController {
     
-    var view : CreateItemControllerToViewDelegate?
-    var interactor : CreateItemInteractor
+    var view : CreateItemControllerToViewDelegate
+    var interactor : CreateItemInteractor?
     
-    init() {
-        interactor = CreateItemInteractor()
-        interactor.controller = self
+    init(view: CreateItemControllerToViewDelegate) {
+        self.view = view
+        interactor = CreateItemInteractor(controller : self)
     }
     
     func createItem(_ title: String?) {
-        interactor.createItem(title)
+        interactor?.createItem(title)
     }
     
     func getCounterList() -> [Counter]{
-        return interactor.getCounterList()
+        return interactor?.getCounterList() ?? []
     }
     
 }
 
 extension CreateItemController : CreateItemInteractorToControllerDelegate {
     func updateCountersList() {
-        view?.updateCountersList()
+        view.updateCountersList()
+        view.hideTextFieldLoading()
+    }
+    
+    func showTextFieldLoading() {
+        view.showTextFieldLoading()
+    }
+    
+    func hideTextFieldLoading() {
+        view.hideTextFieldLoading()
+    }
+    
+    func showDialogError(title: String, message: String, actions: [String:(()->())]) {
+        view.showDialogError(title: title, message: message, actions: actions)
     }
     
 }
 
 protocol CreateItemControllerToViewDelegate {
     func updateCountersList()
+    func showTextFieldLoading()
+    func hideTextFieldLoading()
+    func showDialogError(title: String, message: String, actions : [String:(()->())])
 }
 

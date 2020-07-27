@@ -33,15 +33,12 @@ class CreateItemView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
+        controller = CreateItemController(view : self)
         configureView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        controller = CreateItemController()
-        controller?.view = self
     }
     
     @objc func backAction(_ sender: Any){
@@ -78,6 +75,38 @@ extension CreateItemView : CreateItemControllerToViewDelegate {
             self.titleTextfield.text = ""
             self.titleTextfield.endEditing(false)
             self.performSegue(withIdentifier: "unwindToMain", sender: nil)
+        }
+    }
+    
+    func showTextFieldLoading() {
+        DispatchQueue.main.async {
+            self.saveBtn?.isEnabled = false
+            self.titleTextfield.activityIndicator(loading: true)
+        }
+    }
+    
+    func hideTextFieldLoading() {
+        DispatchQueue.main.async {
+            self.saveBtn?.isEnabled = true
+            self.titleTextfield.activityIndicator(loading: false)
+        }
+    }
+    
+    func showDialogError(title: String, message: String, actions : [String:(()->())]){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+
+        let sortedActions = actions.sorted() {$0.key > $1.key}
+        
+        for action in sortedActions {
+            let handler : ((UIAlertAction) -> Void) = {_ in
+                action.value()
+            }
+            alert.addAction(UIAlertAction(title: action.key, style: .default, handler: handler))
+        }
+        
+        DispatchQueue.main.async {
+            alert.view.tintColor = UIColor(named: "tintColor")
+            self.present(alert, animated: true)
         }
     }
 }

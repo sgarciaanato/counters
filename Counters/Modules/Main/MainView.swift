@@ -16,6 +16,8 @@ class MainView: UIViewController {
     @IBOutlet weak var itemsCounterDescription: UILabel!
     @IBOutlet weak var customErrorView: CustomErrorView!
     
+    var refreshControl = UIRefreshControl()
+    
     var controller : MainController?
     
     private var search = UISearchController(searchResultsController: nil)
@@ -29,6 +31,12 @@ class MainView: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
+        controller = MainController(view : self)
+        controller?.updateCounterDescriptionText()
+        
+        controller?.fetchCounters()
+        showLoading()
+        
         tableView.register(UINib(nibName: "CounterTableViewCell", bundle: nil), forCellReuseIdentifier: "CounterTableViewCell")
 
         if let split = splitViewController {
@@ -39,7 +47,6 @@ class MainView: UIViewController {
     }
     
     func configureSearchBar() {
-        
         search.searchBar.delegate = self
         search.searchBar.sizeToFit()
         search.obscuresBackgroundDuringPresentation = false
@@ -49,18 +56,16 @@ class MainView: UIViewController {
         self.navigationItem.searchController = search
         
         self.navigationController?.navigationBar.addShadow()
-        
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.clipsToBounds = false
         
-        controller = MainController()
-        controller?.view = self
-        
-        controller?.updateCounterDescriptionText()
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        tableView.addSubview(refreshControl)
         
         configureSearchBar()
     }
@@ -73,6 +78,7 @@ class MainView: UIViewController {
         super.viewWillDisappear(animated)
         navigationItem.hidesSearchBarWhenScrolling = true
         navigationController?.navigationBar.prefersLargeTitles = false
+        self.navigationController?.navigationBar.clipsToBounds = true
     }
     
     @IBAction func unwindToMain(_ sender: UIStoryboardSegue) {
@@ -81,6 +87,10 @@ class MainView: UIViewController {
     
     func updateList(_ counters : [Counter]) {
         controller?.setCounters(counters)
+    }
+    
+    @objc func refresh(_ sender: Any){
+        controller?.fetchCounters()
     }
 
 }
@@ -134,12 +144,23 @@ extension MainView : MainControllerToViewDelegate {
             alert.addAction(UIAlertAction(title: action.key, style: .default, handler: handler))
         }
         
-        
         DispatchQueue.main.async {
             alert.view.tintColor = UIColor(named: "tintColor")
             self.present(alert, animated: true)
         }
-
+    }
+    
+    func showLoading() {
+        DispatchQueue.main.async {
+            self.tableView.activityIndicator(loading: true)
+        }
+    }
+    
+    func hideLoading() {
+        DispatchQueue.main.async {
+            self.tableView.activityIndicator(loading: false)
+            self.refreshControl.endRefreshing()
+        }
     }
 }
 

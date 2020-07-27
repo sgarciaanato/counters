@@ -10,40 +10,44 @@ import Foundation
 
 class MainController {
     
-    var view : MainControllerToViewDelegate?
-    var interactor : MainInteractor
+    let view : MainControllerToViewDelegate
+    var interactor : MainInteractor?
     
-    init() {
-        interactor = MainInteractor()
-        interactor.controller = self
+    init(view : MainControllerToViewDelegate) {
+        self.view = view
+        interactor = MainInteractor(controller : self)
+    }
+    
+    func fetchCounters() {
+        interactor?.fetchCounters()
     }
     
     func getCountersCount() -> Int {
-        return interactor.getCountersCount()
+        return interactor?.getCountersCount() ?? 0
     }
     
-    func getCounterFor(_ row : Int) -> Counter {
-        return interactor.getCounterFor(row)
+    func getCounterFor(_ row : Int) -> Counter? {
+        return interactor?.getCounterFor(row)
     }
     
     func increment(_ counter : Counter) {
-        interactor.increment(counter)
+        interactor?.increment(counter)
     }
     
     func decrement(_ counter : Counter) {
-        interactor.decrement(counter)
+        interactor?.decrement(counter)
     }
     
     func updateCounterDescriptionText() {
-        interactor.updateCounterDescriptionText()
+        interactor?.updateCounterDescriptionText()
     }
     
     func setCounters(_ counters : [Counter]) {
-        interactor.setCounters(counters)
+        interactor?.setCounters(counters)
     }
     
     func deleteCounter(at row: Int) {
-        interactor.deleteCounter(at: row)
+        interactor?.deleteCounter(at: row)
     }
     
 }
@@ -51,20 +55,28 @@ class MainController {
 extension MainController : MainInteractorToControllerDelegate {
     
     func showDialogError(title: String, message: String, actions: [String:(()->())]) {
-        view?.showDialogError(title: title, message: message, actions: actions)
+        view.showDialogError(title: title, message: message, actions: actions)
     }
     
     func reloadData() {
-        view?.reloadData()
+        view.reloadData()
     }
     func setDescriptionCounterText(_ text: String) {
-        view?.setDescriptionCounterText(text)
+        view.setDescriptionCounterText(text)
     }
     func showError(error : ErrorModel) {
-        view?.showError(error: error)
+        view.showError(error: error)
     }
     func goToCreateItem() {
-        view?.goToCreateItem()
+        view.goToCreateItem()
+    }
+    
+    func showLoading() {
+        view.showLoading()
+    }
+    
+    func hideLoading() {
+        view.hideLoading()
     }
 }
 
@@ -74,4 +86,6 @@ protocol MainControllerToViewDelegate {
     func showError(error : ErrorModel)
     func goToCreateItem()
     func showDialogError(title: String, message: String, actions : [String:(()->())])
+    func showLoading()
+    func hideLoading()
 }

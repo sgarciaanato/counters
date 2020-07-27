@@ -12,17 +12,33 @@ class MainInteractor {
     
     let controller : MainInteractorToControllerDelegate
     
-    var counters : [Counter] = [] {
-        didSet {
+    var searchText : String? = nil
+    
+    var counters : [Counter] {
+        get {
+            guard let searchText = self.searchText, searchText != "" else {
+                return self.countersWithoutTreating
+            }
+            return self.countersWithoutTreating.filter{ ($0.title?.contains(searchText) ?? false) }
+        }
+        set {
             updateCounterDescriptionText()
         }
     }
+    
+    var countersWithoutTreating : [Counter] = []
     
     init(controller : MainInteractorToControllerDelegate) {
         self.controller = controller
     }
     
-    func fetchCounters() {
+    func fetchCounters(searchText: String? = "") {
+        self.searchText = searchText
+        if searchText != nil, let counters : [Counter] = Cache.shared.getData() {
+            self.countersWithoutTreating = counters
+            self.controller.reloadData()
+            return
+        }
         NetworkOperation.shared.request(paths: [.api, .v1, .counters], httpBody: nil) { (result : Result<[Counter]?,Error>) in
             self.parseResult(result: result)
         }
@@ -66,8 +82,8 @@ class MainInteractor {
     }
     
     func updateCounterDescriptionText() {
-        let count = counters.count
-        let totalCount = counters.map({$0.count}).reduce(0, +)
+        let count = countersWithoutTreating.count
+        let totalCount = countersWithoutTreating.map({$0.count}).reduce(0, +)
         controller.setDescriptionCounterText("\(count) items · Counted \(totalCount) times")
         if count == 0 {
             controller.setDescriptionCounterText("")
@@ -75,7 +91,7 @@ class MainInteractor {
     }
     
     func setCounters(_ counters : [Counter]) {
-        self.counters = counters
+        self.countersWithoutTreating = counters
         self.controller.reloadData()
     }
     
@@ -95,19 +111,19 @@ class MainInteractor {
         switch result {
             case .success(let counters):
                 guard let counters = counters, counters.count > 0 else {
-                    self.counters = []
+                    self.countersWithoutTreating = []
                     let errorModel = ErrorModel(title: "No counters yet", description: "\"When I started counting my blessings, my whole life turned aroud.\"\n-Willie Nelson", buttonTitle: "Create a counter") {
                         self.controller.goToCreateItem()
                     }
                     self.controller.showError(error: errorModel)
                     return
                 }
-                self.counters = counters
+                self.countersWithoutTreating = counters
                 self.controller.reloadData()
         case .failure(let error):
             if let counters : [Counter] = Cache.shared.getData() {
                 if counters.count > 0 {
-                    self.counters = counters
+                    self.countersWithoutTreating = counters
                     self.controller.reloadData()
                     customFailureBlock?()
                     return

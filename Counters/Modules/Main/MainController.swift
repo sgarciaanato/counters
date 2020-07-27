@@ -18,8 +18,8 @@ class MainController {
         interactor = MainInteractor(controller : self)
     }
     
-    func fetchCounters() {
-        interactor?.fetchCounters()
+    func fetchCounters(searchText: String?) {
+        interactor?.fetchCounters(searchText: searchText)
     }
     
     func getCountersCount() -> Int {

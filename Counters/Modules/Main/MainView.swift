@@ -34,7 +34,7 @@ class MainView: UIViewController {
         controller = MainController(view : self)
         controller?.updateCounterDescriptionText()
         
-        controller?.fetchCounters()
+        controller?.fetchCounters(searchText: nil)
         showLoading()
         
         tableView.register(UINib(nibName: "CounterTableViewCell", bundle: nil), forCellReuseIdentifier: "CounterTableViewCell")
@@ -90,13 +90,15 @@ class MainView: UIViewController {
     }
     
     @objc func refresh(_ sender: Any){
-        controller?.fetchCounters()
+        controller?.fetchCounters(searchText: nil)
     }
 
 }
 
 extension MainView : UISearchBarDelegate {
-    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        controller?.fetchCounters(searchText: searchText)
+    }
 }
 
 extension MainView : CounterDelegate {

@@ -25,7 +25,7 @@ class MainController {
     init(view : MainControllerToViewDelegate) {
         self.view = view
         interactor = MainInteractor(controller : self)
-        if interactor?.isFirstLoad() ?? false {
+        if Cache.shared.isFirstLoad() {
             view.showWelcomeScreen()
         }
         fetchCounters()
@@ -40,10 +40,6 @@ class MainController {
         interactor?.fetchCounters()
     }
     
-    func updateCounterDescriptionText() {
-        interactor?.updateCounterDescriptionText()
-    }
-    
     func setCounters(_ counters : [Counter]) {
         interactor?.setCounters(counters)
     }
@@ -54,10 +50,6 @@ class MainController {
     
     func deleteSelected() {
         interactor?.deleteSelected()
-    }
-    
-    func selectedCounterCount() -> Int {
-        return interactor?.selectedCounterCount() ?? 0
     }
     
 }

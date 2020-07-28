@@ -34,6 +34,7 @@ class Cache {
     func isFirstLoad() -> Bool {
         return defaults.object(forKey: firstLoadKey) as? Bool ?? true
     }
+    
     func saveFirstLoad() {
         defaults.set(false, forKey: firstLoadKey)
         defaults.synchronize()

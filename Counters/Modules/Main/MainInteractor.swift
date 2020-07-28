@@ -6,7 +6,7 @@
 //  Copyright © 2020 Samuel García. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class MainInteractor : NSObject {
     
@@ -65,6 +65,7 @@ class MainInteractor : NSObject {
         }
     }
     
+    //Read counters from local storage
     func fetchCounters(searchText: String? = "") {
         self.searchText = searchText
         if searchText != nil, let counters : [Counter] = Cache.shared.getData() {
@@ -106,6 +107,7 @@ class MainInteractor : NSObject {
         }
     }
     
+    #warning("Refactor")
     func parseResult(result : Result<[Counter]?,Error>, customFailureBlock : (()->())? = nil){
         controller.hideLoading()
         switch result {
@@ -160,37 +162,26 @@ class MainInteractor : NSObject {
     func deleteSelected() {
         let selectedCounterCount = selectedCounters.count
         
-        guard selectedCounterCount > 0 else { return }
-        
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        guard selectedCounterCount > 0 else {
+            self.controller.showDialogError(title: "Select at least 1 item", message: "", actions: [
+                "Dismiss" : { }
+            ])
+            return
+        }
 
-        let handler : ((UIAlertAction) -> Void) = {_ in
-            for counter in self.selectedCounters {
-                self.deleteCounter(counter)
+        self.controller.showActionSheet(title: "Select at least 1 item", message: "", actions: [
+            "Delete \(selectedCounterCount) counter" : {
+                for counter in self.selectedCounters {
+                    self.deleteCounter(counter)
+                }
+                self.controller.configureEditingLayout()
+                self.controller.reloadData()
             }
-            self.controller.configureEditingLayout()
-            self.controller.reloadData()
-        }
-        alert.addAction(UIAlertAction(title: "Delete \(selectedCounterCount) counter", style: .destructive, handler: handler))
-
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-
-        DispatchQueue.main.async {
-            alert.view.tintColor = UIColor(named: "tintColor")
-            self.controller.presentAlert(alert, animated: true)
-        }
-    }
-    
-    func selectedCounterCount() -> Int {
-        return selectedCounters.count
+        ])
     }
     
     func isSelected(_ counter : Counter?) -> Bool {
         guard let counterId = counter?.id else { return false }
         return selectedCounters.contains { $0.id == counterId }
-    }
-    
-    func isFirstLoad() -> Bool{
-        return Cache.shared.isFirstLoad()
     }
 }

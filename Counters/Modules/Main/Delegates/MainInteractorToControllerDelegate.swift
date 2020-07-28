@@ -21,7 +21,7 @@ protocol MainInteractorToControllerDelegate {
     func configureEditingLayout()
     func openShareViewController(objectsToShare : [Any])
     func setDataSource(_ dataSource : UITableViewDataSource)
-    func presentAlert(_ alert: UIAlertController, animated: Bool)
+    func showActionSheet(title: String, message: String, actions : [String:(()->())])
 }
 
 extension MainController : MainInteractorToControllerDelegate {
@@ -65,7 +65,7 @@ extension MainController : MainInteractorToControllerDelegate {
     func setDataSource(_ dataSource : UITableViewDataSource) {
         view.setDataSource(dataSource)
     }
-    func presentAlert(_ alert: UIAlertController, animated: Bool){
-        view.presentAlert(alert, animated: animated)
+    func showActionSheet(title: String, message: String, actions : [String:(()->())]) {
+        view.showActionSheet(title: title, message: message, actions : actions)
     }
 }

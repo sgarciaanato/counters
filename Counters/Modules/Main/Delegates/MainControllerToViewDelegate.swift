@@ -22,7 +22,7 @@ protocol MainControllerToViewDelegate {
     func openShareViewController(objectsToShare : [Any])
     func showWelcomeScreen()
     func setDataSource(_ dataSource : UITableViewDataSource)
-    func presentAlert(_ alert: UIAlertController, animated: Bool)
+    func showActionSheet(title: String, message: String, actions : [String:(()->())])
 }
 
 extension MainView : MainControllerToViewDelegate {
@@ -79,6 +79,27 @@ extension MainView : MainControllerToViewDelegate {
         }
     }
     
+    func showActionSheet(title: String, message: String, actions : [String:(()->())]){
+        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        let sortedActions = actions.sorted() {$0.key > $1.key}
+        
+        for action in sortedActions {
+            let handler : ((UIAlertAction) -> Void) = {_ in
+                action.value()
+            }
+            alert.addAction(UIAlertAction(title: action.key, style: .destructive, handler: handler))
+        }
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+
+        DispatchQueue.main.async {
+            alert.view.tintColor = UIColor(named: "tintColor")
+            self.present(alert, animated: true)
+        }
+    }
+    
     func showLoading() {
         DispatchQueue.main.async {
             self.countersTableView.activityIndicator(loading: true)
@@ -109,9 +130,6 @@ extension MainView : MainControllerToViewDelegate {
     
     func setDataSource(_ dataSource : UITableViewDataSource) {
         self.countersTableView.dataSource = dataSource
-    }
-    func presentAlert(_ alert: UIAlertController, animated: Bool) {
-        self.present(alert, animated: true)
     }
     
 }

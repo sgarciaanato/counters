@@ -14,7 +14,7 @@ class MainView: UIViewController {
     
     @IBOutlet weak var noResultsLabel: UILabel!
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var countersTableView: UITableView!
     @IBOutlet weak var itemsCounterDescription: UILabel!
     @IBOutlet weak var customErrorView: CustomErrorView!
     
@@ -37,8 +37,8 @@ class MainView: UIViewController {
         customEditButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(self.edit(_:)))
         navigationItem.leftBarButtonItem = customEditButton
         
-        tableView.dataSource = self
-        tableView.delegate = self
+        countersTableView.dataSource = self
+        countersTableView.delegate = self
         
         controller = MainController(view : self)
         controller?.updateCounterDescriptionText()
@@ -46,7 +46,7 @@ class MainView: UIViewController {
         controller?.fetchCounters()
         showLoading()
         
-        tableView.register(UINib(nibName: "CounterTableViewCell", bundle: nil), forCellReuseIdentifier: "CounterTableViewCell")
+        countersTableView.register(UINib(nibName: "CounterTableViewCell", bundle: nil), forCellReuseIdentifier: "CounterTableViewCell")
 
         if let split = splitViewController {
             let controllers = split.viewControllers
@@ -74,14 +74,13 @@ class MainView: UIViewController {
         navigationController?.navigationBar.clipsToBounds = false
         
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
-        tableView.addSubview(refreshControl)
+        countersTableView.addSubview(refreshControl)
         
         configureSearchBar()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        tableView.reloadData()
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        countersTableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -92,7 +91,7 @@ class MainView: UIViewController {
     }
     
     @IBAction func unwindToMain(_ sender: UIStoryboardSegue) {
-        self.tableView.reloadData()
+        self.countersTableView.reloadData()
     }
     
     func updateList(_ counters : [Counter]) {
@@ -105,7 +104,7 @@ class MainView: UIViewController {
     
     @objc func edit(_ sender: Any){
         configureEditingLayout()
-        tableView.reloadData()
+        countersTableView.reloadData()
     }
     
     func configureEditingLayout() {
@@ -173,8 +172,8 @@ extension MainView : CounterDelegate {
 extension MainView : MainControllerToViewDelegate {
     func reloadData() {
         DispatchQueue.main.async {
-            self.tableView.reloadData()
-            self.tableView.isHidden = false
+            self.countersTableView.reloadData()
+            self.countersTableView.isHidden = false
             self.customErrorView.isHidden = true
         }
     }
@@ -186,20 +185,20 @@ extension MainView : MainControllerToViewDelegate {
     func showError(error : ErrorModel) {
         customErrorView.configure(error: error)
         DispatchQueue.main.async {
-            self.tableView.isHidden = true
+            self.countersTableView.isHidden = true
             self.customErrorView.isHidden = false
         }
     }
     func showNoResults(){
         DispatchQueue.main.async {
             self.noResultsLabel.isHidden = false
-            self.tableView.isHidden = true
+            self.countersTableView.isHidden = true
         }
     }
     func hideNoResults(){
         DispatchQueue.main.async {
             self.noResultsLabel.isHidden = true
-//            self.tableView.isHidden = false
+            self.countersTableView.isHidden = false
         }
     }
     func goToCreateItem() {
@@ -226,13 +225,13 @@ extension MainView : MainControllerToViewDelegate {
     
     func showLoading() {
         DispatchQueue.main.async {
-            self.tableView.activityIndicator(loading: true)
+            self.countersTableView.activityIndicator(loading: true)
         }
     }
     
     func hideLoading() {
         DispatchQueue.main.async {
-            self.tableView.activityIndicator(loading: false)
+            self.countersTableView.activityIndicator(loading: false)
             self.refreshControl.endRefreshing()
         }
     }
@@ -248,6 +247,12 @@ extension MainView : MainControllerToViewDelegate {
         
         self.present(activityViewController, animated: true, completion: nil)
         self.hideLoading()
+    }
+    
+    func showWelcomeScreen () {
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "showWelcomeScreen", sender: nil)
+        }
     }
     
 }
@@ -268,11 +273,6 @@ extension MainView : UITableViewDelegate, UITableViewDataSource {
             return cell
         }
         return UITableViewCell()
-    }
-
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

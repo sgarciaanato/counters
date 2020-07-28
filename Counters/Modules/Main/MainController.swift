@@ -25,6 +25,9 @@ class MainController {
     init(view : MainControllerToViewDelegate) {
         self.view = view
         interactor = MainInteractor(controller : self)
+        if interactor?.isFirstLoad() ?? false {
+            view.showWelcomeScreen()
+        }
     }
     
     func fetchCounters(searchText: String?) {
@@ -141,4 +144,5 @@ protocol MainControllerToViewDelegate {
     func hideLoading()
     func updateEditingLayout()
     func openShareViewController(objectsToShare : [Any])
+    func showWelcomeScreen ()
 }

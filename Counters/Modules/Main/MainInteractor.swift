@@ -53,7 +53,13 @@ class MainInteractor {
     func fetchCounters() {
         searchText = nil
         NetworkOperation.shared.request(paths: [.api, .v1, .counters], httpBody: nil) { (result : Result<[Counter]?,Error>) in
-            self.parseResult(result: result)
+            self.parseResult(result: result) {
+                let errorModel = ErrorModel(title: "Couldn't load the counters", description: "The Internet connection appears to be offline.", buttonTitle: "Retry") {
+                    self.controller.showLoading()
+                    self.fetchCounters()
+                }
+                self.controller.showError(error: errorModel)
+            }
         }
     }
     
@@ -70,13 +76,14 @@ class MainInteractor {
     func increment(_ counter : Counter) {
         guard let id = counter.id, let title = counter.title else { return }
         NetworkOperation.shared.request(paths: [.api, .v1, .counter, .inc], httpMethod: "POST",httpBody: [ "id" : id]) { (result : Result<[Counter]?,Error>) in
-            self.parseResult(result: result){
+            self.parseResult(result: result) {
                 self.controller.showDialogError(title: "Couldn't update the \"\(title)\" counter to \(counter.count + 1)", message: "The internet connection appears to be ofline", actions: [
                     "Dismiss" : { },
                     "Retry" : {
                         self.increment(counter)
                     }
                 ])
+                self.controller.reloadData()
             }
         }
     }
@@ -84,13 +91,14 @@ class MainInteractor {
     func decrement(_ counter : Counter) {
         guard let id = counter.id, let title = counter.title else { return }
         NetworkOperation.shared.request(paths: [.api, .v1, .counter, .dec], httpMethod: "POST",httpBody: [ "id" : id]) { (result : Result<[Counter]?,Error>) in
-            self.parseResult(result: result){
+            self.parseResult(result: result) {
                 self.controller.showDialogError(title: "Couldn't update the \"\(title)\" counter to \(counter.count - 1)", message: "The internet connection appears to be ofline", actions: [
                     "Dismiss" : { },
                     "Retry" : {
                         self.decrement(counter)
                     }
                 ])
+                self.controller.reloadData()
             }
         }
     }
@@ -118,11 +126,13 @@ class MainInteractor {
         controller.setDescriptionCounterText("\(count) items · Counted \(totalCount) times")
         if count == 0 {
             controller.setDescriptionCounterText("")
+            controller.showNoResults()
         }
     }
     
     func setCounters(_ counters : [Counter]) {
         self.countersWithoutTreating = counters
+        updateCounterDescriptionText()
         self.controller.reloadData()
     }
     
@@ -136,6 +146,7 @@ class MainInteractor {
                 self.controller.showDialogError(title: "Couldn't delete the counter \(title)", message: "The internet connection appears to be ofline", actions: [
                     "Dismiss" : { }
                 ])
+                self.controller.reloadData()
             }
         }
     }
@@ -150,6 +161,7 @@ class MainInteractor {
                         self.controller.goToCreateItem()
                     }
                     self.controller.showError(error: errorModel)
+                    updateCounterDescriptionText()
                     return
                 }
                 countersWithoutTreating = counters
@@ -157,9 +169,10 @@ class MainInteractor {
         case .failure(let error):
             if let counters : [Counter] = Cache.shared.getData() {
                 if counters.count > 0 {
-                    countersWithoutTreating = counters
-                    controller.reloadData()
                     customFailureBlock?()
+                    countersWithoutTreating = counters
+                    updateCounterDescriptionText()
+                    controller.reloadData()
                     return
                 }
                 let errorModel = ErrorModel(title: "No counters yet", description: "\"When I started counting my blessings, my whole life turned aroud.\"\n-Willie Nelson", buttonTitle: "Create a counter") {
@@ -208,6 +221,9 @@ class MainInteractor {
         return selectedCounters.contains { $0.id == counterId }
     }
     
+    func isFirstLoad() -> Bool{
+        return Cache.shared.isFirstLoad()
+    }
 }
 
 protocol MainInteractorToControllerDelegate {

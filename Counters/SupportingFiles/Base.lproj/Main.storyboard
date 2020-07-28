@@ -271,18 +271,107 @@
                     </view>
                     <navigationItem key="navigationItem" title="Counters" id="mxu-3r-RIU"/>
                     <connections>
+                        <outlet property="countersTableView" destination="cDU-pb-SFj" id="J9L-5q-PYW"/>
                         <outlet property="createItemButton" destination="vfZ-89-ONi" id="m1k-Lr-uWv"/>
                         <outlet property="customErrorView" destination="JDB-Jq-Pwx" id="9DJ-XO-vUz"/>
                         <outlet property="deleteButton" destination="X6X-Db-8pn" id="fxU-QG-0Cd"/>
                         <outlet property="itemsCounterDescription" destination="YFk-8a-nu9" id="FJZ-gf-2RI"/>
                         <outlet property="noResultsLabel" destination="2qN-UE-PAT" id="vDg-uy-hhi"/>
                         <outlet property="shareButton" destination="6Y0-Ol-FRc" id="Mlh-LW-Zha"/>
-                        <outlet property="tableView" destination="cDU-pb-SFj" id="J9L-5q-PYW"/>
+                        <segue destination="J4g-ml-aaQ" kind="presentation" identifier="showWelcomeScreen" modalPresentationStyle="fullScreen" id="CVo-ni-PMe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="whS-D9-o01" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="708.69565217391312" y="-629.46428571428567"/>
+        </scene>
+        <!--Welcome View-->
+        <scene sceneID="qoz-Nv-gfR">
+            <objects>
+                <viewController id="J4g-ml-aaQ" customClass="WelcomeView" customModule="Counters" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xLS-X7-uxz">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W7X-zS-ycg">
+                                <rect key="frame" x="39" y="74" width="336" height="79"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Welcome to
+</string>
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="33" name="HelveticaNeue-Bold"/>
+                                            <font key="NSOriginalFont" size="33" name="HelveticaNeue-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Counters">
+                                        <attributes>
+                                            <color key="NSColor" red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="33" name="HelveticaNeue-Bold"/>
+                                            <font key="NSOriginalFont" size="33" name="HelveticaNeue-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="An example app that syncs to a Node.js server running on your Mac." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DYj-v1-hcW">
+                                <rect key="frame" x="39" y="170" width="336" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CxM-Ba-pMy">
+                                <rect key="frame" x="40" y="786" width="334" height="57"/>
+                                <color key="backgroundColor" name="tintColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="57" id="3DI-zn-zwl"/>
+                                </constraints>
+                                <state key="normal" title="Continue">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="continue:" destination="J4g-ml-aaQ" eventType="touchUpInside" id="tYm-VK-sop"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DUB-VR-I9t">
+                                <rect key="frame" x="39" y="244" width="336" height="509"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Tvs-xI-ehi" firstAttribute="trailing" secondItem="CxM-Ba-pMy" secondAttribute="trailing" constant="40" id="0Oj-hQ-fbo"/>
+                            <constraint firstItem="DUB-VR-I9t" firstAttribute="leading" secondItem="Tvs-xI-ehi" secondAttribute="leading" constant="39" id="11A-1f-hoi"/>
+                            <constraint firstItem="Tvs-xI-ehi" firstAttribute="trailing" secondItem="DYj-v1-hcW" secondAttribute="trailing" constant="39" id="6XB-CK-21M"/>
+                            <constraint firstItem="DYj-v1-hcW" firstAttribute="top" secondItem="W7X-zS-ycg" secondAttribute="bottom" constant="17" id="8Oo-EW-4Tf"/>
+                            <constraint firstItem="DUB-VR-I9t" firstAttribute="top" secondItem="DYj-v1-hcW" secondAttribute="bottom" constant="33" id="Er0-zT-f8S"/>
+                            <constraint firstItem="Tvs-xI-ehi" firstAttribute="trailing" secondItem="W7X-zS-ycg" secondAttribute="trailing" constant="39" id="SRb-dc-bly"/>
+                            <constraint firstItem="W7X-zS-ycg" firstAttribute="leading" secondItem="Tvs-xI-ehi" secondAttribute="leading" constant="39" id="TWu-Un-uYi"/>
+                            <constraint firstItem="W7X-zS-ycg" firstAttribute="top" secondItem="xLS-X7-uxz" secondAttribute="top" constant="74" id="g3K-wD-ouC"/>
+                            <constraint firstItem="Tvs-xI-ehi" firstAttribute="trailing" secondItem="DUB-VR-I9t" secondAttribute="trailing" constant="39" id="iGW-7I-oAH"/>
+                            <constraint firstItem="CxM-Ba-pMy" firstAttribute="top" secondItem="DUB-VR-I9t" secondAttribute="bottom" constant="33" id="jF7-cY-f1U"/>
+                            <constraint firstAttribute="bottom" secondItem="CxM-Ba-pMy" secondAttribute="bottom" constant="53" id="k1b-hV-484"/>
+                            <constraint firstItem="CxM-Ba-pMy" firstAttribute="leading" secondItem="Tvs-xI-ehi" secondAttribute="leading" constant="40" id="mQ6-ew-RS3"/>
+                            <constraint firstItem="DYj-v1-hcW" firstAttribute="leading" secondItem="Tvs-xI-ehi" secondAttribute="leading" constant="39" id="wbK-yq-5Dl"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Tvs-xI-ehi"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="DUB-VR-I9t" id="QmD-rJ-7Z8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ym4-sc-PJs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1486.9565217391305" y="-630.13392857142856"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="r7l-gg-dq7">

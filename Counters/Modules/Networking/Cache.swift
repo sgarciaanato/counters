@@ -13,6 +13,7 @@ class Cache {
     static let shared = Cache()
     private let defaults = UserDefaults.standard
     let countersKey = "last-counter-key"
+    let firstLoadKey = "first-load"
     
     func getData<T :Codable>() -> T?{
         guard let data : Data = defaults.object(forKey: countersKey) as? Data else { return nil }
@@ -27,6 +28,14 @@ class Cache {
     
     func save(data: Any){
         defaults.set(data, forKey: countersKey)
+        defaults.synchronize()
+    }
+    
+    func isFirstLoad() -> Bool {
+        return defaults.object(forKey: firstLoadKey) as? Bool ?? true
+    }
+    func saveFirstLoad() {
+        defaults.set(false, forKey: firstLoadKey)
         defaults.synchronize()
     }
     

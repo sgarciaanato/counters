@@ -19,7 +19,6 @@ class WelcomeView: UIViewController {
         
         tableView.register(UINib(nibName: "WelcomeTableViewCell", bundle: nil), forCellReuseIdentifier: "WelcomeTableViewCell")
         
-        tableView.delegate = self
         tableView.dataSource = self
         
         fillWelcomeArray()

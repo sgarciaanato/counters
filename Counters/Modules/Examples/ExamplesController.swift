@@ -10,26 +10,16 @@ import Foundation
 
 class ExamplesController {
     
-    var interactor : ExamplesInteractor
+    var interactor : ExamplesInteractor?
+    var view : ExamplesControllerToView
     
-    init(){
-        interactor = ExamplesInteractor()
-    }
-    
-    func getCategory(for row : Int) -> ExamplesCategory{
-        return interactor.getCategory(for : row)
-    }
-    
-    func getCategoryCount() -> Int {
-        return interactor.getCategoryCount()
+    init(view: ExamplesControllerToView){
+        self.view = view
+        interactor = ExamplesInteractor(controller : self)
     }
     
     func getSelectedTitle() -> String {
-        return interactor.getSelectedTitle()
-    }
-    
-    func setSelectedTitle (_ title : String) {
-        interactor.setSelectedTitle(title)
+        return interactor?.getSelectedTitle() ?? ""
     }
     
 }

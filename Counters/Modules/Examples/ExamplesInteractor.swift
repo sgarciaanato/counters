@@ -8,12 +8,15 @@
 
 import Foundation
 
-class ExamplesInteractor {
+class ExamplesInteractor : NSObject {
+    
+    let controller : ExamplesInteractorToController
 
     let examplesCategories : [ExamplesCategory]
     var selectedTitle = ""
     
-    init() {
+    init(controller : ExamplesInteractorToController) {
+        self.controller = controller
         examplesCategories = [
             ExamplesCategory(title: "DRINKS", examples: [
                 Example(text: "Cups of coffe"),
@@ -30,6 +33,8 @@ class ExamplesInteractor {
                 Example(text: "Naps"),
                 Example(text: "Day dreaming"),
                 Example(text: "Some more")])]
+        super.init()
+        self.controller.setDataSource(self)
     }
     
     func getCategory(for row : Int) -> ExamplesCategory {
@@ -44,8 +49,8 @@ class ExamplesInteractor {
         return selectedTitle
     }
     
-    func setSelectedTitle (_ title : String) {
-        selectedTitle = title
+    func unWindToCreateItem() {
+        controller.unWindToCreateItem()
     }
     
 }

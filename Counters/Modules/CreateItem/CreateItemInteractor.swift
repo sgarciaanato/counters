@@ -47,10 +47,3 @@ class CreateItemInteractor {
     }
     
 }
-
-protocol CreateItemInteractorToControllerDelegate {
-    func updateCountersList()
-    func showTextFieldLoading()
-    func hideTextFieldLoading()
-    func showDialogError(title: String, message: String, actions : [String:(()->())])
-}

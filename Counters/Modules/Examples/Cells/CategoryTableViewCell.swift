@@ -66,7 +66,3 @@ extension CategoryTableViewCell : UICollectionViewDelegate, UICollectionViewData
     }
     
 }
-
-protocol ExampleSelectionDelegate {
-    func setSelectedTitle(_ title : String)
-}

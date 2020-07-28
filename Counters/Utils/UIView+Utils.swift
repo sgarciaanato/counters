@@ -98,7 +98,7 @@ extension UIView {
         layer.masksToBounds = false
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.15 // your opacity
-        layer.shadowOffset = CGSize(width: 0, height: 2) // your offset
+        layer.shadowOffset = CGSize(width: 0, height: 1) // your offset
     }
     
     func loadNib(className : String) {

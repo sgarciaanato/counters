@@ -65,10 +65,3 @@ class CounterTableViewCell: UITableViewCell {
     }
     
 }
-
-protocol CounterDelegate {
-    func increment(_ counter: Counter)
-    func decrement(_ counter: Counter)
-    func select(_ counter: Counter)
-    func deselect(_ counter: Counter)
-}

@@ -108,17 +108,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "24CDE856-F71B-41CA-8F20-7CD9DB45E53F"
-            shouldBeEnabled = "No"
+            uuid = "D170E805-BB4A-4328-B827-F4E0448619B2"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Counters/Modules/Main/MainView.swift"
+            filePath = "Counters/Modules/CreateItem/CreateItemRequestModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "265"
-            endingLineNumber = "265"
-            landmarkName = "tableView(_:numberOfRowsInSection:)"
-            landmarkType = "7">
+            startingLineNumber = "12"
+            endingLineNumber = "12"
+            landmarkName = "CreateItemRequestModel"
+            landmarkType = "14">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

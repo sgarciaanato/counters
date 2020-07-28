@@ -27,31 +27,3 @@ class CreateItemController {
     }
     
 }
-
-extension CreateItemController : CreateItemInteractorToControllerDelegate {
-    func updateCountersList() {
-        view.updateCountersList()
-        view.hideTextFieldLoading()
-    }
-    
-    func showTextFieldLoading() {
-        view.showTextFieldLoading()
-    }
-    
-    func hideTextFieldLoading() {
-        view.hideTextFieldLoading()
-    }
-    
-    func showDialogError(title: String, message: String, actions: [String:(()->())]) {
-        view.showDialogError(title: title, message: message, actions: actions)
-    }
-    
-}
-
-protocol CreateItemControllerToViewDelegate {
-    func updateCountersList()
-    func showTextFieldLoading()
-    func hideTextFieldLoading()
-    func showDialogError(title: String, message: String, actions : [String:(()->())])
-}
-

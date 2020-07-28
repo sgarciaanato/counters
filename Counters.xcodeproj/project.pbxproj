@@ -28,7 +28,6 @@
 		8EA12E2824CE0E40000D7979 /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E2724CE0E40000D7979 /* ErrorModel.swift */; };
 		8EA12E2A24CE32D9000D7979 /* CreateItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E2924CE32D9000D7979 /* CreateItemController.swift */; };
 		8EA12E2C24CE32E7000D7979 /* CreateItemInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E2B24CE32E7000D7979 /* CreateItemInteractor.swift */; };
-		8EA12E2E24CE3E10000D7979 /* CreateItemRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E2D24CE3E10000D7979 /* CreateItemRequestModel.swift */; };
 		8EA12E3024CE5729000D7979 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E2F24CE5729000D7979 /* Cache.swift */; };
 		8EA12E3224CEBE31000D7979 /* UITableView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E3124CEBE31000D7979 /* UITableView+Utils.swift */; };
 		8EA12E3424CECE55000D7979 /* UITextField+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E3324CECE55000D7979 /* UITextField+Utils.swift */; };
@@ -37,6 +36,15 @@
 		8EA12E3E24CF895A000D7979 /* WelcomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E3C24CF895A000D7979 /* WelcomeTableViewCell.swift */; };
 		8EA12E3F24CF895A000D7979 /* WelcomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EA12E3D24CF895A000D7979 /* WelcomeTableViewCell.xib */; };
 		8EA12E4124CF9496000D7979 /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E4024CF9496000D7979 /* UIColor+Utils.swift */; };
+		8EA12E4324CFFC40000D7979 /* MainInteractorDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E4224CFFC3F000D7979 /* MainInteractorDataSource.swift */; };
+		8EA12E4724D011A6000D7979 /* MainControllerToViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E4624D011A6000D7979 /* MainControllerToViewDelegate.swift */; };
+		8EA12E4924D0123B000D7979 /* MainViewSearchBardDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E4824D0123B000D7979 /* MainViewSearchBardDelegate.swift */; };
+		8EA12E4B24D01399000D7979 /* MainInteractorToControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E4A24D01399000D7979 /* MainInteractorToControllerDelegate.swift */; };
+		8EA12E4E24D0159A000D7979 /* CreateItemControllerToViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E4D24D0159A000D7979 /* CreateItemControllerToViewDelegate.swift */; };
+		8EA12E5024D015CE000D7979 /* CreateItemInteractorToControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E4F24D015CE000D7979 /* CreateItemInteractorToControllerDelegate.swift */; };
+		8EA12E5424D016F4000D7979 /* ExamplesInteractorDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E5324D016F4000D7979 /* ExamplesInteractorDataSource.swift */; };
+		8EA12E5724D0198B000D7979 /* ExamplesInteractorToController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E5624D0198B000D7979 /* ExamplesInteractorToController.swift */; };
+		8EA12E5B24D019B1000D7979 /* ExamplesControllerToView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E5A24D019B1000D7979 /* ExamplesControllerToView.swift */; };
 		8EA8FE9324CBA4B20009A23B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA8FE9224CBA4B20009A23B /* AppDelegate.swift */; };
 		8EA8FE9524CBA4B20009A23B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA8FE9424CBA4B20009A23B /* SceneDelegate.swift */; };
 		8EA8FE9724CBA4B20009A23B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA8FE9624CBA4B20009A23B /* MainView.swift */; };
@@ -80,7 +88,6 @@
 		8EA12E2724CE0E40000D7979 /* ErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModel.swift; sourceTree = "<group>"; };
 		8EA12E2924CE32D9000D7979 /* CreateItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateItemController.swift; sourceTree = "<group>"; };
 		8EA12E2B24CE32E7000D7979 /* CreateItemInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateItemInteractor.swift; sourceTree = "<group>"; };
-		8EA12E2D24CE3E10000D7979 /* CreateItemRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateItemRequestModel.swift; sourceTree = "<group>"; };
 		8EA12E2F24CE5729000D7979 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		8EA12E3124CEBE31000D7979 /* UITableView+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Utils.swift"; sourceTree = "<group>"; };
 		8EA12E3324CECE55000D7979 /* UITextField+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Utils.swift"; sourceTree = "<group>"; };
@@ -89,6 +96,15 @@
 		8EA12E3C24CF895A000D7979 /* WelcomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeTableViewCell.swift; sourceTree = "<group>"; };
 		8EA12E3D24CF895A000D7979 /* WelcomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeTableViewCell.xib; sourceTree = "<group>"; };
 		8EA12E4024CF9496000D7979 /* UIColor+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
+		8EA12E4224CFFC3F000D7979 /* MainInteractorDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractorDataSource.swift; sourceTree = "<group>"; };
+		8EA12E4624D011A6000D7979 /* MainControllerToViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainControllerToViewDelegate.swift; sourceTree = "<group>"; };
+		8EA12E4824D0123B000D7979 /* MainViewSearchBardDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewSearchBardDelegate.swift; sourceTree = "<group>"; };
+		8EA12E4A24D01399000D7979 /* MainInteractorToControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractorToControllerDelegate.swift; sourceTree = "<group>"; };
+		8EA12E4D24D0159A000D7979 /* CreateItemControllerToViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateItemControllerToViewDelegate.swift; sourceTree = "<group>"; };
+		8EA12E4F24D015CE000D7979 /* CreateItemInteractorToControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateItemInteractorToControllerDelegate.swift; sourceTree = "<group>"; };
+		8EA12E5324D016F4000D7979 /* ExamplesInteractorDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamplesInteractorDataSource.swift; sourceTree = "<group>"; };
+		8EA12E5624D0198B000D7979 /* ExamplesInteractorToController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamplesInteractorToController.swift; sourceTree = "<group>"; };
+		8EA12E5A24D019B1000D7979 /* ExamplesControllerToView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamplesControllerToView.swift; sourceTree = "<group>"; };
 		8EA8FE8F24CBA4B20009A23B /* Counters.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Counters.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EA8FE9224CBA4B20009A23B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8EA8FE9424CBA4B20009A23B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -125,10 +141,10 @@
 		8E4163E924CBCDA20093B20E /* CreateItem */ = {
 			isa = PBXGroup;
 			children = (
+				8EA12E4C24D0158D000D7979 /* Delegates */,
 				8EA8FE9824CBA4B20009A23B /* CreateItemView.swift */,
 				8EA12E2924CE32D9000D7979 /* CreateItemController.swift */,
 				8EA12E2B24CE32E7000D7979 /* CreateItemInteractor.swift */,
-				8EA12E2D24CE3E10000D7979 /* CreateItemRequestModel.swift */,
 			);
 			path = CreateItem;
 			sourceTree = "<group>";
@@ -170,6 +186,8 @@
 		8E4163F724CD332E0093B20E /* Examples */ = {
 			isa = PBXGroup;
 			children = (
+				8EA12E5524D01974000D7979 /* Delegates */,
+				8EA12E5124D016C9000D7979 /* DataSources */,
 				8E41640724CD38BB0093B20E /* Models */,
 				8E4163FA24CD36CB0093B20E /* Cells */,
 				8E4163F824CD335E0093B20E /* ExamplesView.swift */,
@@ -252,6 +270,50 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		8EA12E4424D0118C000D7979 /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				8EA12E4224CFFC3F000D7979 /* MainInteractorDataSource.swift */,
+			);
+			path = DataSources;
+			sourceTree = "<group>";
+		};
+		8EA12E4524D01196000D7979 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				8EA12E4624D011A6000D7979 /* MainControllerToViewDelegate.swift */,
+				8EA12E4824D0123B000D7979 /* MainViewSearchBardDelegate.swift */,
+				8EA12E4A24D01399000D7979 /* MainInteractorToControllerDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		8EA12E4C24D0158D000D7979 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				8EA12E4D24D0159A000D7979 /* CreateItemControllerToViewDelegate.swift */,
+				8EA12E4F24D015CE000D7979 /* CreateItemInteractorToControllerDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		8EA12E5124D016C9000D7979 /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				8EA12E5324D016F4000D7979 /* ExamplesInteractorDataSource.swift */,
+			);
+			path = DataSources;
+			sourceTree = "<group>";
+		};
+		8EA12E5524D01974000D7979 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				8EA12E5624D0198B000D7979 /* ExamplesInteractorToController.swift */,
+				8EA12E5A24D019B1000D7979 /* ExamplesControllerToView.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
 		8EA8FE8624CBA4B20009A23B = {
 			isa = PBXGroup;
 			children = (
@@ -314,6 +376,8 @@
 		8EA8FEBA24CBCB3B0009A23B /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				8EA12E4524D01196000D7979 /* Delegates */,
+				8EA12E4424D0118C000D7979 /* DataSources */,
 				8EA12E1C24CDF1BA000D7979 /* Models */,
 				8E4163EB24CCC4D10093B20E /* Cells */,
 				8EA8FE9624CBA4B20009A23B /* MainView.swift */,
@@ -430,6 +494,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E41640624CD38A40093B20E /* ExamplesInteractor.swift in Sources */,
+				8EA12E5724D0198B000D7979 /* ExamplesInteractorToController.swift in Sources */,
 				8EA12E3E24CF895A000D7979 /* WelcomeTableViewCell.swift in Sources */,
 				8E4163F624CD25730093B20E /* UIViewController+Utils.swift in Sources */,
 				8EA12E2124CE0C49000D7979 /* CustomErrorView.swift in Sources */,
@@ -439,26 +504,33 @@
 				8E41640924CD38E40093B20E /* ExamplesCategory.swift in Sources */,
 				8EA8FEB924CBC3050009A23B /* NetworkingOperation.swift in Sources */,
 				8E4163F224CD035F0093B20E /* UIView+Utils.swift in Sources */,
-				8EA12E2E24CE3E10000D7979 /* CreateItemRequestModel.swift in Sources */,
 				8EA12E3024CE5729000D7979 /* Cache.swift in Sources */,
 				8E41640124CD377B0093B20E /* ExampleCollectionViewCell.swift in Sources */,
 				8EA12E1924CDEA25000D7979 /* MainController.swift in Sources */,
 				8EA12E2824CE0E40000D7979 /* ErrorModel.swift in Sources */,
 				8EA12E4124CF9496000D7979 /* UIColor+Utils.swift in Sources */,
 				8E4163F924CD335E0093B20E /* ExamplesView.swift in Sources */,
+				8EA12E5024D015CE000D7979 /* CreateItemInteractorToControllerDelegate.swift in Sources */,
 				8E4163FD24CD36E60093B20E /* CategoryTableViewCell.swift in Sources */,
 				8E4163EE24CCC4E60093B20E /* CounterTableViewCell.swift in Sources */,
+				8EA12E4B24D01399000D7979 /* MainInteractorToControllerDelegate.swift in Sources */,
 				8EA12E2C24CE32E7000D7979 /* CreateItemInteractor.swift in Sources */,
 				8EA8FE9524CBA4B20009A23B /* SceneDelegate.swift in Sources */,
 				8EA12E3224CEBE31000D7979 /* UITableView+Utils.swift in Sources */,
+				8EA12E4E24D0159A000D7979 /* CreateItemControllerToViewDelegate.swift in Sources */,
 				8EA12E3A24CF8890000D7979 /* WelcomeModel.swift in Sources */,
+				8EA12E5B24D019B1000D7979 /* ExamplesControllerToView.swift in Sources */,
 				8EA8FE9724CBA4B20009A23B /* MainView.swift in Sources */,
 				8EA12E1E24CDF1C6000D7979 /* Counter.swift in Sources */,
 				8EA8FE9924CBA4B20009A23B /* CreateItemView.swift in Sources */,
 				8EA12E3424CECE55000D7979 /* UITextField+Utils.swift in Sources */,
+				8EA12E4724D011A6000D7979 /* MainControllerToViewDelegate.swift in Sources */,
+				8EA12E5424D016F4000D7979 /* ExamplesInteractorDataSource.swift in Sources */,
 				8EA12E3724CF7AD2000D7979 /* WelcomeView.swift in Sources */,
 				8EA12E1B24CDEA6E000D7979 /* MainInteractor.swift in Sources */,
+				8EA12E4324CFFC40000D7979 /* MainInteractorDataSource.swift in Sources */,
 				8E41640B24CD38F70093B20E /* Example.swift in Sources */,
+				8EA12E4924D0123B000D7979 /* MainViewSearchBardDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

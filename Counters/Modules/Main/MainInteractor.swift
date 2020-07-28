@@ -6,9 +6,9 @@
 //  Copyright © 2020 Samuel García. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-class MainInteractor {
+class MainInteractor : NSObject {
     
     let controller : MainInteractorToControllerDelegate
     
@@ -48,6 +48,8 @@ class MainInteractor {
     
     init(controller : MainInteractorToControllerDelegate) {
         self.controller = controller
+        super.init()
+        self.controller.setDataSource(self)
     }
     
     func fetchCounters() {
@@ -71,53 +73,6 @@ class MainInteractor {
             updateCounterDescriptionText()
             return
         }
-    }
-    
-    func increment(_ counter : Counter) {
-        guard let id = counter.id, let title = counter.title else { return }
-        NetworkOperation.shared.request(paths: [.api, .v1, .counter, .inc], httpMethod: "POST",httpBody: [ "id" : id]) { (result : Result<[Counter]?,Error>) in
-            self.parseResult(result: result) {
-                self.controller.showDialogError(title: "Couldn't update the \"\(title)\" counter to \(counter.count + 1)", message: "The internet connection appears to be ofline", actions: [
-                    "Dismiss" : { },
-                    "Retry" : {
-                        self.increment(counter)
-                    }
-                ])
-                self.controller.reloadData()
-            }
-        }
-    }
-    
-    func decrement(_ counter : Counter) {
-        guard let id = counter.id, let title = counter.title else { return }
-        NetworkOperation.shared.request(paths: [.api, .v1, .counter, .dec], httpMethod: "POST",httpBody: [ "id" : id]) { (result : Result<[Counter]?,Error>) in
-            self.parseResult(result: result) {
-                self.controller.showDialogError(title: "Couldn't update the \"\(title)\" counter to \(counter.count - 1)", message: "The internet connection appears to be ofline", actions: [
-                    "Dismiss" : { },
-                    "Retry" : {
-                        self.decrement(counter)
-                    }
-                ])
-                self.controller.reloadData()
-            }
-        }
-    }
-    
-    func select(_ counter : Counter) {
-        self.selectedCounters.append(counter)
-    }
-    
-    func deselect(_ counter : Counter) {
-        self.selectedCounters.removeAll { $0.id == counter.id }
-    }
-    
-    func getCountersCount() -> Int {
-        return counters.count
-    }
-    
-    func getCounterFor(_ row : Int) -> Counter? {
-        guard row < counters.count else { return nil }
-        return counters[row]
     }
     
     func updateCounterDescriptionText() {
@@ -190,7 +145,6 @@ class MainInteractor {
     }
     
     func shareSelected(){
-        
         var objectsToShare : [Any] = []
         
         for counter in selectedCounters {
@@ -199,17 +153,32 @@ class MainInteractor {
         
         objectsToShare.append("You can see the full list on sam-counters://share")
         
-        
         controller.showLoading()
         controller.openShareViewController(objectsToShare: objectsToShare)
     }
     
     func deleteSelected() {
-        for counter in selectedCounters {
-            deleteCounter(counter)
+        let selectedCounterCount = selectedCounters.count
+        
+        guard selectedCounterCount > 0 else { return }
+        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        let handler : ((UIAlertAction) -> Void) = {_ in
+            for counter in self.selectedCounters {
+                self.deleteCounter(counter)
+            }
+            self.controller.configureEditingLayout()
+            self.controller.reloadData()
         }
-        controller.updateEditingLayout()
-        controller.reloadData()
+        alert.addAction(UIAlertAction(title: "Delete \(selectedCounterCount) counter", style: .destructive, handler: handler))
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+
+        DispatchQueue.main.async {
+            alert.view.tintColor = UIColor(named: "tintColor")
+            self.controller.presentAlert(alert, animated: true)
+        }
     }
     
     func selectedCounterCount() -> Int {
@@ -224,18 +193,4 @@ class MainInteractor {
     func isFirstLoad() -> Bool{
         return Cache.shared.isFirstLoad()
     }
-}
-
-protocol MainInteractorToControllerDelegate {
-    func reloadData()
-    func setDescriptionCounterText(_ text: String)
-    func showError(error : ErrorModel)
-    func showNoResults()
-    func hideNoResults()
-    func goToCreateItem()
-    func showDialogError(title: String, message: String, actions : [String:(()->())])
-    func showLoading()
-    func hideLoading()
-    func updateEditingLayout()
-    func openShareViewController(objectsToShare : [Any])
 }

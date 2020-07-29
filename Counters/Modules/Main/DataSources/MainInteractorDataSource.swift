@@ -53,7 +53,6 @@ extension MainInteractor : CounterDelegate {
                         self.increment(counter)
                     }
                 ])
-                self.showTableView()
             }
         }
     }
@@ -69,7 +68,6 @@ extension MainInteractor : CounterDelegate {
                         self.decrement(counter)
                     }
                 ])
-                self.showTableView()
             }
         }
     }

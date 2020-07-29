@@ -23,8 +23,6 @@ class MainInteractor : NSObject {
                 let treatedCounters = self.countersWithoutTreating.filter{ ($0.title?.lowercased().contains(searchText.lowercased()) ?? false) }
                 if treatedCounters.count == 0 {
                     showNoResults()
-                }else{
-                    showTableView()
                 }
                 updateCounterDescriptionText(counters: treatedCounters)
                 return treatedCounters.reversed()
@@ -128,12 +126,12 @@ class MainInteractor : NSObject {
     }
     
     func parseCounters(_ counters: [Counter]) {
+        countersWithoutTreating = counters
+        updateCounterDescriptionText(counters: counters)
         guard counters.count > 0 else {
             (searchText != nil && searchText != "") ? showNoResults() : showNoCountersError()
-            updateCounterDescriptionText(counters: [])
             return
         }
-        countersWithoutTreating = counters
         showTableView()
     }
     

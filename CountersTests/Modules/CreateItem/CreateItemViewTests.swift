@@ -15,16 +15,32 @@ class CreateItemViewTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        view = CreateItemView(nibName: "CreateItemView", bundle: nil)
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        view = storyboard.instantiateViewController(withIdentifier: "CreateItemView") as? CreateItemView
+        
+        view.beginAppearanceTransition(true, animated: false)
+        view.endAppearanceTransition()
+        
         view.viewDidLoad()
     }
 
-    func test_BarButtonSet() throws {
-        let leftBarButtonItem = view.navigationItem.leftBarButtonItem
-        let rightBarButtonItem = view.navigationItem.rightBarButtonItem
+    func test_BarButtonSet() {
+        let leftBarButtonItem = view.navigationItem.leftBarButtonItem!
+        let rightBarButtonItem = view.navigationItem.rightBarButtonItem!
         
-        XCTAssertEqual(leftBarButtonItem?.title, "Cancel")
-        XCTAssertEqual(rightBarButtonItem?.title, "Saves")
+        XCTAssertEqual(leftBarButtonItem.title, "Cancel")
+        XCTAssertEqual(rightBarButtonItem.title, "Save")
+        
+        XCTAssertEqual(leftBarButtonItem.action, #selector(view.backAction(_:)))
+        XCTAssertEqual(rightBarButtonItem.action, #selector(view.saveAction(_:)))
+    }
+    
+    func test_SetSelectedTitle() {
+        let evalText = "Custom testing text"
+        view.setSelectedTitle(evalText)
+        
+        XCTAssertEqual(view.titleTextfield.text, evalText)
     }
 
 }

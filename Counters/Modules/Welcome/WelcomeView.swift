@@ -32,7 +32,7 @@ class WelcomeView: UIViewController {
         welcomeArray.append(WelcomeModel(title: "Count your thoughts", description: "Possibilities are literally endless.", iconName: "third-welcome-icon", backgroundColor: UIColor.hexStringToUIColor(hex: "#4CD964")))
     }
     
-    @IBAction func `continue`(_ sender: Any) {
+    @IBAction func continueToMain(_ sender: Any) {
         Cache.shared.saveFirstLoad()
         dismiss(animated: true)
     }

@@ -21,7 +21,7 @@ class MainView: UIViewController {
     var refreshControl = UIRefreshControl()
     var search = UISearchController(searchResultsController: nil)
     var controller : MainController?
-    private var createItemView: CreateItemView? = nil
+    var createItemView: CreateItemView? = nil
     private var customEditButton : UIBarButtonItem?
 
     override func viewDidLoad() {

@@ -43,7 +43,9 @@ protocol CounterDelegate {
 extension MainInteractor : CounterDelegate {
     func increment(_ counter: Counter) {
         guard let id = counter.id, let title = counter.title else { return }
+        controller.showLoading()
         NetworkOperation.shared.request(paths: [.api, .v1, .counter, .inc], httpMethod: "POST",httpBody: [ "id" : id]) { (result : Result<[Counter]?,Error>) in
+            self.controller.hideLoading()
             self.parseResult(result: result) {
                 self.controller.showDialogError(title: "Couldn't update the \"\(title)\" counter to \(counter.count + 1)", message: "The internet connection appears to be ofline", actions: [
                     "Dismiss" : { },
@@ -51,13 +53,15 @@ extension MainInteractor : CounterDelegate {
                         self.increment(counter)
                     }
                 ])
-                self.controller.reloadData()
+                self.showTableView()
             }
         }
     }
     func decrement(_ counter: Counter) {
         guard let id = counter.id, let title = counter.title else { return }
+        controller.showLoading()
         NetworkOperation.shared.request(paths: [.api, .v1, .counter, .dec], httpMethod: "POST",httpBody: [ "id" : id]) { (result : Result<[Counter]?,Error>) in
+            self.controller.hideLoading()
             self.parseResult(result: result) {
                 self.controller.showDialogError(title: "Couldn't update the \"\(title)\" counter to \(counter.count - 1)", message: "The internet connection appears to be ofline", actions: [
                     "Dismiss" : { },
@@ -65,7 +69,7 @@ extension MainInteractor : CounterDelegate {
                         self.decrement(counter)
                     }
                 ])
-                self.controller.reloadData()
+                self.showTableView()
             }
         }
     }

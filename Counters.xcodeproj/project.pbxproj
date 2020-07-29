@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E305E5924D1149000CFEA57 /* CreateItemViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E305E5824D1149000CFEA57 /* CreateItemViewTests.swift */; };
 		8E4163EE24CCC4E60093B20E /* CounterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4163EC24CCC4E60093B20E /* CounterTableViewCell.swift */; };
 		8E4163EF24CCC4E60093B20E /* CounterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E4163ED24CCC4E60093B20E /* CounterTableViewCell.xib */; };
 		8E4163F224CD035F0093B20E /* UIView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4163F124CD035F0093B20E /* UIView+Utils.swift */; };
@@ -67,6 +68,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8E305E5824D1149000CFEA57 /* CreateItemViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateItemViewTests.swift; sourceTree = "<group>"; };
 		8E4163EC24CCC4E60093B20E /* CounterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterTableViewCell.swift; sourceTree = "<group>"; };
 		8E4163ED24CCC4E60093B20E /* CounterTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CounterTableViewCell.xib; sourceTree = "<group>"; };
 		8E4163F124CD035F0093B20E /* UIView+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Utils.swift"; sourceTree = "<group>"; };
@@ -138,6 +140,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8E305E5624D1142E00CFEA57 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				8E305E5724D1145000CFEA57 /* CreateItem */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		8E305E5724D1145000CFEA57 /* CreateItem */ = {
+			isa = PBXGroup;
+			children = (
+				8E305E5824D1149000CFEA57 /* CreateItemViewTests.swift */,
+			);
+			path = CreateItem;
+			sourceTree = "<group>";
+		};
 		8E4163E924CBCDA20093B20E /* CreateItem */ = {
 			isa = PBXGroup;
 			children = (
@@ -345,6 +363,7 @@
 		8EA8FEAA24CBA4B90009A23B /* CountersTests */ = {
 			isa = PBXGroup;
 			children = (
+				8E305E5624D1142E00CFEA57 /* Modules */,
 				8EA8FEAB24CBA4B90009A23B /* CountersTests.swift */,
 				8EA8FEAD24CBA4B90009A23B /* Info.plist */,
 			);
@@ -354,12 +373,12 @@
 		8EA8FEB624CBC2DD0009A23B /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				8EA12E3524CF7A6B000D7979 /* Welcome */,
+				8E4163E924CBCDA20093B20E /* CreateItem */,
 				8EA12E1F24CE0C2C000D7979 /* Error */,
 				8E4163F724CD332E0093B20E /* Examples */,
-				8E4163E924CBCDA20093B20E /* CreateItem */,
 				8EA8FEBA24CBCB3B0009A23B /* Main */,
 				8EA8FEB724CBC2F50009A23B /* Networking */,
+				8EA12E3524CF7A6B000D7979 /* Welcome */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -539,6 +558,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EA8FEAC24CBA4B90009A23B /* CountersTests.swift in Sources */,
+				8E305E5924D1149000CFEA57 /* CreateItemViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

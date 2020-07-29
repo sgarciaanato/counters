@@ -9,11 +9,10 @@
 import UIKit
 
 protocol MainControllerToViewDelegate {
-    func reloadData()
     func setDescriptionCounterText(_ text: String)
     func showError(error : ErrorModel)
     func showNoResults()
-    func hideNoResults()
+    func showTableView()
     func goToCreateItem()
     func showDialogError(title: String, message: String, actions : [String:(()->())])
     func showLoading()
@@ -26,13 +25,6 @@ protocol MainControllerToViewDelegate {
 }
 
 extension MainView : MainControllerToViewDelegate {
-    func reloadData() {
-        DispatchQueue.main.async {
-            self.countersTableView.reloadData()
-            self.countersTableView.isHidden = false
-            self.customErrorView.isHidden = true
-        }
-    }
     func setDescriptionCounterText(_ text: String) {
         DispatchQueue.main.async {
             self.itemsCounterDescription.text = text
@@ -43,18 +35,22 @@ extension MainView : MainControllerToViewDelegate {
         DispatchQueue.main.async {
             self.countersTableView.isHidden = true
             self.customErrorView.isHidden = false
+            self.noResultsLabel.isHidden = true
         }
     }
     func showNoResults(){
         DispatchQueue.main.async {
-            self.noResultsLabel.isHidden = false
             self.countersTableView.isHidden = true
+            self.customErrorView.isHidden = true
+            self.noResultsLabel.isHidden = false
         }
     }
-    func hideNoResults(){
+    func showTableView(){
         DispatchQueue.main.async {
-            self.noResultsLabel.isHidden = true
             self.countersTableView.isHidden = false
+            self.customErrorView.isHidden = true
+            self.noResultsLabel.isHidden = true
+            self.countersTableView.reloadData()
         }
     }
     func goToCreateItem() {

@@ -9,11 +9,10 @@
 import UIKit
 
 protocol MainInteractorToControllerDelegate {
-    func reloadData()
     func setDescriptionCounterText(_ text: String)
     func showError(error : ErrorModel)
     func showNoResults()
-    func hideNoResults()
+    func showTableView()
     func goToCreateItem()
     func showDialogError(title: String, message: String, actions : [String:(()->())])
     func showLoading()
@@ -29,10 +28,6 @@ extension MainController : MainInteractorToControllerDelegate {
     func showDialogError(title: String, message: String, actions: [String:(()->())]) {
         view.showDialogError(title: title, message: message, actions: actions)
     }
-    
-    func reloadData() {
-        view.reloadData()
-    }
     func setDescriptionCounterText(_ text: String) {
         view.setDescriptionCounterText(text)
     }
@@ -42,8 +37,8 @@ extension MainController : MainInteractorToControllerDelegate {
     func showNoResults() {
         view.showNoResults()
     }
-    func hideNoResults() {
-        view.hideNoResults()
+    func showTableView() {
+        view.showTableView()
     }
     func goToCreateItem() {
         view.goToCreateItem()

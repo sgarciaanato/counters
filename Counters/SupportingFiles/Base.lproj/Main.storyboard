@@ -261,10 +261,10 @@
                             <constraint firstItem="mjE-hO-aB9" firstAttribute="top" secondItem="JDB-Jq-Pwx" secondAttribute="bottom" id="dJ5-Dl-ETO"/>
                             <constraint firstItem="mjE-hO-aB9" firstAttribute="trailing" secondItem="BIS-TU-Y2b" secondAttribute="trailing" id="fLC-sd-rkd"/>
                             <constraint firstItem="JDB-Jq-Pwx" firstAttribute="top" secondItem="BIS-TU-Y2b" secondAttribute="top" id="m5x-rQ-3BK"/>
-                            <constraint firstItem="JDB-Jq-Pwx" firstAttribute="leading" secondItem="BIS-TU-Y2b" secondAttribute="leading" id="p7N-r2-mjd"/>
+                            <constraint firstItem="JDB-Jq-Pwx" firstAttribute="leading" secondItem="gEr-DM-rDJ" secondAttribute="leading" id="p7N-r2-mjd"/>
                             <constraint firstItem="2qN-UE-PAT" firstAttribute="centerY" secondItem="gEr-DM-rDJ" secondAttribute="centerY" multiplier="0.75" id="pCw-vX-7UK"/>
                             <constraint firstItem="mjE-hO-aB9" firstAttribute="top" secondItem="cDU-pb-SFj" secondAttribute="bottom" id="q9X-VI-Gec"/>
-                            <constraint firstItem="BIS-TU-Y2b" firstAttribute="trailing" secondItem="JDB-Jq-Pwx" secondAttribute="trailing" id="qHB-me-lQF"/>
+                            <constraint firstAttribute="trailing" secondItem="JDB-Jq-Pwx" secondAttribute="trailing" id="qHB-me-lQF"/>
                             <constraint firstItem="BIS-TU-Y2b" firstAttribute="bottom" secondItem="mjE-hO-aB9" secondAttribute="bottom" constant="-34" id="wNm-Io-MaA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="BIS-TU-Y2b"/>

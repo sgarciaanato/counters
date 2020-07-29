@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		8E305E5924D1149000CFEA57 /* CreateItemViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E305E5824D1149000CFEA57 /* CreateItemViewTests.swift */; };
+		8E305E6124D192BB00CFEA57 /* MainViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E305E6024D192BB00CFEA57 /* MainViewTests.swift */; };
+		8E305E6324D197DC00CFEA57 /* MainControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E305E6224D197DC00CFEA57 /* MainControllerTests.swift */; };
+		8E305E6624D1C44600CFEA57 /* MainInteractorToControllerDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E305E6524D1C44600CFEA57 /* MainInteractorToControllerDelegateTests.swift */; };
+		8E305E6824D1CCD800CFEA57 /* MainControllerToViewDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E305E6724D1CCD800CFEA57 /* MainControllerToViewDelegateTests.swift */; };
+		8E305E6A24D1D0EA00CFEA57 /* CreateItemControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E305E6924D1D0EA00CFEA57 /* CreateItemControllerTests.swift */; };
+		8E305E6D24D1D49800CFEA57 /* CreateItemControllerToViewDelefateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E305E6C24D1D49800CFEA57 /* CreateItemControllerToViewDelefateTests.swift */; };
+		8E305E6F24D1D66900CFEA57 /* CreateItemInteractorToControllerDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E305E6E24D1D66900CFEA57 /* CreateItemInteractorToControllerDelegateTests.swift */; };
 		8E4163EE24CCC4E60093B20E /* CounterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4163EC24CCC4E60093B20E /* CounterTableViewCell.swift */; };
 		8E4163EF24CCC4E60093B20E /* CounterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E4163ED24CCC4E60093B20E /* CounterTableViewCell.xib */; };
 		8E4163F224CD035F0093B20E /* UIView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4163F124CD035F0093B20E /* UIView+Utils.swift */; };
@@ -69,6 +76,13 @@
 
 /* Begin PBXFileReference section */
 		8E305E5824D1149000CFEA57 /* CreateItemViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateItemViewTests.swift; sourceTree = "<group>"; };
+		8E305E6024D192BB00CFEA57 /* MainViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewTests.swift; sourceTree = "<group>"; };
+		8E305E6224D197DC00CFEA57 /* MainControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainControllerTests.swift; sourceTree = "<group>"; };
+		8E305E6524D1C44600CFEA57 /* MainInteractorToControllerDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractorToControllerDelegateTests.swift; sourceTree = "<group>"; };
+		8E305E6724D1CCD800CFEA57 /* MainControllerToViewDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainControllerToViewDelegateTests.swift; sourceTree = "<group>"; };
+		8E305E6924D1D0EA00CFEA57 /* CreateItemControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateItemControllerTests.swift; sourceTree = "<group>"; };
+		8E305E6C24D1D49800CFEA57 /* CreateItemControllerToViewDelefateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateItemControllerToViewDelefateTests.swift; sourceTree = "<group>"; };
+		8E305E6E24D1D66900CFEA57 /* CreateItemInteractorToControllerDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateItemInteractorToControllerDelegateTests.swift; sourceTree = "<group>"; };
 		8E4163EC24CCC4E60093B20E /* CounterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterTableViewCell.swift; sourceTree = "<group>"; };
 		8E4163ED24CCC4E60093B20E /* CounterTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CounterTableViewCell.xib; sourceTree = "<group>"; };
 		8E4163F124CD035F0093B20E /* UIView+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Utils.swift"; sourceTree = "<group>"; };
@@ -143,6 +157,7 @@
 		8E305E5624D1142E00CFEA57 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				8E305E5F24D192AB00CFEA57 /* Main */,
 				8E305E5724D1145000CFEA57 /* CreateItem */,
 			);
 			path = Modules;
@@ -151,9 +166,39 @@
 		8E305E5724D1145000CFEA57 /* CreateItem */ = {
 			isa = PBXGroup;
 			children = (
+				8E305E6B24D1D43A00CFEA57 /* Delegates */,
 				8E305E5824D1149000CFEA57 /* CreateItemViewTests.swift */,
+				8E305E6924D1D0EA00CFEA57 /* CreateItemControllerTests.swift */,
 			);
 			path = CreateItem;
+			sourceTree = "<group>";
+		};
+		8E305E5F24D192AB00CFEA57 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				8E305E6424D1C43300CFEA57 /* Delegates */,
+				8E305E6024D192BB00CFEA57 /* MainViewTests.swift */,
+				8E305E6224D197DC00CFEA57 /* MainControllerTests.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		8E305E6424D1C43300CFEA57 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				8E305E6524D1C44600CFEA57 /* MainInteractorToControllerDelegateTests.swift */,
+				8E305E6724D1CCD800CFEA57 /* MainControllerToViewDelegateTests.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		8E305E6B24D1D43A00CFEA57 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				8E305E6C24D1D49800CFEA57 /* CreateItemControllerToViewDelefateTests.swift */,
+				8E305E6E24D1D66900CFEA57 /* CreateItemInteractorToControllerDelegateTests.swift */,
+			);
+			path = Delegates;
 			sourceTree = "<group>";
 		};
 		8E4163E924CBCDA20093B20E /* CreateItem */ = {
@@ -557,7 +602,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E305E6624D1C44600CFEA57 /* MainInteractorToControllerDelegateTests.swift in Sources */,
+				8E305E6824D1CCD800CFEA57 /* MainControllerToViewDelegateTests.swift in Sources */,
+				8E305E6D24D1D49800CFEA57 /* CreateItemControllerToViewDelefateTests.swift in Sources */,
+				8E305E6A24D1D0EA00CFEA57 /* CreateItemControllerTests.swift in Sources */,
+				8E305E6324D197DC00CFEA57 /* MainControllerTests.swift in Sources */,
 				8EA8FEAC24CBA4B90009A23B /* CountersTests.swift in Sources */,
+				8E305E6124D192BB00CFEA57 /* MainViewTests.swift in Sources */,
+				8E305E6F24D1D66900CFEA57 /* CreateItemInteractorToControllerDelegateTests.swift in Sources */,
 				8E305E5924D1149000CFEA57 /* CreateItemViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

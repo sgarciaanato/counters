@@ -27,7 +27,7 @@ extension MainView : UISearchBarDelegate {
         self.navigationController?.navigationBar.clipsToBounds = !largeTitle
     }
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    @objc func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         controller?.fetchCounters(searchText: searchText)
     }
     

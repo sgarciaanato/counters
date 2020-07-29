@@ -70,7 +70,7 @@ class MainInteractor : NSObject {
 
 extension MainInteractor {
     
-    func fetchCounters() {
+    @objc func fetchCounters() {
         searchText = nil
         NetworkOperation.shared.request(paths: [.api, .v1, .counters], httpBody: nil) { (result : Result<[Counter]?,Error>) in
             self.handleResult(result: result)
@@ -78,7 +78,7 @@ extension MainInteractor {
     }
     
     //Read counters from local storage
-    func fetchCounters(searchText: String? = "") {
+    @objc func fetchCounters(searchText: String? = "") {
         let counters : [Counter] = Cache.shared.getData() ?? []
         self.searchText = searchText
         setCounters(counters)
@@ -182,7 +182,7 @@ extension MainInteractor {
         }
     }
     
-    func shareSelected(){
+    @objc func shareSelected(){
         var objectsToShare : [Any] = []
         
         for counter in selectedCounters {
@@ -195,7 +195,7 @@ extension MainInteractor {
         controller.openShareViewController(objectsToShare: objectsToShare)
     }
     
-    func deleteSelected() {
+    @objc func deleteSelected() {
         let selectedCounterCount = selectedCounters.count
         
         guard selectedCounterCount > 0 else {

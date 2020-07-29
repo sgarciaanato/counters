@@ -32,12 +32,12 @@ class MainController {
         showLoading()
     }
     
-    func fetchCounters(searchText: String?) {
-        interactor?.fetchCounters(searchText: searchText)
-    }
-    
     func fetchCounters() {
         interactor?.fetchCounters()
+    }
+    
+    func fetchCounters(searchText: String?) {
+        interactor?.fetchCounters(searchText: searchText)
     }
     
     func setCounters(_ counters : [Counter]) {

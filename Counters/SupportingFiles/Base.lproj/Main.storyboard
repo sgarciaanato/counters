@@ -166,7 +166,7 @@
         <!--Counters-->
         <scene sceneID="TAW-3E-Urx">
             <objects>
-                <viewController id="US1-V7-Gbv" customClass="MainView" customModule="Counters" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainView" id="US1-V7-Gbv" customClass="MainView" customModule="Counters" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gEr-DM-rDJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

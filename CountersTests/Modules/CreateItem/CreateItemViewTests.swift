@@ -24,6 +24,11 @@ class CreateItemViewTests: XCTestCase {
         
         view.viewDidLoad()
     }
+    
+    override func tearDown() {
+        super.tearDown()
+        view = nil
+    }
 
     func test_BarButtonSet() {
         let leftBarButtonItem = view.navigationItem.leftBarButtonItem!

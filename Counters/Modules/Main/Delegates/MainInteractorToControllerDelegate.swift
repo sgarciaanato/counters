@@ -9,58 +9,67 @@
 import UIKit
 
 protocol MainInteractorToControllerDelegate {
-    func setDescriptionCounterText(_ text: String)
-    func showError(error : ErrorModel)
-    func showNoResults()
-    func showTableView()
-    func goToCreateItem()
-    func showDialogError(title: String, message: String, actions : [String:(()->())])
-    func showLoading()
-    func hideLoading()
     func configureEditingLayout()
+    func goToCreateItem()
+    func hideLoading()
     func openShareViewController(objectsToShare : [Any])
     func setDataSource(_ dataSource : UITableViewDataSource)
-    func showActionSheet(title: String, message: String, actions : [String:(()->())])
+    func setDescriptionCounterText(_ text: String)
+    func showActionSheet(title: String?, message: String?, actions : [String:(()->())])
+    func showDialogError(title: String, message: String, actions : [String:(()->())])
+    func showError(error : ErrorModel)
+    func showLoading()
+    func showNoResults()
+    func showTableView()
 }
 
 extension MainController : MainInteractorToControllerDelegate {
     
-    func showDialogError(title: String, message: String, actions: [String:(()->())]) {
-        view.showDialogError(title: title, message: message, actions: actions)
+    func configureEditingLayout() {
+        view.configureEditingLayout()
     }
+    
+    func goToCreateItem() {
+        view.goToCreateItem()
+    }
+    
+    func hideLoading() {
+        view.hideLoading()
+    }
+    
+    func openShareViewController(objectsToShare : [Any]){
+        view.openShareViewController(objectsToShare: objectsToShare)
+    }
+    
+    func setDataSource(_ dataSource : UITableViewDataSource) {
+        view.setDataSource(dataSource)
+    }
+    
     func setDescriptionCounterText(_ text: String) {
         view.setDescriptionCounterText(text)
     }
+    
+    func showActionSheet(title: String?, message: String?, actions : [String:(()->())]) {
+        view.showActionSheet(title: title, message: message, actions : actions)
+    }
+    
+    func showDialogError(title: String, message: String, actions: [String:(()->())]) {
+        view.showDialogError(title: title, message: message, actions: actions)
+    }
+    
     func showError(error : ErrorModel) {
         view.showError(error: error)
-    }
-    func showNoResults() {
-        view.showNoResults()
-    }
-    func showTableView() {
-        view.showTableView()
-    }
-    func goToCreateItem() {
-        view.goToCreateItem()
     }
     
     func showLoading() {
         view.showLoading()
     }
     
-    func hideLoading() {
-        view.hideLoading()
+    func showNoResults() {
+        view.showNoResults()
     }
-    func configureEditingLayout() {
-        view.configureEditingLayout()
+    func showTableView() {
+        view.showTableView()
     }
-    func openShareViewController(objectsToShare : [Any]){
-        view.openShareViewController(objectsToShare: objectsToShare)
-    }
-    func setDataSource(_ dataSource : UITableViewDataSource) {
-        view.setDataSource(dataSource)
-    }
-    func showActionSheet(title: String, message: String, actions : [String:(()->())]) {
-        view.showActionSheet(title: title, message: message, actions : actions)
-    }
+    
 }

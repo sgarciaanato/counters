@@ -33,35 +33,21 @@ extension MainInteractor : UITableViewDataSource {
 }
 
 protocol CounterDelegate {
-    func increment(_ counter: Counter)
     func decrement(_ counter: Counter)
-    func select(_ counter: Counter)
     func deselect(_ counter: Counter)
+    func increment(_ counter: Counter)
+    func select(_ counter: Counter)
 }
 
 
 extension MainInteractor : CounterDelegate {
-    func increment(_ counter: Counter) {
-        guard let id = counter.id, let title = counter.title else { return }
-        controller.showLoading()
-        NetworkOperation.shared.request(paths: [.api, .v1, .counter, .inc], httpMethod: "POST",httpBody: [ "id" : id]) { (result : Result<[Counter]?,Error>) in
-            self.controller.hideLoading()
-            self.parseResult(result: result) {
-                self.controller.showDialogError(title: "Couldn't update the \"\(title)\" counter to \(counter.count + 1)", message: "The internet connection appears to be ofline", actions: [
-                    "Dismiss" : { },
-                    "Retry" : {
-                        self.increment(counter)
-                    }
-                ])
-            }
-        }
-    }
+    
     func decrement(_ counter: Counter) {
         guard let id = counter.id, let title = counter.title else { return }
         controller.showLoading()
         NetworkOperation.shared.request(paths: [.api, .v1, .counter, .dec], httpMethod: "POST",httpBody: [ "id" : id]) { (result : Result<[Counter]?,Error>) in
             self.controller.hideLoading()
-            self.parseResult(result: result) {
+            self.handleResult(result: result) {
                 self.controller.showDialogError(title: "Couldn't update the \"\(title)\" counter to \(counter.count - 1)", message: "The internet connection appears to be ofline", actions: [
                     "Dismiss" : { },
                     "Retry" : {
@@ -71,10 +57,29 @@ extension MainInteractor : CounterDelegate {
             }
         }
     }
-    func select(_ counter: Counter) {
-        self.selectedCounters.append(counter)
+    
+    func increment(_ counter: Counter) {
+        guard let id = counter.id, let title = counter.title else { return }
+        controller.showLoading()
+        NetworkOperation.shared.request(paths: [.api, .v1, .counter, .inc], httpMethod: "POST",httpBody: [ "id" : id]) { (result : Result<[Counter]?,Error>) in
+            self.controller.hideLoading()
+            self.handleResult(result: result) {
+                self.controller.showDialogError(title: "Couldn't update the \"\(title)\" counter to \(counter.count + 1)", message: "The internet connection appears to be ofline", actions: [
+                    "Dismiss" : { },
+                    "Retry" : {
+                        self.increment(counter)
+                    }
+                ])
+            }
+        }
     }
+    
     func deselect(_ counter: Counter) {
         self.selectedCounters.removeAll { $0.id == counter.id }
     }
+    
+    func select(_ counter: Counter) {
+        self.selectedCounters.append(counter)
+    }
+    
 }

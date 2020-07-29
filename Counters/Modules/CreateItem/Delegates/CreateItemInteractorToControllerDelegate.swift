@@ -9,21 +9,13 @@
 import Foundation
 
 protocol CreateItemInteractorToControllerDelegate {
-    func updateCountersList()
-    func showTextFieldLoading()
     func hideTextFieldLoading()
     func showDialogError(title: String, message: String, actions : [String:(()->())])
+    func showTextFieldLoading()
+    func updateCountersList()
 }
 
 extension CreateItemController : CreateItemInteractorToControllerDelegate {
-    func updateCountersList() {
-        view.updateCountersList()
-        view.hideTextFieldLoading()
-    }
-    
-    func showTextFieldLoading() {
-        view.showTextFieldLoading()
-    }
     
     func hideTextFieldLoading() {
         view.hideTextFieldLoading()
@@ -31,6 +23,15 @@ extension CreateItemController : CreateItemInteractorToControllerDelegate {
     
     func showDialogError(title: String, message: String, actions: [String:(()->())]) {
         view.showDialogError(title: title, message: message, actions: actions)
+    }
+    
+    func showTextFieldLoading() {
+        view.showTextFieldLoading()
+    }
+    
+    func updateCountersList() {
+        view.updateCountersList()
+        view.hideTextFieldLoading()
     }
 }
 

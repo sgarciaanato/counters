@@ -59,10 +59,21 @@ class MainInteractor : NSObject {
         self.controller.setDataSource(self)
     }
     
+    func isSelected(_ counter : Counter?) -> Bool {
+        guard let counterId = counter?.id else { return false }
+        return selectedCounters.contains { $0.id == counterId }
+    }
+    
+}
+
+// MARK: MainInteractor Fetch
+
+extension MainInteractor {
+    
     func fetchCounters() {
         searchText = nil
         NetworkOperation.shared.request(paths: [.api, .v1, .counters], httpBody: nil) { (result : Result<[Counter]?,Error>) in
-            self.parseResult(result: result)
+            self.handleResult(result: result)
         }
     }
     
@@ -70,39 +81,16 @@ class MainInteractor : NSObject {
     func fetchCounters(searchText: String? = "") {
         let counters : [Counter] = Cache.shared.getData() ?? []
         self.searchText = searchText
-        parseCounters(counters)
+        setCounters(counters)
     }
     
-    func updateCounterDescriptionText(counters : [Counter]) {
-        let count = counters.count
-        guard count > 0 else {
-            controller.setDescriptionCounterText("")
-            return
-        }
-        let totalCount = counters.map({$0.count}).reduce(0, +)
-        controller.setDescriptionCounterText("\(count) items · Counted \(totalCount) times")
-    }
+}
+
+// MARK: MainInteractor Handle the data
+
+extension MainInteractor {
     
-    func setCounters(_ counters : [Counter]) {
-        parseCounters(counters)
-    }
-    
-    func deleteCounter(_ counter : Counter) {
-        guard let id = counter.id, let title = counter.title else { return }
-        deselect(counter)
-        controller.showLoading()
-        NetworkOperation.shared.request(paths: [.api, .v1, .counter], httpMethod: "DELETE",httpBody: [ "id" : id]) { (result : Result<[Counter]?,Error>) in
-            self.controller.hideLoading()
-            self.parseResult(result: result) {
-                self.controller.showDialogError(title: "Couldn't delete the counter \(title)", message: "The internet connection appears to be ofline", actions: [
-                    "Dismiss" : { }
-                ])
-                self.showTableView()
-            }
-        }
-    }
-    
-    func parseResult(result : Result<[Counter]?,Error>, customFailureBlock : (()->())? = nil){
+    func handleResult(result : Result<[Counter]?,Error>, customFailureBlock : (()->())? = nil){
         controller.hideLoading()
         switch result {
             case .success(let counters):
@@ -113,27 +101,23 @@ class MainInteractor : NSObject {
     }
     
     func handleSuccessLoadingCounters(_ counters : [Counter]) {
-        parseCounters(counters)
+        setCounters(counters)
     }
     
     func handlerErrorLoadingCounters(_ customFailureBlock : (()->())? = nil) {
         if let counters : [Counter] = Cache.shared.getData() {
-            parseCounters(counters)
+            setCounters(counters)
             customFailureBlock?()
             return
         }
         showCouldntLoadCounters()
     }
     
-    func parseCounters(_ counters: [Counter]) {
-        countersWithoutTreating = counters
-        updateCounterDescriptionText(counters: counters)
-        guard counters.count > 0 else {
-            (searchText != nil && searchText != "") ? showNoResults() : showNoCountersError()
-            return
-        }
-        showTableView()
-    }
+}
+
+// MARK: MainInteractor Notify view for data update
+
+extension MainInteractor {
     
     func showNoCountersError() {
         let errorModel = ErrorModel(title: "No counters yet", description: "\"When I started counting my blessings, my whole life turned aroud.\"\n-Willie Nelson", buttonTitle: "Create a counter") {
@@ -147,6 +131,55 @@ class MainInteractor : NSObject {
             self.fetchCounters()
         }
         self.controller.showError(error: errorModel)
+    }
+    
+    func showNoResults(){
+        self.controller.showNoResults()
+    }
+    
+    func showTableView(){
+        self.controller.showTableView()
+    }
+    
+    func updateCounterDescriptionText(counters : [Counter]) {
+        let count = counters.count
+        guard count > 0 else {
+            controller.setDescriptionCounterText("")
+            return
+        }
+        let totalCount = counters.map({$0.count}).reduce(0, +)
+        controller.setDescriptionCounterText("\(count) items · Counted \(totalCount) times")
+    }
+    
+}
+
+// MARK: MainInteractor update counter data
+
+extension MainInteractor {
+    
+    func setCounters(_ counters: [Counter]) {
+        countersWithoutTreating = counters
+        updateCounterDescriptionText(counters: counters)
+        guard counters.count > 0 else {
+            (searchText != nil && searchText != "") ? showNoResults() : showNoCountersError()
+            return
+        }
+        showTableView()
+    }
+    
+    func deleteCounter(_ counter : Counter) {
+        guard let id = counter.id, let title = counter.title else { return }
+        deselect(counter)
+        controller.showLoading()
+        NetworkOperation.shared.request(paths: [.api, .v1, .counter], httpMethod: "DELETE",httpBody: [ "id" : id]) { (result : Result<[Counter]?,Error>) in
+            self.controller.hideLoading()
+            self.handleResult(result: result) {
+                self.controller.showDialogError(title: "Couldn't delete the counter \(title)", message: "The internet connection appears to be ofline", actions: [
+                    "Dismiss" : { }
+                ])
+                self.showTableView()
+            }
+        }
     }
     
     func shareSelected(){
@@ -172,7 +205,7 @@ class MainInteractor : NSObject {
             return
         }
 
-        self.controller.showActionSheet(title: "Select at least 1 item", message: "", actions: [
+        self.controller.showActionSheet(title: nil, message: nil, actions: [
             "Delete \(selectedCounterCount) counter" : {
                 for counter in self.selectedCounters {
                     self.deleteCounter(counter)
@@ -183,16 +216,4 @@ class MainInteractor : NSObject {
         ])
     }
     
-    func isSelected(_ counter : Counter?) -> Bool {
-        guard let counterId = counter?.id else { return false }
-        return selectedCounters.contains { $0.id == counterId }
-    }
-    
-    func showNoResults(){
-        self.controller.showNoResults()
-    }
-    
-    func showTableView(){
-        self.controller.showTableView()
-    }
 }

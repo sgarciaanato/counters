@@ -9,27 +9,13 @@
 import UIKit
 
 protocol CreateItemControllerToViewDelegate {
-    func updateCountersList()
-    func showTextFieldLoading()
     func hideTextFieldLoading()
     func showDialogError(title: String, message: String, actions : [String:(()->())])
+    func showTextFieldLoading()
+    func updateCountersList()
 }
 
 extension CreateItemView : CreateItemControllerToViewDelegate {
-    func updateCountersList() {
-        DispatchQueue.main.async {
-            self.titleTextfield.text = ""
-            self.titleTextfield.endEditing(false)
-            self.performSegue(withIdentifier: "unwindToMain", sender: nil)
-        }
-    }
-    
-    func showTextFieldLoading() {
-        DispatchQueue.main.async {
-            self.saveBtn?.isEnabled = false
-            self.titleTextfield.activityIndicator(loading: true)
-        }
-    }
     
     func hideTextFieldLoading() {
         DispatchQueue.main.async {
@@ -55,5 +41,21 @@ extension CreateItemView : CreateItemControllerToViewDelegate {
             self.present(alert, animated: true)
         }
     }
+    
+    func showTextFieldLoading() {
+        DispatchQueue.main.async {
+            self.saveBtn?.isEnabled = false
+            self.titleTextfield.activityIndicator(loading: true)
+        }
+    }
+    
+    func updateCountersList() {
+        DispatchQueue.main.async {
+            self.titleTextfield.text = ""
+            self.titleTextfield.endEditing(false)
+            self.performSegue(withIdentifier: "unwindToMain", sender: nil)
+        }
+    }
+    
 }
 

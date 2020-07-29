@@ -9,15 +9,18 @@
 import UIKit
 
 protocol ExamplesControllerToView {
-    func unWindToCreateItem()
     func setDataSource(_ dataSource : UITableViewDataSource)
+    func unWindToCreateItem()
 }
 
 extension ExamplesView : ExamplesControllerToView {
-    func unWindToCreateItem() {
-        self.performSegue(withIdentifier: "unwindToCreateItem", sender: nil)
-    }
+    
     func setDataSource(_ dataSource : UITableViewDataSource) {
         self.categoriesTableView.dataSource = dataSource
     }
+    
+    func unWindToCreateItem() {
+        self.performSegue(withIdentifier: "unwindToCreateItem", sender: nil)
+    }
+    
 }

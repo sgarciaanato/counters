@@ -10,16 +10,6 @@ import UIKit
 
 extension MainView : UISearchBarDelegate {
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        controller?.fetchCounters(searchText: searchText)
-    }
-    
-    func prefersLargeTitles(_ largeTitle : Bool){
-        navigationController?.navigationBar.prefersLargeTitles = largeTitle
-        navigationItem.hidesSearchBarWhenScrolling = !largeTitle
-        self.navigationController?.navigationBar.clipsToBounds = !largeTitle
-    }
-    
     func configureSearchBar() {
         search.searchBar.delegate = self
         search.searchBar.sizeToFit()
@@ -29,6 +19,16 @@ extension MainView : UISearchBarDelegate {
         search.searchBar.placeholder = "Search"
         self.navigationItem.searchController = search
         self.navigationController?.navigationBar.addShadow()
+    }
+    
+    func prefersLargeTitles(_ largeTitle : Bool){
+        navigationController?.navigationBar.prefersLargeTitles = largeTitle
+        navigationItem.hidesSearchBarWhenScrolling = !largeTitle
+        self.navigationController?.navigationBar.clipsToBounds = !largeTitle
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        controller?.fetchCounters(searchText: searchText)
     }
     
 }

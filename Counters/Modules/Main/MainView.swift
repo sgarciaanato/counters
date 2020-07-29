@@ -6,25 +6,23 @@
 //  Copyright © 2020 Samuel García. All rights reserved.
 //
 
-#warning("Order everything alphabetically")
-
 import UIKit
 
 class MainView: UIViewController {
     
-    @IBOutlet weak var noResultsLabel: UILabel!
     @IBOutlet weak var countersTableView: UITableView!
-    @IBOutlet weak var itemsCounterDescription: UILabel!
-    @IBOutlet weak var customErrorView: CustomErrorView!
     @IBOutlet weak var createItemButton: UIButton!
-    @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var customErrorView: CustomErrorView!
     @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var itemsCounterDescription: UILabel!
+    @IBOutlet weak var noResultsLabel: UILabel!
+    @IBOutlet weak var shareButton: UIButton!
     
-    var refreshControl = UIRefreshControl()
-    var search = UISearchController(searchResultsController: nil)
     var controller : MainController?
     var createItemView: CreateItemView? = nil
     private var customEditButton : UIBarButtonItem?
+    var refreshControl = UIRefreshControl()
+    var search = UISearchController(searchResultsController: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,33 +50,33 @@ class MainView: UIViewController {
         prefersLargeTitles(true)
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        countersTableView.reloadData()
-    }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         prefersLargeTitles(false)
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        countersTableView.reloadData()
     }
     
     @IBAction func unwindToMain(_ sender: UIStoryboardSegue) {
         self.countersTableView.reloadData()
     }
     
-    func updateList(_ counters : [Counter]) {
-        controller?.setCounters(counters)
-    }
-    
     @objc func refresh(_ sender: Any){
         controller?.fetchCounters()
     }
     
-    @IBAction func shareSelected(_ sender: Any) {
-        controller?.shareSelected()
+    func updateList(_ counters : [Counter]) {
+        controller?.setCounters(counters)
     }
     
     @IBAction func deleteSelected(_ sender: Any) {
         controller?.deleteSelected()
+    }
+    
+    @IBAction func shareSelected(_ sender: Any) {
+        controller?.shareSelected()
     }
     
 }
@@ -86,11 +84,6 @@ class MainView: UIViewController {
 // MARK: Editing Configuration
 
 extension MainView {
-    
-    @objc func edit(_ sender: Any){
-        configureEditingLayout()
-        countersTableView.reloadData()
-    }
     
     func configureEditingLayout() {
         guard let editing = controller?.editing else { return }
@@ -106,6 +99,11 @@ extension MainView {
         deleteButton.isHidden = editing
         shareButton.isHidden = editing
         createItemButton.isHidden = !editing
+    }
+    
+    @objc func edit(_ sender: Any){
+        configureEditingLayout()
+        countersTableView.reloadData()
     }
     
 }

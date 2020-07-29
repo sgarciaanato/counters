@@ -9,15 +9,18 @@
 import UIKit
 
 protocol ExamplesInteractorToController {
-    func unWindToCreateItem()
     func setDataSource(_ dataSource : UITableViewDataSource)
+    func unWindToCreateItem()
 }
 
 extension ExamplesController : ExamplesInteractorToController {
-    func unWindToCreateItem() {
-        view.unWindToCreateItem()
-    }
+    
     func setDataSource(_ dataSource : UITableViewDataSource) {
         view.setDataSource(dataSource)
     }
+    
+    func unWindToCreateItem() {
+        view.unWindToCreateItem()
+    }
+    
 }

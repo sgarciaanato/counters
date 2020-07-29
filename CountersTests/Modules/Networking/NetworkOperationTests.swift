@@ -12,6 +12,7 @@ import XCTest
 class NetworkOperationTests: XCTestCase {
     
     var counterId = ""
+    var countersAmmount = 0
     
     func tests_runEndpointsTests() {
         
@@ -29,7 +30,7 @@ class NetworkOperationTests: XCTestCase {
         NetworkOperation.shared.request(paths: [.api, .v1, .counters], httpBody: nil) { (result : Result<[Counter]?,Error>) in
             switch result {
                 case .success(let counters):
-                    XCTAssertEqual(counters!.count, 0, "Make sure you are running a fresh server")
+                    self.countersAmmount = counters!.count
                     self.createCounter {
                         completionBlock()
                     }
@@ -44,8 +45,8 @@ class NetworkOperationTests: XCTestCase {
         NetworkOperation.shared.request(paths: [.api, .v1, .counter], httpMethod: "POST", httpBody: [ "title" : "First Counter"]) { (result : Result<[Counter]?,Error>) in
             switch result {
                 case .success(let counters):
-                    XCTAssertEqual(counters!.count, 1)
-                    let counter = counters!.first
+                    XCTAssertEqual(counters!.count, self.countersAmmount + 1)
+                    let counter = counters!.last
                     self.counterId = counter!.id!
                     XCTAssertEqual(counter!.title!, "First Counter")
                     self.incrementCounter {
@@ -63,8 +64,8 @@ class NetworkOperationTests: XCTestCase {
         NetworkOperation.shared.request(paths: [.api, .v1, .counter, .inc], httpMethod: "POST",httpBody: [ "id" : counterId]) { (result : Result<[Counter]?,Error>) in
             switch result {
                 case .success(let counters):
-                    XCTAssertEqual(counters!.count, 1)
-                    let counter = counters!.first
+                    XCTAssertEqual(counters!.count, self.countersAmmount + 1)
+                    let counter = counters!.last
                     XCTAssertEqual(counter!.count, 1)
                     self.decrementCounter {
                         completionBlock()
@@ -81,8 +82,8 @@ class NetworkOperationTests: XCTestCase {
         NetworkOperation.shared.request(paths: [.api, .v1, .counter, .dec], httpMethod: "POST",httpBody: [ "id" : counterId]) { (result : Result<[Counter]?,Error>) in
             switch result {
                 case .success(let counters):
-                    XCTAssertEqual(counters!.count, 1)
-                    let counter = counters!.first
+                    XCTAssertEqual(counters!.count, self.countersAmmount + 1)
+                    let counter = counters!.last
                     XCTAssertEqual(counter!.count, 0)
                     self.deleteCounter {
                         completionBlock()
@@ -99,7 +100,7 @@ class NetworkOperationTests: XCTestCase {
         NetworkOperation.shared.request(paths: [.api, .v1, .counter], httpMethod: "DELETE",httpBody: [ "id" : counterId]) { (result : Result<[Counter]?,Error>) in
             switch result {
                 case .success(let counters):
-                    XCTAssertEqual(counters!.count, 0)
+                    XCTAssertEqual(counters!.count, self.countersAmmount)
                     completionBlock()
                 break
             default:

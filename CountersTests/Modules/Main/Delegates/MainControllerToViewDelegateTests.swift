@@ -25,7 +25,8 @@ class MainControllerToViewDelegateTests: XCTestCase {
         view.endAppearanceTransition()
         
         customView = CustomMainView()
-        view.controller = MainController(view: customView)
+        controller = MainController(view: customView)
+        view.controller = controller
         
         view.viewDidLoad()
         
@@ -38,63 +39,63 @@ class MainControllerToViewDelegateTests: XCTestCase {
         controller = nil
     }
     
-    func test_ConfigureEditingLayout_CallController() {
-        customView.configureEditingLayout()
+    func test_ConfigureEditingLayout_ControllerCallView() {
+        controller.configureEditingLayout()
         XCTAssertEqual(customView.calledFunctionIdentifier, "ConfigureEditingLayout")
     }
     
-    func test_GoToCreateItem_CallController() {
-        customView.goToCreateItem()
+    func test_GoToCreateItem_ControllerCallView() {
+        controller.goToCreateItem()
         XCTAssertEqual(customView.calledFunctionIdentifier, "GoToCreateItem")
     }
     
-    func test_HideLoading_CallController() {
-        customView.hideLoading()
+    func test_HideLoading_ControllerCallView() {
+        controller.hideLoading()
         XCTAssertEqual(customView.calledFunctionIdentifier, "HideLoading")
     }
     
-    func test_OpenShareViewController_CallController() {
-        customView.openShareViewController(objectsToShare: [])
+    func test_OpenShareViewController_ControllerCallView() {
+        controller.openShareViewController(objectsToShare: [])
         XCTAssertEqual(customView.calledFunctionIdentifier, "OpenShareViewController")
     }
     
-    func test_SetDataSource_CallController() {
-        customView.setDataSource(MainInteractor(controller: MainController(view: customView)))
+    func test_SetDataSource_ControllerCallView() {
+        controller.setDataSource(MainInteractor(controller: MainController(view: customView)))
         XCTAssertEqual(customView.calledFunctionIdentifier, "SetDataSource")
     }
     
-    func test_SetDescriptionCounterText_CallController() {
-        customView.setDescriptionCounterText("Text Test")
+    func test_SetDescriptionCounterText_ControllerCallView() {
+        controller.setDescriptionCounterText("Text Test")
         XCTAssertEqual(customView.calledFunctionIdentifier, "SetDescriptionCounterText Text Test")
     }
     
-    func test_ShowActionSheet_CallController() {
-        customView.showActionSheet(title: "Test Title", message: "Test Message", actions: ["Test Action" : {}])
+    func test_ShowActionSheet_ControllerCallView() {
+        controller.showActionSheet(title: "Test Title", message: "Test Message", actions: ["Test Action" : {}])
         XCTAssertEqual(customView.calledFunctionIdentifier, "ShowActionSheet Test Title Test Message Test Action")
     }
     
-    func test_ShowDialogError_CallController() {
-        customView.showDialogError(title: "Test Title", message: "Test Message", actions: ["Test Action" : {}])
+    func test_ShowDialogError_ControllerCallView() {
+        controller.showDialogError(title: "Test Title", message: "Test Message", actions: ["Test Action" : {}])
         XCTAssertEqual(customView.calledFunctionIdentifier, "ShowDialogError Test Title Test Message Test Action")
     }
     
-    func test_ShowError_CallController() {
-        customView.showError(error: ErrorModel(title: "Test Title", description: "Test Description", buttonTitle: "Test Button Title", action: {}))
+    func test_ShowError_ControllerCallView() {
+        controller.showError(error: ErrorModel(title: "Test Title", description: "Test Description", buttonTitle: "Test Button Title", action: {}))
         XCTAssertEqual(customView.calledFunctionIdentifier, "ShowError Test Title Test Description Test Button Title")
     }
     
-    func test_ShowLoading_CallController() {
-        customView.showLoading()
+    func test_ShowLoading_ControllerCallView() {
+        controller.showLoading()
         XCTAssertEqual(customView.calledFunctionIdentifier, "ShowLoading")
     }
     
-    func test_ShowNoResults_CallController() {
-        customView.showNoResults()
+    func test_ShowNoResults_ControllerCallView() {
+        controller.showNoResults()
         XCTAssertEqual(customView.calledFunctionIdentifier, "ShowNoResults")
     }
     
-    func test_ShowTableView_CallController() {
-        customView.showTableView()
+    func test_ShowTableView_ControllerCallView() {
+        controller.showTableView()
         XCTAssertEqual(customView.calledFunctionIdentifier, "ShowTableView")
     }
     

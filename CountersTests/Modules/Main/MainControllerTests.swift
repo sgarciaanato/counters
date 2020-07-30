@@ -37,22 +37,22 @@ class MainControllerTests: XCTestCase {
         customInteractor = nil
     }
     
-    func test_FetchCounters_CallInteractor() {
+    func test_FetchCounters_ControllerCallInteractor() {
         controller.fetchCounters()
         XCTAssertEqual(customInteractor.calledFunctionIdentifier, "FetchCounters")
     }
     
-    func test_FetchCountersWithText_CallInteractor() {
+    func test_FetchCountersWithText_ControllerCallInteractor() {
         controller.fetchCounters(searchText: "Test Text")
         XCTAssertEqual(customInteractor.calledFunctionIdentifier, "FetchCountersWithText Test Text")
     }
     
-    func test_ShareSelected_CallInteractor() {
+    func test_ShareSelected_ControllerCallInteractor() {
         controller.shareSelected()
         XCTAssertEqual(customInteractor.calledFunctionIdentifier, "ShareSelected")
     }
     
-    func test_DeleteSelected_CallInteractor() {
+    func test_DeleteSelected_ControllerCallInteractor() {
         controller.deleteSelected()
         XCTAssertEqual(customInteractor.calledFunctionIdentifier, "DeleteSelected")
     }

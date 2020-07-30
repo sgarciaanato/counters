@@ -25,7 +25,8 @@ class CreateItemControllerToViewDelefateTests: XCTestCase {
         view.endAppearanceTransition()
         
         customView = CustomCreateItemView()
-        view.controller = CreateItemController(view: customView)
+        controller = CreateItemController(view: customView)
+        view.controller = controller
         
         view.viewDidLoad()
         
@@ -38,23 +39,23 @@ class CreateItemControllerToViewDelefateTests: XCTestCase {
         controller = nil
     }
     
-    func test_HideTextFieldLoading_CallController() {
-        customView.hideTextFieldLoading()
+    func test_HideTextFieldLoading_ControllerCallView() {
+        controller.hideTextFieldLoading()
         XCTAssertEqual(customView.calledFunctionIdentifier, "HideTextFieldLoading")
     }
     
-    func test_ShowDialogError_CallController() {
-        customView.showDialogError(title: "Test Title", message: "Test Message", actions: ["Test Action" : {}])
+    func test_ShowDialogError_ControllerCallView() {
+        controller.showDialogError(title: "Test Title", message: "Test Message", actions: ["Test Action" : {}])
         XCTAssertEqual(customView.calledFunctionIdentifier, "ShowDialogError Test Title Test Message Test Action")
     }
     
-    func test_ShowTextFieldLoading_CallController() {
-        customView.showTextFieldLoading()
+    func test_ShowTextFieldLoading_ControllerCallView() {
+        controller.showTextFieldLoading()
         XCTAssertEqual(customView.calledFunctionIdentifier, "ShowTextFieldLoading")
     }
     
-    func test_UpdateCountersList_CallController() {
-        customView.updateCountersList()
+    func test_UpdateCountersList_ControllerCallView() {
+        controller.updateCountersList()
         XCTAssertEqual(customView.calledFunctionIdentifier, "UpdateCountersList")
     }
     

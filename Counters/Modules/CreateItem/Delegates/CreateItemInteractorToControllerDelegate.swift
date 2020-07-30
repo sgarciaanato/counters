@@ -30,8 +30,8 @@ extension CreateItemController : CreateItemInteractorToControllerDelegate {
     }
     
     func updateCountersList() {
-        view.updateCountersList()
         view.hideTextFieldLoading()
+        view.updateCountersList()
     }
 }
 

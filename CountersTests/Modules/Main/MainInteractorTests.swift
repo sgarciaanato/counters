@@ -13,7 +13,9 @@ class MainInteractorTests: XCTestCase {
     
     var view : MainView!
     var controller : MainController!
-    var interactor : MainInteractor!
+    var customInteractor : MainInteractor!
+    
+    var counters : [Counter]!
     
     override func setUp() {
         super.setUp()
@@ -25,8 +27,8 @@ class MainInteractorTests: XCTestCase {
         view.endAppearanceTransition()
         
         controller = MainController(view: view)
-        interactor = MainInteractor(controller: controller)
-        controller.interactor = interactor
+        customInteractor = MainInteractor(controller: controller)
+        controller.interactor = customInteractor
         
     }
     
@@ -34,19 +36,57 @@ class MainInteractorTests: XCTestCase {
         super.tearDown()
         view = nil
         controller = nil
-        interactor = nil
+        customInteractor = nil
     }
     
     func test_IsSelected() {
         let selectedCounter = Counter(id: "1", title: "title", count: 0)
         let notSelectedCounter = Counter(id: "2", title: "title", count: 0)
-        interactor.countersWithoutTreating = [selectedCounter,notSelectedCounter]
-        interactor.selectedCounters = [selectedCounter]
+        customInteractor.countersWithoutTreating = [selectedCounter,notSelectedCounter]
+        customInteractor.selectedCounters = [selectedCounter]
         
-        XCTAssertTrue(interactor.isSelected(selectedCounter))
-        XCTAssertFalse(interactor.isSelected(notSelectedCounter))
+        XCTAssertTrue(customInteractor.isSelected(selectedCounter))
+        XCTAssertFalse(customInteractor.isSelected(notSelectedCounter))
+    }
+    
+    func test_FetchCounters() {
+        customInteractor.fetchCounters()
+        expectAfter(3, identifier: "FetchCounters") {
+            self.counters = self.customInteractor.counters
+            self.fetchCountersWithString()
+        }
+    }
+    
+    func fetchCountersWithString() {
+        for char in "abcdefghijklmnñopqrstuvwxyz\".-,!·$%&/()=?¿*^¨ç´`+¡'0987654321ºª|@#¢∞¬÷“”≠´‚][{}–…„ " {
+            
+            let testingCounters = self.counters.filter{ ($0.title?.lowercased().contains(char) ?? false) }
+            customInteractor.fetchCounters(searchText: String(char))
+            
+            let searchedCounters = customInteractor.counters
+            
+            XCTAssertEqual(testingCounters.count, searchedCounters.count)
+            
+            for (index,counter) in searchedCounters.enumerated() {
+                XCTAssertEqual(counter.id, testingCounters[index].id)
+                XCTAssertEqual(counter.title, testingCounters[index].title)
+                XCTAssertEqual(counter.count, testingCounters[index].count)
+            }
+            
+            debugPrint(char)
+        }
+    }
+    
+    func expectAfter(_ time : Int, identifier: String, completionHandler: @escaping (()->())) {
+        let exp = self.expectation(description: identifier)
         
-        
+        let dispatchQueue = DispatchQueue(label: "MainInteractorTests+\(identifier)", qos: .background)
+        dispatchQueue.asyncAfter(deadline: .now() + TimeInterval(time)) {
+            completionHandler()
+            exp.fulfill()
+        }
+
+        waitForExpectations(timeout: TimeInterval(time + 1))
     }
     
 }

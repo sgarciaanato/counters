@@ -104,7 +104,7 @@ extension MainInteractor {
         setCounters(counters)
     }
     
-    func handlerErrorLoadingCounters(_ customFailureBlock : (()->())? = nil) {
+    @objc func handlerErrorLoadingCounters(_ customFailureBlock : (()->())? = nil) {
         if let counters : [Counter] = Cache.shared.getData() {
             setCounters(counters)
             customFailureBlock?()
@@ -119,7 +119,7 @@ extension MainInteractor {
 
 extension MainInteractor {
     
-    func showNoCountersError() {
+    @objc func showNoCountersError() {
         let errorModel = ErrorModel(title: "No counters yet", description: "\"When I started counting my blessings, my whole life turned aroud.\"\n-Willie Nelson", buttonTitle: "Create a counter") {
             self.controller.goToCreateItem()
         }

@@ -20,7 +20,7 @@ enum Path : String {
 class NetworkOperation {
     
     static let shared = NetworkOperation()
-    private var urlComponents = URLComponents(string: "http://29303e736327.ngrok.io")
+    private var urlComponents = URLComponents(string: "http://localhost:3000")
     private var dataTask : URLSessionTask?
     private let defaultSession = URLSession(configuration: .default)
     

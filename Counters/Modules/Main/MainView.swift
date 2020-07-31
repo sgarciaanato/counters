@@ -30,6 +30,9 @@ class MainView: UIViewController {
         customEditButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(self.edit(_:)))
         navigationItem.leftBarButtonItem = customEditButton
         
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        countersTableView.addSubview(refreshControl)
+        
         countersTableView.register(UINib(nibName: "CounterTableViewCell", bundle: nil), forCellReuseIdentifier: "CounterTableViewCell")
         
         controller = MainController(view : self)
@@ -41,18 +44,6 @@ class MainView: UIViewController {
         
         configureSearchBar()
         
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
-        countersTableView.addSubview(refreshControl)
-        prefersLargeTitles(true)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        prefersLargeTitles(false)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

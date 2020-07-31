@@ -19,12 +19,8 @@ extension MainView : UISearchBarDelegate {
         search.searchBar.placeholder = "Search"
         self.navigationItem.searchController = search
         self.navigationController?.navigationBar.addBottomBorderWithColor(color: UIColor.hexStringToUIColor(hex: "#000000").withAlphaComponent(0.15), width: 1)
-    }
-    
-    func prefersLargeTitles(_ largeTitle : Bool){
-        navigationController?.navigationBar.prefersLargeTitles = largeTitle
-        navigationItem.hidesSearchBarWhenScrolling = !largeTitle
-        self.navigationController?.navigationBar.clipsToBounds = !largeTitle
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.hidesSearchBarWhenScrolling = true
     }
     
     @objc func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

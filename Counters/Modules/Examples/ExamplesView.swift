@@ -22,6 +22,9 @@ class ExamplesView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         categoriesTableView.register(UINib(nibName: "CategoryTableViewCell", bundle: nil), forCellReuseIdentifier: "CategoryTableViewCell")
+        navigationItem.title = "Examples"
+        navigationController?.navigationItem.backBarButtonItem = UIBarButtonItem(
+        title: "Create", style: .plain, target: nil, action: nil)
     }
     
     // MARK: Segue

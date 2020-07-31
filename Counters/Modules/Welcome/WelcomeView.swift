@@ -24,6 +24,13 @@ class WelcomeView: UIViewController {
         
         fillWelcomeArray()
         
+        let titleAttributedString = NSMutableAttributedString(string: "Welcome to\nCounters", attributes: [:])
+        if let color = UIColor(named: "AppTintColor") {
+            titleAttributedString.addAttribute(.foregroundColor, value: color, range: NSRange(location:11,length:8))
+        }
+        
+        titleLabel.attributedText = titleAttributedString
+        
         tableView.reloadData()
     }
     

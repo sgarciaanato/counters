@@ -23,6 +23,12 @@ class CreateItemView: UIViewController {
         self.examplesLabel.isUserInteractionEnabled = true
         self.examplesLabel.addGestureRecognizer(examplesLabelTap)
         
+        let examplesAttributedString = NSMutableAttributedString(string: "Give it a name. Creative block? See examples.", attributes: [:])
+        
+        examplesAttributedString.addAttribute(.underlineStyle, value:NSUnderlineStyle.single.rawValue, range: NSRange(location:36,length:8))
+        
+        examplesLabel.attributedText = examplesAttributedString
+        
     }
     
     override func viewDidLoad() {

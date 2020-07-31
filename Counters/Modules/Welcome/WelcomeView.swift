@@ -12,6 +12,7 @@ class WelcomeView: UIViewController {
     
     var welcomeArray : [WelcomeModel] = []
 
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -33,7 +34,7 @@ class WelcomeView: UIViewController {
     }
     
     @IBAction func continueToMain(_ sender: Any) {
-        Cache.shared.saveFirstLoad()
+//        Cache.shared.saveFirstLoad()
         dismiss(animated: true)
     }
     

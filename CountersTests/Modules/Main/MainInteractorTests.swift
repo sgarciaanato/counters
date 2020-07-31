@@ -55,10 +55,11 @@ class MainInteractorTests: XCTestCase {
     }
     
     func fetchCountersWithString() {
-        for char in "abcdefghijklmnñopqrstuvwxyz\".-,!·$%&/()=?¿*^¨Çç´`+¡'0987654321ºª|@#¢∞¬÷“”≠´‚][{}–…„ " {
+        for char in "abcdefghijklmnñopqrstuvwxyz\".-,!·$%&/()=?¿*^¨Çç´`+¡'0987654321ºª|@#¢∞¬÷“”≠´‚][{}–…„" {
             
-            let testingCounters = customInteractor.countersWithoutTreating.filter{ ($0.title?.lowercased().contains(char.lowercased()) ?? false) }
             customInteractor.fetchCounters(searchText: String(char))
+            var testingCounters = customInteractor.countersWithoutTreating.filter{ ($0.title?.lowercased().contains(char.lowercased()) ?? true) }
+            testingCounters = testingCounters.reversed()
             
             let searchedCounters = customInteractor.counters
             

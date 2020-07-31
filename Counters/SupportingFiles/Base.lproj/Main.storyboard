@@ -15,7 +15,7 @@
                     <navigationBar key="navigationBar" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Pmd-2v-anx">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" name="TabBarColor"/>
+                        <color key="backgroundColor" name="tabBarColor"/>
                     </navigationBar>
                     <connections>
                         <segue destination="US1-V7-Gbv" kind="relationship" relationship="rootViewController" id="8yo-Ts-DNB"/>
@@ -35,7 +35,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k6C-x2-Ey0">
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
-                                <color key="backgroundColor" name="BackgroundColor"/>
+                                <color key="backgroundColor" name="backgroundColor"/>
                             </view>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Cups of coffee" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ldc-wY-hf2">
                                 <rect key="frame" x="12" y="113" width="390" height="55"/>
@@ -61,7 +61,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" name="TabBarColor"/>
+                        <color key="backgroundColor" name="tabBarColor"/>
                         <constraints>
                             <constraint firstItem="k6C-x2-Ey0" firstAttribute="top" secondItem="VUw-jc-0yf" secondAttribute="top" id="0vX-XH-1GG"/>
                             <constraint firstAttribute="bottom" secondItem="k6C-x2-Ey0" secondAttribute="bottom" id="6DT-af-dQ9"/>
@@ -128,7 +128,7 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" name="BackgroundColor"/>
+                        <color key="backgroundColor" name="backgroundColor"/>
                         <constraints>
                             <constraint firstItem="sPU-J2-N0q" firstAttribute="top" secondItem="Z4m-R3-Ix9" secondAttribute="bottom" constant="16" id="0Fe-vj-aA0"/>
                             <constraint firstItem="shx-de-FGZ" firstAttribute="trailing" secondItem="Z4m-R3-Ix9" secondAttribute="trailing" constant="8" id="6fb-3r-rio"/>
@@ -178,7 +178,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yiU-he-t1X">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
-                                <color key="backgroundColor" name="BackgroundColor"/>
+                                <color key="backgroundColor" name="backgroundColor"/>
                             </view>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No results" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2qN-UE-PAT">
                                 <rect key="frame" x="163.5" y="324" width="87.5" height="24"/>
@@ -188,7 +188,7 @@
                             </label>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JDB-Jq-Pwx" customClass="CustomErrorView" customModule="Counters" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="88" width="414" height="726.5"/>
-                                <color key="backgroundColor" name="BackgroundColor"/>
+                                <color key="backgroundColor" name="backgroundColor"/>
                             </view>
                             <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cDU-pb-SFj">
                                 <rect key="frame" x="12" y="88" width="390" height="726.5"/>
@@ -256,7 +256,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" name="TabBarColor"/>
+                        <color key="backgroundColor" name="tabBarColor"/>
                         <constraints>
                             <constraint firstItem="yiU-he-t1X" firstAttribute="leading" secondItem="gEr-DM-rDJ" secondAttribute="leading" id="3q5-Rz-47f"/>
                             <constraint firstItem="cDU-pb-SFj" firstAttribute="leading" secondItem="gEr-DM-rDJ" secondAttribute="leading" constant="12" id="46v-sg-TjG"/>
@@ -352,7 +352,7 @@ Counters</string>
                             <constraint firstItem="W7X-zS-ycg" firstAttribute="top" secondItem="xLS-X7-uxz" secondAttribute="top" constant="74" id="g3K-wD-ouC"/>
                             <constraint firstItem="Tvs-xI-ehi" firstAttribute="trailing" secondItem="DUB-VR-I9t" secondAttribute="trailing" constant="39" id="iGW-7I-oAH"/>
                             <constraint firstItem="CxM-Ba-pMy" firstAttribute="top" secondItem="DUB-VR-I9t" secondAttribute="bottom" constant="33" id="jF7-cY-f1U"/>
-                            <constraint firstAttribute="bottom" secondItem="CxM-Ba-pMy" secondAttribute="bottom" constant="53" id="k1b-hV-484"/>
+                            <constraint firstItem="Tvs-xI-ehi" firstAttribute="bottom" secondItem="CxM-Ba-pMy" secondAttribute="bottom" constant="19" id="k1b-hV-484"/>
                             <constraint firstItem="CxM-Ba-pMy" firstAttribute="leading" secondItem="Tvs-xI-ehi" secondAttribute="leading" constant="40" id="mQ6-ew-RS3"/>
                             <constraint firstItem="DYj-v1-hcW" firstAttribute="leading" secondItem="Tvs-xI-ehi" secondAttribute="leading" constant="39" id="wbK-yq-5Dl"/>
                         </constraints>
@@ -374,7 +374,7 @@ Counters</string>
                     <navigationBar key="navigationBar" multipleTouchEnabled="YES" contentMode="scaleToFill" id="DjV-YW-jjY">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" name="TabBarColor"/>
+                        <color key="backgroundColor" name="tabBarColor"/>
                     </navigationBar>
                     <connections>
                         <segue destination="JEX-9P-axG" kind="relationship" relationship="rootViewController" id="GKi-kA-LjT"/>
@@ -397,14 +397,8 @@ Counters</string>
         <namedColor name="AppTintColor">
             <color red="1" green="0.58399999141693115" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="BackgroundColor">
-            <color red="0.89800000190734863" green="0.89800000190734863" blue="0.89800000190734863" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="GrayTextColor">
             <color red="0.53299999237060547" green="0.54500001668930054" blue="0.56499999761581421" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="TabBarColor">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="TextFieldBackgroundColor">
             <color red="0.99199998378753662" green="0.99199998378753662" blue="0.99199998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -413,6 +407,12 @@ Counters</string>
             <color red="0.77999997138977051" green="0.77999997138977051" blue="0.80000001192092896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="WhiteBackgroundColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="backgroundColor">
+            <color red="0.89800000190734863" green="0.89800000190734863" blue="0.89800000190734863" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="tabBarColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>

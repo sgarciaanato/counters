@@ -59,7 +59,6 @@
 		8EA8FE9C24CBA4B20009A23B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EA8FE9A24CBA4B20009A23B /* Main.storyboard */; };
 		8EA8FE9E24CBA4B90009A23B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EA8FE9D24CBA4B90009A23B /* Assets.xcassets */; };
 		8EA8FEA124CBA4B90009A23B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EA8FE9F24CBA4B90009A23B /* LaunchScreen.storyboard */; };
-		8EA8FEAC24CBA4B90009A23B /* CountersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA8FEAB24CBA4B90009A23B /* CountersTests.swift */; };
 		8EA8FEB924CBC3050009A23B /* NetworkingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA8FEB824CBC3050009A23B /* NetworkingOperation.swift */; };
 /* End PBXBuildFile section */
 
@@ -129,7 +128,6 @@
 		8EA8FEA024CBA4B90009A23B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8EA8FEA224CBA4B90009A23B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8EA8FEA724CBA4B90009A23B /* CountersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CountersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8EA8FEAB24CBA4B90009A23B /* CountersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountersTests.swift; sourceTree = "<group>"; };
 		8EA8FEAD24CBA4B90009A23B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8EA8FEB824CBC3050009A23B /* NetworkingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingOperation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -414,7 +412,6 @@
 			isa = PBXGroup;
 			children = (
 				8E305E5624D1142E00CFEA57 /* Modules */,
-				8EA8FEAB24CBA4B90009A23B /* CountersTests.swift */,
 				8EA8FEAD24CBA4B90009A23B /* Info.plist */,
 			);
 			path = CountersTests;
@@ -612,7 +609,6 @@
 				8E305E7124D1DD9800CFEA57 /* MainInteractorTests.swift in Sources */,
 				8E305E6A24D1D0EA00CFEA57 /* CreateItemControllerTests.swift in Sources */,
 				8E305E6324D197DC00CFEA57 /* MainControllerTests.swift in Sources */,
-				8EA8FEAC24CBA4B90009A23B /* CountersTests.swift in Sources */,
 				8E305E6124D192BB00CFEA57 /* MainViewTests.swift in Sources */,
 				8E305E5924D1149000CFEA57 /* CreateItemViewTests.swift in Sources */,
 			);

@@ -15,20 +15,14 @@ class CreateItemView: UIViewController {
     
     var controller : CreateItemController?
     
-    var saveBtn : UIBarButtonItem?
-    
+    @IBOutlet weak var saveBtn: UIBarButtonItem!
 
     func configureView() {
-        let backBtn = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(backAction(_:)))
-        navigationItem.leftBarButtonItem = backBtn
-        
-        saveBtn = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveAction(_:)))
-        
-        navigationItem.rightBarButtonItem = saveBtn
         
         let examplesLabelTap = UITapGestureRecognizer(target: self, action: #selector(self.exampleLabelTapped(_:)))
         self.examplesLabel.isUserInteractionEnabled = true
         self.examplesLabel.addGestureRecognizer(examplesLabelTap)
+        
     }
     
     override func viewDidLoad() {
@@ -36,12 +30,10 @@ class CreateItemView: UIViewController {
         controller = CreateItemController(view : self)
         configureView()
     }
-    
-    @objc func backAction(_ sender: Any){
+    @IBAction func backAction(_ sender: Any) {
         navigationController?.navigationController?.popViewController(animated: true)
     }
-    
-    @objc func saveAction(_ sender: Any){
+    @IBAction func saveAction(_ sender: Any) {
         controller?.createItem(self.titleTextfield.text)
     }
     
@@ -49,7 +41,13 @@ class CreateItemView: UIViewController {
         self.navigationController?.performSegue(withIdentifier: "showExamples", sender: nil)
     }
     
-    @IBAction func unwindToCreateItem(_ sender: UIStoryboardSegue) { }
+    @IBAction func unwindToCreateItem(_ sender: UIStoryboardSegue) {
+        self.saveBtn?.isEnabled = self.titleTextfield.text != ""
+    }
+    
+    @IBAction func editingChange(_ sender: Any) {
+        self.saveBtn?.isEnabled = self.titleTextfield.text != ""
+    }
     
     func setSelectedTitle(_ text : String) {
         self.titleTextfield.text = text

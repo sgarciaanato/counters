@@ -72,7 +72,7 @@ extension MainView : MainControllerToViewDelegate {
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 
         DispatchQueue.main.async {
-            alert.view.tintColor = UIColor(named: "tintColor")
+            alert.view.tintColor = UIColor(named: "AppTintColor")
             self.present(alert, animated: true)
         }
     }
@@ -90,7 +90,7 @@ extension MainView : MainControllerToViewDelegate {
         }
         
         DispatchQueue.main.async {
-            alert.view.tintColor = UIColor(named: "tintColor")
+            alert.view.tintColor = UIColor(named: "AppTintColor")
             self.present(alert, animated: true)
         }
     }

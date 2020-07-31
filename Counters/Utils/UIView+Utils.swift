@@ -94,13 +94,6 @@ extension UIView {
         }
     }
     
-    func addShadow() {
-        layer.masksToBounds = false
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOpacity = 0.15 // your opacity
-        layer.shadowOffset = CGSize(width: 0, height: 1) // your offset
-    }
-    
     func loadNib(className : String) {
         let bundle = Bundle.init(for: type(of: self))
         let nib = UINib(nibName: className, bundle: bundle)
@@ -108,5 +101,49 @@ extension UIView {
         view.frame = bounds
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         addSubview(view)
+    }
+    
+    func addTopBorderWithColor(color: UIColor, width: CGFloat) {
+        let view = UIView()
+        view.backgroundColor = color
+        view.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(view)
+        view.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        view.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        view.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        view.heightAnchor.constraint(equalToConstant: width).isActive = true
+    }
+
+    func addRightBorderWithColor(color: UIColor, width: CGFloat) {
+        let view = UIView()
+        view.backgroundColor = color
+        view.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(view)
+        view.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        view.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        view.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        view.widthAnchor.constraint(equalToConstant: width).isActive = true
+    }
+
+    func addBottomBorderWithColor(color: UIColor, width: CGFloat) {
+        let view = UIView()
+        view.backgroundColor = color
+        view.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(view)
+        view.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        view.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        view.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        view.heightAnchor.constraint(equalToConstant: width).isActive = true
+    }
+
+    func addLeftBorderWithColor(color: UIColor, width: CGFloat) {
+        let view = UIView()
+        view.backgroundColor = color
+        view.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(view)
+        view.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        view.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        view.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        view.widthAnchor.constraint(equalToConstant: width).isActive = true
     }
 }

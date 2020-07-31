@@ -39,14 +39,14 @@ class MainView: UIViewController {
             createItemView = (controllers[controllers.count-1] as! UINavigationController).topViewController as? CreateItemView
         }
         
+        configureSearchBar()
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         countersTableView.addSubview(refreshControl)
-        
-        configureSearchBar()
         prefersLargeTitles(true)
     }
     

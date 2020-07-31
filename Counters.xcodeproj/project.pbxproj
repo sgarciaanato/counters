@@ -18,7 +18,6 @@
 		8E4163EE24CCC4E60093B20E /* CounterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4163EC24CCC4E60093B20E /* CounterTableViewCell.swift */; };
 		8E4163EF24CCC4E60093B20E /* CounterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E4163ED24CCC4E60093B20E /* CounterTableViewCell.xib */; };
 		8E4163F224CD035F0093B20E /* UIView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4163F124CD035F0093B20E /* UIView+Utils.swift */; };
-		8E4163F624CD25730093B20E /* UIViewController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4163F524CD25730093B20E /* UIViewController+Utils.swift */; };
 		8E4163F924CD335E0093B20E /* ExamplesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4163F824CD335E0093B20E /* ExamplesView.swift */; };
 		8E4163FD24CD36E60093B20E /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4163FB24CD36E60093B20E /* CategoryTableViewCell.swift */; };
 		8E4163FE24CD36E60093B20E /* CategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E4163FC24CD36E60093B20E /* CategoryTableViewCell.xib */; };
@@ -86,7 +85,6 @@
 		8E4163EC24CCC4E60093B20E /* CounterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterTableViewCell.swift; sourceTree = "<group>"; };
 		8E4163ED24CCC4E60093B20E /* CounterTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CounterTableViewCell.xib; sourceTree = "<group>"; };
 		8E4163F124CD035F0093B20E /* UIView+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Utils.swift"; sourceTree = "<group>"; };
-		8E4163F524CD25730093B20E /* UIViewController+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utils.swift"; sourceTree = "<group>"; };
 		8E4163F824CD335E0093B20E /* ExamplesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamplesView.swift; sourceTree = "<group>"; };
 		8E4163FB24CD36E60093B20E /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		8E4163FC24CD36E60093B20E /* CategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTableViewCell.xib; sourceTree = "<group>"; };
@@ -247,7 +245,6 @@
 			children = (
 				8E4163F124CD035F0093B20E /* UIView+Utils.swift */,
 				8EA12E3124CEBE31000D7979 /* UITableView+Utils.swift */,
-				8E4163F524CD25730093B20E /* UIViewController+Utils.swift */,
 				8EA12E3324CECE55000D7979 /* UITextField+Utils.swift */,
 				8EA12E4024CF9496000D7979 /* UIColor+Utils.swift */,
 			);
@@ -568,7 +565,6 @@
 				8E41640624CD38A40093B20E /* ExamplesInteractor.swift in Sources */,
 				8EA12E5724D0198B000D7979 /* ExamplesInteractorToController.swift in Sources */,
 				8EA12E3E24CF895A000D7979 /* WelcomeTableViewCell.swift in Sources */,
-				8E4163F624CD25730093B20E /* UIViewController+Utils.swift in Sources */,
 				8EA12E2124CE0C49000D7979 /* CustomErrorView.swift in Sources */,
 				8EA12E2A24CE32D9000D7979 /* CreateItemController.swift in Sources */,
 				8EA8FE9324CBA4B20009A23B /* AppDelegate.swift in Sources */,

@@ -37,9 +37,9 @@ class CounterTableViewCell: UITableViewCell {
     
     func configure(_ counter: Counter?, editing : Bool = false, selected : Bool?){
         self.counter = counter
-        hiddenEditRadioButtonConstraint.isActive = !editing
+        hiddenEditRadioButtonConstraint.priority = editing ? UILayoutPriority(rawValue: 250) : UILayoutPriority(rawValue: 750)
         selectButton.isEnabled = editing
-        selectionImageView.image = selected ?? false ? UIImage(named: "selected-radio-button") : UIImage(named: "unselected-radio-button")
+        selectionImageView.image = selected ?? false ? UIImage(named: "SelectedRadioButton") : UIImage(named: "UnselectedRadioButton")
     }
     
     @IBAction func incButton(_ sender: Any) {
@@ -56,10 +56,10 @@ class CounterTableViewCell: UITableViewCell {
         isSelected = !isSelected
         guard let counter = counter else { return }
         if isSelected {
-            selectionImageView.image = UIImage(named: "selected-radio-button")
+            selectionImageView.image = UIImage(named: "SelectedRadioButton")
             delegate?.select(counter)
         }else{
-            selectionImageView.image = UIImage(named: "unselected-radio-button")
+            selectionImageView.image = UIImage(named: "UnselectedRadioButton")
             delegate?.deselect(counter)
         }
     }

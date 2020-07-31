@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -53,6 +54,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="YGD-zC-tUE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="4MF-Aw-V6G"/>
                     <constraint firstAttribute="bottom" secondItem="11s-xN-yoH" secondAttribute="bottom" constant="12" id="85g-ZZ-w7w"/>
@@ -65,6 +67,7 @@
                     <constraint firstAttribute="trailingMargin" secondItem="11s-xN-yoH" secondAttribute="trailing" constant="15" id="z7G-Ku-okT"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" name="WhiteBackgroundColor"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="descriptionLabel" destination="11s-xN-yoH" id="0Rv-Lv-fra"/>
@@ -75,4 +78,9 @@
             <point key="canvasLocation" x="137.68115942028987" y="134.26339285714286"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <namedColor name="WhiteBackgroundColor">
+            <color red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

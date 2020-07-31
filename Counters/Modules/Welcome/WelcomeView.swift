@@ -27,9 +27,9 @@ class WelcomeView: UIViewController {
     }
     
     func fillWelcomeArray() {
-        welcomeArray.append(WelcomeModel(title: "Add almost anything", description: "Capture cups of lattes, frapuccinos, or anything else that can be counted.", iconName: "first-welcome-icon", backgroundColor: UIColor.hexStringToUIColor(hex: "#FF3B30")))
-        welcomeArray.append(WelcomeModel(title: "Count to self, or with anyone", description: "Others can view or make changes. There’s no authentication API.", iconName: "second-welcome-icon", backgroundColor: UIColor.hexStringToUIColor(hex: "#FFCC00")))
-        welcomeArray.append(WelcomeModel(title: "Count your thoughts", description: "Possibilities are literally endless.", iconName: "third-welcome-icon", backgroundColor: UIColor.hexStringToUIColor(hex: "#4CD964")))
+        welcomeArray.append(WelcomeModel(title: "Add almost anything", description: "Capture cups of lattes, frapuccinos, or anything else that can be counted.", iconName: "FirstWelcomeIcon", backgroundColor: UIColor.hexStringToUIColor(hex: "#FF3B30")))
+        welcomeArray.append(WelcomeModel(title: "Count to self, or with anyone", description: "Others can view or make changes. There’s no authentication API.", iconName: "SecondWelcomeIcon", backgroundColor: UIColor.hexStringToUIColor(hex: "#FFCC00")))
+        welcomeArray.append(WelcomeModel(title: "Count your thoughts", description: "Possibilities are literally endless.", iconName: "ThirdWelcomeIcon", backgroundColor: UIColor.hexStringToUIColor(hex: "#4CD964")))
     }
     
     @IBAction func continueToMain(_ sender: Any) {

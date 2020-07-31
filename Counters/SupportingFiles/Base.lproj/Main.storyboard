@@ -15,8 +15,7 @@
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Pmd-2v-anx">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="0.94999999999999996" colorSpace="calibratedRGB"/>
-                        <color key="tintColor" name="tintColor"/>
+                        <color key="backgroundColor" name="TabBarColor"/>
                     </navigationBar>
                     <connections>
                         <segue destination="US1-V7-Gbv" kind="relationship" relationship="rootViewController" id="8yo-Ts-DNB"/>
@@ -41,6 +40,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="editingChange:" destination="JEX-9P-axG" eventType="editingChanged" id="cN0-ew-ccu"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PgQ-KZ-mZ6">
                                 <rect key="frame" x="24" y="181" width="366" height="20.5"/>
@@ -71,8 +73,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="tintColor" name="tintColor"/>
+                        <color key="backgroundColor" name="BackgroundColor"/>
                         <constraints>
                             <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="PgQ-KZ-mZ6" secondAttribute="trailing" constant="24" id="75I-cj-jhX"/>
                             <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="Ldc-wY-hf2" secondAttribute="trailing" constant="12" id="RbG-2c-E6r"/>
@@ -84,9 +85,21 @@
                         <viewLayoutGuide key="safeArea" id="VUw-jc-0yf"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Create a counter" id="mOI-FS-AaM"/>
+                    <navigationItem key="navigationItem" title="Create a counter" id="mOI-FS-AaM">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="WWt-D7-NEq">
+                            <connections>
+                                <action selector="backAction:" destination="JEX-9P-axG" id="b7V-P1-FFk"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Save" id="O5j-dA-FSZ">
+                            <connections>
+                                <action selector="saveAction:" destination="JEX-9P-axG" id="9nG-m2-gGE"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="examplesLabel" destination="PgQ-KZ-mZ6" id="BIM-gs-KEe"/>
+                        <outlet property="saveBtn" destination="O5j-dA-FSZ" id="NVv-aW-yVT"/>
                         <outlet property="titleTextfield" destination="Ldc-wY-hf2" id="WbL-Bj-ZbW"/>
                         <segue destination="YXN-DY-c7B" kind="unwind" identifier="unwindToMain" unwindAction="unwindToMain:" id="cQ0-Yk-hbq"/>
                     </connections>
@@ -206,7 +219,6 @@
                                         <subviews>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Y0-Ol-FRc">
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="27.5"/>
-                                                <color key="tintColor" name="tintColor"/>
                                                 <state key="normal" image="square.and.arrow.up" catalog="system"/>
                                                 <connections>
                                                     <action selector="shareSelected:" destination="US1-V7-Gbv" eventType="touchUpInside" id="yrW-af-GeQ"/>
@@ -214,7 +226,6 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vfZ-89-ONi">
                                                 <rect key="frame" x="0.0" y="0.0" width="25" height="27.5"/>
-                                                <color key="tintColor" name="tintColor"/>
                                                 <state key="normal" image="plus" catalog="system"/>
                                                 <connections>
                                                     <segue destination="vC3-pB-5Vb" kind="showDetail" identifier="createItemSegue" id="BW1-cT-bgv"/>
@@ -224,14 +235,13 @@
                                     </stackView>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X6X-Db-8pn">
                                         <rect key="frame" x="14" y="10" width="19.5" height="27.5"/>
-                                        <color key="tintColor" name="tintColor"/>
                                         <state key="normal" image="trash" catalog="system"/>
                                         <connections>
                                             <action selector="deleteSelected:" destination="US1-V7-Gbv" eventType="touchUpInside" id="sYG-Rx-E98"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" name="WhiteBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="YFk-8a-nu9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="X6X-Db-8pn" secondAttribute="trailing" constant="8" id="0pW-nU-J14"/>
                                     <constraint firstItem="p2N-RH-pN4" firstAttribute="top" secondItem="mjE-hO-aB9" secondAttribute="top" id="4fi-SI-jaq"/>
@@ -325,7 +335,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CxM-Ba-pMy">
                                 <rect key="frame" x="40" y="786" width="334" height="57"/>
-                                <color key="backgroundColor" name="tintColor"/>
+                                <color key="backgroundColor" name="AppTintColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="57" id="3DI-zn-zwl"/>
                                 </constraints>
@@ -343,11 +353,11 @@
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DUB-VR-I9t">
                                 <rect key="frame" x="39" y="244" width="336" height="509"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="WhiteBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Tvs-xI-ehi" firstAttribute="trailing" secondItem="CxM-Ba-pMy" secondAttribute="trailing" constant="40" id="0Oj-hQ-fbo"/>
                             <constraint firstItem="DUB-VR-I9t" firstAttribute="leading" secondItem="Tvs-xI-ehi" secondAttribute="leading" constant="39" id="11A-1f-hoi"/>
@@ -380,7 +390,7 @@
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="DjV-YW-jjY">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" name="tintColor"/>
+                        <color key="backgroundColor" name="TabBarColor"/>
                     </navigationBar>
                     <connections>
                         <segue destination="JEX-9P-axG" kind="relationship" relationship="rootViewController" id="GKi-kA-LjT"/>
@@ -395,12 +405,22 @@
     <inferredMetricsTieBreakers>
         <segue reference="BW1-cT-bgv"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
     <resources>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <image name="trash" catalog="system" width="121" height="128"/>
-        <namedColor name="tintColor">
+        <namedColor name="AppTintColor">
             <color red="1" green="0.58399999141693115" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="BackgroundColor">
+            <color red="0.89800000190734863" green="0.89800000190734863" blue="0.89800000190734863" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TabBarColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="WhiteBackgroundColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

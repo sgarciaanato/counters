@@ -15,8 +15,6 @@ class MainInteractorTests: XCTestCase {
     var controller : MainController!
     var customInteractor : MainInteractor!
     
-    var counters : [Counter]!
-    
     override func setUp() {
         super.setUp()
         
@@ -52,15 +50,14 @@ class MainInteractorTests: XCTestCase {
     func test_FetchCounters() {
         customInteractor.fetchCounters()
         expectAfter(3, identifier: "FetchCounters") {
-            self.counters = self.customInteractor.counters
             self.fetchCountersWithString()
         }
     }
     
     func fetchCountersWithString() {
-        for char in "abcdefghijklmnñopqrstuvwxyz\".-,!·$%&/()=?¿*^¨ç´`+¡'0987654321ºª|@#¢∞¬÷“”≠´‚][{}–…„ " {
+        for char in "abcdefghijklmnñopqrstuvwxyz\".-,!·$%&/()=?¿*^¨Çç´`+¡'0987654321ºª|@#¢∞¬÷“”≠´‚][{}–…„ " {
             
-            let testingCounters = self.counters.filter{ ($0.title?.lowercased().contains(char) ?? false) }
+            let testingCounters = customInteractor.countersWithoutTreating.filter{ ($0.title?.lowercased().contains(char.lowercased()) ?? false) }
             customInteractor.fetchCounters(searchText: String(char))
             
             let searchedCounters = customInteractor.counters

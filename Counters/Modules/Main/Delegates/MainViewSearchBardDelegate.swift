@@ -18,7 +18,7 @@ extension MainView : UISearchBarDelegate {
         self.definesPresentationContext = true
         search.searchBar.placeholder = "Search"
         self.navigationItem.searchController = search
-        self.navigationController?.navigationBar.addShadow()
+        self.navigationController?.navigationBar.addBottomBorderWithColor(color: UIColor.hexStringToUIColor(hex: "#000000").withAlphaComponent(0.15), width: 1)
     }
     
     func prefersLargeTitles(_ largeTitle : Bool){

@@ -41,7 +41,7 @@ class WelcomeView: UIViewController {
     }
     
     @IBAction func continueToMain(_ sender: Any) {
-//        Cache.shared.saveFirstLoad()
+        Cache.shared.saveFirstLoad()
         dismiss(animated: true)
     }
     

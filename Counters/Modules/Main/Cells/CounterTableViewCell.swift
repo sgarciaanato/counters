@@ -45,7 +45,7 @@ class CounterTableViewCell: UITableViewCell {
     
     func animateEditing(_ editing: Bool?) {
         guard let editing = editing else { return }
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 0.2) {
             self.hiddenEditRadioButtonConstraint.priority = editing ? UILayoutPriority(rawValue: 250) : UILayoutPriority(rawValue: 750)
             self.layoutIfNeeded()
         }

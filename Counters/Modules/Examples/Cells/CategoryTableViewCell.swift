@@ -58,7 +58,7 @@ extension CategoryTableViewCell : UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExampleCollectionViewCell", for: indexPath) as? ExampleCollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExampleCollectionViewCell", for: indexPath) as? ExampleCollectionViewCell, indexPath.row < examplesCategory?.examples.count ?? 0 {
             cell.configure(examplesCategory?.examples[indexPath.row])
             return cell
         }

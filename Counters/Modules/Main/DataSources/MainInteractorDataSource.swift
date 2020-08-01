@@ -15,7 +15,7 @@ extension MainInteractor : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "CounterTableViewCell", for: indexPath) as? CounterTableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "CounterTableViewCell", for: indexPath) as? CounterTableViewCell, indexPath.row < counters.count {
             let counter = counters[indexPath.row]
             cell.configure(counter, editing: editing, selected: isSelected(counter))
             cell.delegate = self
@@ -25,7 +25,7 @@ extension MainInteractor : UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete  {
+        if editingStyle == .delete, indexPath.row < counters.count  {
             deleteCounter(counters[indexPath.row])
         }
     }

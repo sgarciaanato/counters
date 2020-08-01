@@ -53,7 +53,7 @@ extension WelcomeView : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "WelcomeTableViewCell", for: indexPath) as? WelcomeTableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "WelcomeTableViewCell", for: indexPath) as? WelcomeTableViewCell, indexPath.row < welcomeArray.count {
             cell.configure(welcomeArray[indexPath.row])
             return cell
         }

@@ -15,7 +15,7 @@ extension ExamplesInteractor : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryTableViewCell", for: indexPath) as? CategoryTableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryTableViewCell", for: indexPath) as? CategoryTableViewCell, indexPath.row < examplesCategories.count {
             cell.configure(examplesCategories[indexPath.row])
             cell.delegate = self
             return cell

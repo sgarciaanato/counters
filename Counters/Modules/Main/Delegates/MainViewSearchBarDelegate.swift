@@ -1,5 +1,5 @@
 //
-//  MainViewSearchBardDelegate.swift
+//  MainViewSearchBarDelegate.swift
 //  Counters
 //
 //  Created by Samuel García on 28-07-20.
@@ -13,7 +13,7 @@ extension MainView : UISearchBarDelegate {
     func configureSearchBar() {
         search.searchBar.delegate = self
         search.searchBar.sizeToFit()
-        search.obscuresBackgroundDuringPresentation = false
+        search.obscuresBackgroundDuringPresentation = true
         search.hidesNavigationBarDuringPresentation = true
         self.definesPresentationContext = true
         search.searchBar.placeholder = "Search"
@@ -25,6 +25,10 @@ extension MainView : UISearchBarDelegate {
     
     @objc func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         controller?.fetchCounters(searchText: searchText)
+    }
+    
+    override func viewSafeAreaInsetsDidChange() {
+        self.view.layoutIfNeeded()
     }
     
 }

@@ -45,7 +45,7 @@
 		8EA12E4124CF9496000D7979 /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E4024CF9496000D7979 /* UIColor+Utils.swift */; };
 		8EA12E4324CFFC40000D7979 /* MainInteractorDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E4224CFFC3F000D7979 /* MainInteractorDataSource.swift */; };
 		8EA12E4724D011A6000D7979 /* MainControllerToViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E4624D011A6000D7979 /* MainControllerToViewDelegate.swift */; };
-		8EA12E4924D0123B000D7979 /* MainViewSearchBardDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E4824D0123B000D7979 /* MainViewSearchBardDelegate.swift */; };
+		8EA12E4924D0123B000D7979 /* MainViewSearchBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E4824D0123B000D7979 /* MainViewSearchBarDelegate.swift */; };
 		8EA12E4B24D01399000D7979 /* MainInteractorToControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E4A24D01399000D7979 /* MainInteractorToControllerDelegate.swift */; };
 		8EA12E4E24D0159A000D7979 /* CreateItemControllerToViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E4D24D0159A000D7979 /* CreateItemControllerToViewDelegate.swift */; };
 		8EA12E5024D015CE000D7979 /* CreateItemInteractorToControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E4F24D015CE000D7979 /* CreateItemInteractorToControllerDelegate.swift */; };
@@ -111,7 +111,7 @@
 		8EA12E4024CF9496000D7979 /* UIColor+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
 		8EA12E4224CFFC3F000D7979 /* MainInteractorDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractorDataSource.swift; sourceTree = "<group>"; };
 		8EA12E4624D011A6000D7979 /* MainControllerToViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainControllerToViewDelegate.swift; sourceTree = "<group>"; };
-		8EA12E4824D0123B000D7979 /* MainViewSearchBardDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewSearchBardDelegate.swift; sourceTree = "<group>"; };
+		8EA12E4824D0123B000D7979 /* MainViewSearchBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewSearchBarDelegate.swift; sourceTree = "<group>"; };
 		8EA12E4A24D01399000D7979 /* MainInteractorToControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractorToControllerDelegate.swift; sourceTree = "<group>"; };
 		8EA12E4D24D0159A000D7979 /* CreateItemControllerToViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateItemControllerToViewDelegate.swift; sourceTree = "<group>"; };
 		8EA12E4F24D015CE000D7979 /* CreateItemInteractorToControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateItemInteractorToControllerDelegate.swift; sourceTree = "<group>"; };
@@ -348,7 +348,7 @@
 			isa = PBXGroup;
 			children = (
 				8EA12E4624D011A6000D7979 /* MainControllerToViewDelegate.swift */,
-				8EA12E4824D0123B000D7979 /* MainViewSearchBardDelegate.swift */,
+				8EA12E4824D0123B000D7979 /* MainViewSearchBarDelegate.swift */,
 				8EA12E4A24D01399000D7979 /* MainInteractorToControllerDelegate.swift */,
 			);
 			path = Delegates;
@@ -595,7 +595,7 @@
 				8EA12E1B24CDEA6E000D7979 /* MainInteractor.swift in Sources */,
 				8EA12E4324CFFC40000D7979 /* MainInteractorDataSource.swift in Sources */,
 				8E41640B24CD38F70093B20E /* Example.swift in Sources */,
-				8EA12E4924D0123B000D7979 /* MainViewSearchBardDelegate.swift in Sources */,
+				8EA12E4924D0123B000D7979 /* MainViewSearchBarDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

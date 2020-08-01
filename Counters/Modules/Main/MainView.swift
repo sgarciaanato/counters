@@ -51,7 +51,7 @@ class MainView: UIViewController {
     }
     
     @IBAction func unwindToMain(_ sender: UIStoryboardSegue) {
-        self.countersTableView.reloadData()
+        countersTableView.reloadData()
     }
     
     @objc func refresh(_ sender: Any){
@@ -94,7 +94,15 @@ extension MainView {
     
     @objc func edit(_ sender: Any){
         configureEditingLayout()
-        countersTableView.reloadData()
+        animateRows()
+    }
+    
+    func animateRows() {
+        for cell in countersTableView.visibleCells {
+            if let cell = cell as? CounterTableViewCell {
+                cell.animateEditing(controller?.editing)
+            }
+        }
     }
     
 }

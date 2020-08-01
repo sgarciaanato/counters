@@ -43,6 +43,14 @@ class CounterTableViewCell: UITableViewCell {
         selectionImageView.image = selected ?? false ? UIImage(named: "SelectedRadioButton") : UIImage(named: "UnselectedRadioButton")
     }
     
+    func animateEditing(_ editing: Bool?) {
+        guard let editing = editing else { return }
+        UIView.animate(withDuration: 0.5) {
+            self.hiddenEditRadioButtonConstraint.priority = editing ? UILayoutPriority(rawValue: 250) : UILayoutPriority(rawValue: 750)
+            self.layoutIfNeeded()
+        }
+    }
+    
     @IBAction func incButton(_ sender: Any) {
         guard let counter = counter else { return }
         delegate?.increment(counter)

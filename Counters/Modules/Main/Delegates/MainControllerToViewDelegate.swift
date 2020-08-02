@@ -37,7 +37,6 @@ extension MainView : MainControllerToViewDelegate {
     }
     
     func openShareViewController(objectsToShare : [Any]) {
-        
         let activityViewController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view
         
@@ -57,7 +56,6 @@ extension MainView : MainControllerToViewDelegate {
     }
     
     func showActionSheet(title: String?, message: String?, actions : [String:(()->())]){
-        
         let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
 
         let sortedActions = actions.sorted() {$0.key > $1.key}

@@ -27,20 +27,23 @@
                                     <constraint firstAttribute="height" constant="26" id="au9-Vd-dMR"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fIl-vx-RsQ">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Agi-4M-Vxq">
                                 <rect key="frame" x="0.0" y="0.0" width="39" height="96"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="selectAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="6Yq-yU-nj1"/>
+                                    <action selector="selectAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="VaY-VQ-h2O"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="Agi-4M-Vxq" firstAttribute="leading" secondItem="jav-qN-1Tr" secondAttribute="leading" id="3zY-Bp-NSj"/>
                             <constraint firstAttribute="width" priority="250" id="6NH-2A-1ty"/>
                             <constraint firstItem="YkZ-Qw-7R2" firstAttribute="leading" secondItem="jav-qN-1Tr" secondAttribute="leading" priority="750" constant="2" id="6rK-jd-WoC"/>
+                            <constraint firstItem="Agi-4M-Vxq" firstAttribute="top" secondItem="jav-qN-1Tr" secondAttribute="top" id="lZH-Lf-mqf"/>
                             <constraint firstAttribute="trailing" secondItem="YkZ-Qw-7R2" secondAttribute="trailing" priority="749" constant="11" id="p7g-fY-UKL"/>
                             <constraint firstItem="YkZ-Qw-7R2" firstAttribute="centerY" secondItem="jav-qN-1Tr" secondAttribute="centerY" id="qh2-d6-214"/>
+                            <constraint firstAttribute="bottom" secondItem="Agi-4M-Vxq" secondAttribute="bottom" id="umU-JC-OFH"/>
+                            <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="Agi-4M-Vxq" secondAttribute="trailing" id="zKP-Ip-i1b"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QAx-9n-cb8">
@@ -159,7 +162,7 @@
                 <outlet property="decButton" destination="zYF-nS-h45" id="8s6-eH-nVQ"/>
                 <outlet property="hiddenEditRadioButtonConstraint" destination="6NH-2A-1ty" id="Dam-3i-yaC"/>
                 <outlet property="incButton" destination="AOH-Ly-D5F" id="QLP-QD-76w"/>
-                <outlet property="selectButton" destination="fIl-vx-RsQ" id="yFZ-nZ-dgs"/>
+                <outlet property="selectButton" destination="Agi-4M-Vxq" id="66E-wK-Swa"/>
                 <outlet property="selectionImageView" destination="YkZ-Qw-7R2" id="66X-e4-utM"/>
                 <outlet property="titleLabel" destination="FnI-C7-Wrw" id="YAb-t1-SE1"/>
             </connections>

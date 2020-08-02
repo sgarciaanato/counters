@@ -16,6 +16,8 @@ class MainInteractor : NSObject {
     
     var editing : Bool = false
     
+    var shouldUpdateCount = true
+    
     var counters : [Counter] {
         get {
             //Loading counters search list

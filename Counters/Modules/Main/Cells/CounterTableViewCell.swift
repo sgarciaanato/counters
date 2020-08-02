@@ -28,7 +28,7 @@ class CounterTableViewCell: UITableViewCell {
             decButton.isEnabled = decButtonEnabled
             decButton.alpha = decButtonEnabled ? 1 : 0.5
             counterLabel.text = "\(self.counter?.count ?? 0)"
-            counterLabel.textColor = decButtonEnabled ? UIColor(named: "AppTintColor") : UIColor.hexStringToUIColor(hex: "#EDEDED")
+            counterLabel.textColor = decButtonEnabled ? UIColor(named: "AppTintColor") : UIColor.hexStringToUIColor(hex: "#DCDCDF")
         }
     }
     

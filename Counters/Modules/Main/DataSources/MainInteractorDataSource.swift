@@ -44,7 +44,7 @@ extension MainInteractor : CounterDelegate {
     
     func decrement(_ counter: Counter) {
         guard let id = counter.id, let title = counter.title else { return }
-        if !shouldUpdateCount {
+        if !shouldUpdateCount || counter.count <= 0 {
             return
         }
         shouldUpdateCount = false

@@ -126,6 +126,7 @@ extension MainInteractor {
             self.controller.goToCreateItem()
         }
         controller.showError(error: errorModel)
+        controller.setDescriptionCounterText("")
     }
     
     func showCouldntLoadCounters() {
@@ -133,10 +134,12 @@ extension MainInteractor {
             self.fetchCounters()
         }
         self.controller.showError(error: errorModel)
+        controller.setDescriptionCounterText("")
     }
     
     func showNoResults(){
         self.controller.showNoResults()
+        controller.setDescriptionCounterText("")
     }
     
     func showTableView(){
